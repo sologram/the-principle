@@ -2,7 +2,7 @@
 
 ## Preface / 前言
 
-## The Zeroth Law of Existential / 第零 (存在) 定律
+## [The Zeroth Law of Existential](en/THE-0th-LAW.md) / 第零 (存在) 定律
 
 ## First Law of Correct / 第一 (正确) 定律
 
