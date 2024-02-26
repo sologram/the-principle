@@ -1,1 +1,1 @@
-# The Zeroth Law of Existential
+# 第一 (正确) 定律
