@@ -12,6 +12,6 @@
 
 ## [The Fourth Law of Justice](en/THE-4th-LAW.md) / [第四 (正义) 定律](zh/THE-4th-LAW.md)
 
-## Bring order out of chaos / 拨乱反正
+## [Order out of chaos](en/ORDER-OUT-OF-CHAOS.md) / [拨乱反正](zh/ORDER-OUT-OF-CHAOS.md)
 
 ## [AGI](en/AGI.md) / [通用机器智能](zh/AGI.md)
