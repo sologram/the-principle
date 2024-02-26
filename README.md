@@ -14,4 +14,4 @@
 
 ## Bring order out of chaos / 拨乱反正
 
-## AGI / 通用机器智能
+## [AGI](en/AGI.md) / [通用机器智能](zh/AGI.md)
