@@ -8,7 +8,7 @@
 
 ## The Second Law of Motivation / 第二 (动机) 定律
 
-## The Third Law of Freedem / 第三 (自由) 定律
+## The Third Law of Freedom / 第三 (自由) 定律
 
 ## The Fourth Law of Justice / 第四 (正义) 定律
 
