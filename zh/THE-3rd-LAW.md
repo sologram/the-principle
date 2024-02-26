@@ -1,1 +1,1 @@
-# The Zeroth Law of Existential
+# 第三 (自由) 定律
