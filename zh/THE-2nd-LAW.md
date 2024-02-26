@@ -1,1 +1,1 @@
-# The Zeroth Law of Existential
+# 第二 (动机) 定律
