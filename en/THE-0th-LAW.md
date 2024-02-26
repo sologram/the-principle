@@ -1,1 +1,1 @@
-# The Zeroth Law of Existential
+# The Zeroth Law of Existence
