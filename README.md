@@ -1,4 +1,4 @@
-# The Principle / [事物原理](https://github.com/sologram/the-principle/tree/master/zh)
+# [The Principle](en/) / [事物原理](zh/)
 
 ## [Preface](en/PREFACE.md) / [前言](zh/PREFACE.md)
 
