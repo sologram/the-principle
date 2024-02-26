@@ -1,6 +1,6 @@
 # The Principle / [事物原理](https://github.com/sologram/the-principle/tree/master/zh)
 
-## Preface / 前言
+## [Preface](en/PREFACE.md) / [前言](zh/PREFACE.md)
 
 ## [The Zeroth Law of Existential](en/THE-0th-LAW.md) / [第零 (存在) 定律](zh/THE-0th-LAW.md)
 
