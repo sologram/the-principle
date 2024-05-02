@@ -15,3 +15,5 @@
 ## [拨乱反正](ORDER-OUT-OF-CHAOS.md)
 
 ## [通用机器智能](AGI.md)
+
+## 应用
