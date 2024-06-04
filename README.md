@@ -14,6 +14,8 @@
 
 ## [Order out of chaos](en/ORDER-OUT-OF-CHAOS.md) / [拨乱反正](zh/ORDER-OUT-OF-CHAOS.md)
 
+## [Science](en/SCIENCE.md) / [科学](zh/SCIENCE.md)
+
 ## [AGI](en/AGI.md) / [通用机器智能](zh/AGI.md)
 
 ## Glossaries / [术语](zh/GLOSSARIES.md)
