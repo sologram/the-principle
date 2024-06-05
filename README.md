@@ -16,6 +16,6 @@
 
 ## [Science](en/SCIENCE.md) / [科学](zh/SCIENCE.md)
 
-## [AGI](en/AGI.md) / [通用机器智能](zh/AGI.md)
+## [AGI](agi/EN.md) / [通用机器智能](agi/ZH.md)
 
 ## Glossaries / [术语](zh/GLOSSARIES.md)
