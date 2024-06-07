@@ -2,7 +2,9 @@
 
 ## 模块化
 
-- 组装接口
+- stage
+- translator 
+- engine 
 
 ## 世界模型
 
