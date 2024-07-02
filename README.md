@@ -12,10 +12,10 @@
 
 ## [The Fourth Law of Justice](en/THE-4th-LAW.md) / [第四 (正义) 定律](zh/THE-4th-LAW.md)
 
-## [Order out of chaos](en/ORDER-OUT-OF-CHAOS.md) / [拨乱反正](zh/ORDER-OUT-OF-CHAOS.md)
-
 ## [Science](en/SCIENCE.md) / [科学](zh/SCIENCE.md)
 
 ## [AGI](agi/EN.md) / [通用机器智能](agi/ZH.md)
+
+## [Dephilosophizing](en/DEPHILOSOPHIZING.md) / [去哲学化](zh/DEPHILOSOPHIZING.md)
 
 ## Glossaries / [术语](zh/GLOSSARIES.md)
