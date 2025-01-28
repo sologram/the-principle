@@ -14,7 +14,7 @@
 
 ## [Science](en/SCIENCE.md) / [科学](zh/SCIENCE.md)
 
-## [AGI](agi/EN.md) / [通用机器智能](agi/ZH.md)
+## [AI](agi/EN.md) / [机器智能](agi/ZH.md)
 
 ## [Dephilosophizing](en/DEPHILOSOPHIZING.md) / [去哲学化](zh/DEPHILOSOPHIZING.md)
 
