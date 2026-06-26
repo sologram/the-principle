@@ -28,7 +28,7 @@ The Principle consists of the following five laws:
 - **The First Law (Correct)** Correctness is completeness
 - **The Second Law (Motivation)** Things tend toward completeness
 - **The Third Law (Freedom)** Freedom is ignorance
-- **The Fourth Law (Justice)** Justice is cheapness
+- **The Fourth Law (Justice)** Justice is efficiency
 
 What are the few truths at the most fundamental level of human knowledge system and social rules?
 https://www.zhihu.com/question/5632235326/answer/50089587283
