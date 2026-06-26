@@ -1,1 +1,3 @@
-# The Zeroth Law of Existential
+# The Third Law of Freedom
+
+Freedom is ignorance.

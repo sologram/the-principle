@@ -2,7 +2,7 @@
 
 ## [Preface](PREFACE.md)
 
-## [The Zeroth Law of Existential](THE-0th-LAW.md)
+## [The Zeroth Law of Existence](THE-0th-LAW.md)
 
 ## [First Law of Correct](THE-1st-LAW.md)
 
@@ -12,6 +12,10 @@
 
 ## [The Fourth Law of Justice](THE-4th-LAW.md)
 
-## [Order out of chaos](ORDER-OUT-OF-CHAOS.md)
+## [Science](SCIENCE.md)
 
-## [AGI](AGI.md)
+## [Order Out of Chaos](ORDER-OUT-OF-CHAOS.md)
+
+## [Dephilosophizing](DEPHILOSOPHIZING.md)
+
+## [Glossaries](GLOSSARIES.md)

@@ -1,1 +1,3 @@
-# The Zeroth Law of Existential
+# The Second Law of Motivation
+
+Things tend toward completeness.

@@ -1,0 +1,70 @@
+# Glossaries
+
+- **Instinct**
+- **Essence**
+- **Boundary**
+- **Abstraction** /concrete, generalization, compression
+- **Existence** - information
+- **Wrong** - error, incomplete, incorrect
+- **Morality** - long-term interest
+- **Right** - correct, complete, opposite of wrong
+- **Generalization**
+- **Laissez-faire** /enslavement/freedom/order
+- **Analysis** /synthesis
+- **Symbol**
+- **Fairness** /justice
+- **Good** - efficiency. /bad
+- **Cooperation** - goodness. / non-cooperation / anti-cooperation
+- **Bad** - not good, not efficient.
+- **Concrete**
+- **Absolute** - proposition contains all conditions needed for its judgment
+- **Objective** - consensus. /subjective
+- **Beauty** - competitiveness, efficiency
+- **Fate**
+- **Rationality** /sensibility
+- **Democracy**
+- **Enslavement**
+- **Discrimination**
+- **Equality**
+- **Artificial** /natural
+- **Human nature**
+- **Is**
+- **Thing**
+- **Reality**
+- **Comfort**
+- **Characteristic**
+- **Investment** /consumption
+- **Completeness**
+- **Crisis** - effect precedes signal
+- **Matter** /consciousness
+- **Relative**
+- **Consciousness**
+- **Intention**
+- **Meaning** - interest
+- **Consumption**
+- **Efficiency**
+- **Channel**
+- **Signal** /noise
+- **Information**
+- **Compression** - the most efficient compression is abstraction
+- **Causality**
+- **Eternity**
+- **Disaster**
+- **Noise**
+- **True**
+- **Truth**: The Greek origin of Truth is Alethia, which means "unconcealed." Heidegger believed that what is concealed is existence itself, and truth is letting existence become unconcealed, i.e., unconcealed. https://www.zhihu.com/question/657852807/answer/3517653286
+- **Real**
+- **Proof**
+- **Justice**
+- **Order**
+- **Ultimate**
+- **Summary**
+- **Subjective** - divergence
+- **Nature**: cost valley
+- **Natural boundary**
+- **Self**
+- **Freedom**
+- **Free will**
+- **Synthesis**
+- **Maximum common domain**
+- **Maximum entropy**

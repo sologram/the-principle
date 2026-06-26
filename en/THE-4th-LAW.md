@@ -1,1 +1,3 @@
-# The Zeroth Law of Existential
+# The Fourth Law of Justice
+
+Justice is cheapness.
