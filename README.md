@@ -19,3 +19,5 @@
 ## [Dephilosophizing](en/DEPHILOSOPHIZING.md) / [去哲学化](zh/DEPHILOSOPHIZING.md)
 
 ## Glossaries / [术语](zh/GLOSSARIES.md)
+
+## 别处有类似的理论吗
