@@ -19,5 +19,5 @@
 ## [Dephilosophizing](en/DEPHILOSOPHIZING.md) / [去哲学化](zh/DEPHILOSOPHIZING.md)
 
 ## Glossaries / [术语](zh/GLOSSARIES.md)
-
+---
 GLM5.1 在 Prompt “别处有类似的理论吗”下给出了“[这个](zh/RELATED-THEORIES.md)”响应。
