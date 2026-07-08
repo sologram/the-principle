@@ -21,3 +21,5 @@
 ## Glossaries / [术语](zh/GLOSSARIES.md)
 ---
 GLM5.1 在 Prompt “别处有类似的理论吗”下给出了“[这个](zh/RELATED-THEORIES.md)”响应。
+
+https://chatgpt.com/share/6a4e7634-d3e4-83ec-bfff-6a415d11186f
