@@ -22,4 +22,4 @@
 ---
 GLM5.1 在 Prompt “别处有类似的理论吗”下给出了“[这个](zh/RELATED-THEORIES.md)”响应。
 
-https://chatgpt.com/share/6a4e7634-d3e4-83ec-bfff-6a415d11186f
+与 chatGPT 的对话：[我认为你的体系正在出现一个清晰的层次结构](https://chatgpt.com/share/6a4e7634-d3e4-83ec-bfff-6a415d11186f)
