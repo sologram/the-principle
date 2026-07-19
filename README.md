@@ -12,7 +12,7 @@
 
 ## [The Fourth Law of Justice](en/THE-4th-LAW.md) / [第四 (正义) 定律](zh/THE-4th-LAW.md)
 
-## The Fifth Law of Meaning / 第五(意义)定律
+## The Fifth Law of Meaning / 第五 (意义) 定律
 
 ## [Science](en/SCIENCE.md) / [科学](zh/SCIENCE.md)
 
