@@ -4,7 +4,7 @@
 
 ## [The Zeroth Law of Existence](en/THE-0th-LAW.md) / [第零 (存在) 定律](zh/THE-0th-LAW.md)
 
-## [First Law of Correct](en/THE-1st-LAW.md) / [第一 (正确) 定律](zh/THE-1st-LAW.md)
+## [First Law of Correctness](en/THE-1st-LAW.md) / [第一 (正确) 定律](zh/THE-1st-LAW.md)
 
 ## [The Second Law of Motivation](en/THE-2nd-LAW.md) / [第二 (动机) 定律](zh/THE-2nd-LAW.md)
 
