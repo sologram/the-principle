@@ -108,6 +108,18 @@ class VectorExtractor:
             return outputs.last_hidden_state.mean(dim=1)[0]
 
         mask = inputs["attention_mask"].unsqueeze(-1)
+
+        # 多层融合：如果 layer 是列表，融合多层
+        if isinstance(layer, list):
+            vecs = []
+            for l in layer:
+                layer_idx = len(h) + l if l < 0 else l
+                if 0 <= layer_idx < len(h):
+                    layer_h = h[layer_idx]
+                    vec = (layer_h * mask).sum(dim=1) / mask.sum(dim=1)
+                    vecs.append(vec[0])
+            return torch.stack(vecs).mean(dim=0)
+
         layer_idx = len(h) + layer if layer < 0 else layer
 
         if 0 <= layer_idx < len(h):
@@ -132,6 +144,10 @@ class ConceptAxis:
     def _compute_axis(self):
         pos_vecs = [self.extractor.get_vector(w, self.layer) for w in self.pos_words]
         neg_vecs = [self.extractor.get_vector(w, self.layer) for w in self.neg_words]
+
+        pos_vecs = [v.float() for v in pos_vecs]
+        neg_vecs = [v.float() for v in neg_vecs]
+
         self.pos_vec = torch.stack(pos_vecs).mean(dim=0)
         self.neg_vec = torch.stack(neg_vecs).mean(dim=0)
         self.axis = self.pos_vec - self.neg_vec
@@ -201,6 +217,8 @@ def load_model(model_name):
     model_paths = {
         "qwen3.5-9b": r"C:\Users\hans\Desktop\models\qwen3.5-9b",
         "bert-base-chinese": "bert-base-chinese",
+        "infoxlm-large": r"C:\Users\hans\Desktop\models\infoxlm-large",
+        "qwen2.5-7b-instruct": r"C:\Users\hans\Desktop\models\qwen2.5-7b-instruct",
     }
     path = model_paths.get(model_name, model_name)
     tokenizer = AutoTokenizer.from_pretrained(path, trust_remote_code=True)
@@ -382,25 +400,31 @@ class ConceptGeometryAnalyzer:
 
 def main():
     parser = argparse.ArgumentParser(description='Concept Geometry Analysis Tool v2.3')
-    parser.add_argument('--model', type=str, default='qwen3.5-9b', help='Model to use')
-    parser.add_argument('--layer', type=int, default=-1, help='Layer to use')
+    parser.add_argument('--model', type=str, default='infoxlm-large', help='Model to use')
+    parser.add_argument('--layer', type=str, default='0',
+                        help='Layer(s) to use. Single layer: 0. Multi-layer fusion: 0,1,2')
     parser.add_argument('--task', type=str, default='all',
-                        choices=['axis', 'opposites', 'law', 'all'], help='Analysis task')
-    parser.add_argument('--law', type=str, default=None, help='Law to verify (e.g., law1)')
+                        choices=['axis', 'opposites', 'law', 'law1', 'law2', 'law3', 'law4', 'law5', 'all'],
+                        help='Analysis task')
 
     args = parser.parse_args()
 
-    analyzer = ConceptGeometryAnalyzer(model_name=args.model, layer=args.layer)
+    # 解析层参数
+    if ',' in args.layer:
+        layer = [int(l.strip()) for l in args.layer.split(',')]
+    else:
+        layer = int(args.layer)
+
+    analyzer = ConceptGeometryAnalyzer(model_name=args.model, layer=layer)
 
     if args.task == 'axis':
         analyzer.print_axis_report()
     elif args.task == 'opposites':
         analyzer.print_opposites_report()
     elif args.task == 'law':
-        if args.law:
-            analyzer.print_law_report(args.law)
-        else:
-            analyzer.print_all_laws_report()
+        analyzer.print_all_laws_report()
+    elif args.task.startswith('law'):
+        analyzer.print_law_report(args.task)
     else:
         analyzer.print_axis_report()
         analyzer.print_opposites_report()
