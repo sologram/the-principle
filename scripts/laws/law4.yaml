@@ -1,0 +1,33 @@
+# 第四定律：正义即效率
+# 正义是效率的社会体现
+
+name: 正义即效率
+theory: 正义是效率的社会体现
+
+positive_pairs:
+  - [正义, 效率]
+  - [公平, 效率]
+  - [投资, 收益]
+  - [成本, 效率]
+
+opposite_pairs:
+  - [正义, 不公]
+  - [效率, 低效]
+  - [投资, 消费]
+
+# 语用轴
+pragmatic_axes:
+  价值轴:
+    pos_words: [好, 优秀, 成功, 有益]
+    neg_words: [坏, 差, 失败, 有害]
+  真值轴:
+    pos_words: [对, 正确, 真实, 是]
+    neg_words: [错, 错误, 虚假, 否]
+  美学轴:
+    pos_words: [美, 漂亮, 优雅, 和谐]
+    neg_words: [丑, 难看, 粗俗, 混乱]
+
+# 阈值
+thresholds:
+  positive_similarity: 0.5
+  opposite_pragmatic: -0.3

@@ -1,0 +1,30 @@
+# 第二定律：不完备湮灭
+# 不完备的事物终将湮灭
+
+name: 不完备湮灭
+theory: 不完备的事物终将湮灭
+
+positive_pairs:
+  - [动机, 目标]
+  - [欲望, 需求]
+  - [生存, 适应]
+  - [竞争, 进化]
+
+opposite_pairs:
+  - [生存, 消亡]
+  - [进化, 退化]
+  - [竞争, 合作]
+
+# 语用轴
+pragmatic_axes:
+  价值轴:
+    pos_words: [好, 优秀, 成功, 有益]
+    neg_words: [坏, 差, 失败, 有害]
+  真值轴:
+    pos_words: [对, 正确, 真实, 是]
+    neg_words: [错, 错误, 虚假, 否]
+
+# 阈值
+thresholds:
+  positive_similarity: 0.5
+  opposite_pragmatic: -0.3

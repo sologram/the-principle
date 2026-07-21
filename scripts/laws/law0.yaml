@@ -1,0 +1,30 @@
+# 第零定律：存在即信息
+# 任何可以被识别、区分或描述的事物都是信息
+
+name: 存在即信息
+theory: 任何可以被识别、区分或描述的事物都是信息
+
+positive_pairs:
+  - [存在, 信息]
+  - [实在, 真实]
+  - [符号, 编码]
+  - [物质, 信息]
+
+opposite_pairs:
+  - [真实, 虚假]
+  - [存在, 虚无]
+  - [物质, 意识]
+
+# 语用轴（可用于此定律验证）
+pragmatic_axes:
+  价值轴:
+    pos_words: [好, 优秀, 成功, 有益]
+    neg_words: [坏, 差, 失败, 有害]
+  真值轴:
+    pos_words: [对, 正确, 真实, 是]
+    neg_words: [错, 错误, 虚假, 否]
+
+# 阈值
+thresholds:
+  positive_similarity: 0.5
+  opposite_pragmatic: -0.3

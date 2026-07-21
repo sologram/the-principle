@@ -1,87 +1,65 @@
-# 概念几何分析工具
+# 概念几何分析
 
-本目录包含用于概念几何分析的工具脚本。
+概念几何分析的理论框架、算法实现和验证结果。
 
-## geometry.py
-
-基于预训练语言模型的隐藏状态，分析概念在语义空间中的方向关系。
-
-### 环境配置
+## 快速开始
 
 ```bash
-pip install torch transformers
+python geometry.py --task all
+python geometry.py --task law --law law1
 ```
 
-### 核心函数
+详细验证结果见 [THEORY.md](THEORY.md)。
 
-#### `get_vector(text, layer=-1)`
+## 核心问题
 
-获取文本的语义向量。
+词向量同时包含两类信息：
 
-- **参数**
-  - `text`: 输入文本
-  - `layer`: 模型层索引，-1 表示最后一层，0 表示 embedding 层
-- **返回**: 语义向量（经 mean pooling）
+1. **语用信息** — 评价性维度（好/坏、对/错、善/恶）
+2. **语法信息** — 语言形式化表达（我们不关心）
 
-#### `concept_axis(pos, neg)`
+两者混合导致相反词（如"好-坏"）显示**高相似度**，这与直觉矛盾。
 
-构造概念轴（正负方向向量差）。
+## 解决方案：语用空间分析
 
-- **参数**
-  - `pos`: 正向词（如 "好"）
-  - `neg`: 负向词（如 "坏"）
-- **返回**: 概念方向向量
+分离出**语用空间**，在语用空间中，相反词显示**负相似度**（方向相反）。
 
-#### `cosine(a, b)`
+## 语用轴定义
 
-计算两个向量的余弦相似度。
+| 语用轴 | 正向极 | 负向极 | 理论定义 |
+|--------|--------|--------|----------|
+| 价值轴 | 好 | 坏 | 好=效率 |
+| 真值轴 | 对 | 错 | 对=完备 |
+| 道德轴 | 善 | 恶 | 善=合作 |
+| 美学轴 | 美 | 丑 | 美=效率 |
 
-- **返回**: -1 到 1 之间的相似度值
+## 配置文件
 
-### 使用示例
+每个定律配置 (`laws/law*.yaml`) 包含：
 
-```python
-# 构造概念轴
-axis_good_bad = concept_axis("好", "坏")
-axis_efficient = concept_axis("高效", "低效")
-
-# 比较概念方向相似度
-similarity = cosine(axis_good_bad, axis_efficient)
-print(f"好-坏 轴与 高效-低效 轴的相似度: {similarity}")
-
-# 投影分析
-words = ["合作", "信任", "欺骗", "破坏"]
-for word in words:
-    vec = get_vector(word)
-    score = cosine(vec, axis_good_bad)
-    print(f"{word}: {score}")
+```yaml
+name: 完备即正确
+theory: 任何正确不允许任何遗漏
+positive_pairs: [[完备, 正确]]
+opposite_pairs: [[完备, 不完备]]
+pragmatic_axes:
+  价值轴:
+    pos_words: [好, 优秀]
+    neg_words: [坏, 差]
+thresholds:
+  positive_similarity: 0.5
+  opposite_pragmatic: -0.3
 ```
 
-### 模型选择
+## 添加新定律
 
-脚本默认使用 `bert-base-chinese`，可通过修改 `MODEL` 变量切换：
+创建 `laws/law6.yaml` 后运行：
 
-| 模型 | 特点 |
-|------|------|
-| `bert-base-chinese` | 12层，768维，通用中文模型（在线加载） |
-| `infoxlm-large` | 多语言 XLM，中文理解更强（本地） |
-| `qwen3.5-9b` | 通义千问，语义理解最强，需要更多资源（本地） |
-| `BAAI/bge-large-zh-v1.5` | 专门优化的中文 embedding 模型（在线） |
-| `hfl/chinese-roberta-wwm-ext` | 全词遮罩预训练，中文理解更准确（在线） |
-
-本地模型位于 `C:\Users\hans\Desktop\models`，修改 `MODEL` 变量即可切换：
-
-```python
-MODEL = "infoxlm-large"   # 或 "qwen3.5-9b"
+```bash
+python geometry.py --task law --law law6
 ```
 
-### 改进方向
+## 参考
 
-1. **多词对平均** - 用多对正反义词定义概念轴，减少单词噪声
-2. **Layer 选择** - 中间层（如 -6 ~ -4）可能比最后一层更"语义"
-3. **Pooling 策略** - 对长句可考虑 CLS token 或去掉 `[CLS]`/`[SEP]` 后再 pooling
-4. **词表约束** - 优先选择模型词表中完整存在的词
-
-## 理论关联
-
-详见 [THEORY.md](THEORY.md)，说明概念几何分析与事物原理的关联。
+- [THEORY.md](THEORY.md) — 详细验证结果
+- [../zh/GLOSSARIES-FULL.md](../zh/GLOSSARIES-FULL.md) — 术语定义
