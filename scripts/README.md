@@ -63,10 +63,17 @@ for word in words:
 
 | 模型 | 特点 |
 |------|------|
-| `bert-base-chinese` | 12层，768维，通用中文模型 |
-| `BAAI/bge-large-zh-v1.5` | 专门优化的中文 embedding 模型，效果更好 |
-| `Qwen/Qwen2.5-7B` | 大模型，语义理解更强，需要更多资源 |
-| `hfl/chinese-roberta-wwm-ext` | 全词遮罩预训练，中文理解更准确 |
+| `bert-base-chinese` | 12层，768维，通用中文模型（在线加载） |
+| `infoxlm-large` | 多语言 XLM，中文理解更强（本地） |
+| `qwen3.5-9b` | 通义千问，语义理解最强，需要更多资源（本地） |
+| `BAAI/bge-large-zh-v1.5` | 专门优化的中文 embedding 模型（在线） |
+| `hfl/chinese-roberta-wwm-ext` | 全词遮罩预训练，中文理解更准确（在线） |
+
+本地模型位于 `C:\Users\hans\Desktop\models`，修改 `MODEL` 变量即可切换：
+
+```python
+MODEL = "infoxlm-large"   # 或 "qwen3.5-9b"
+```
 
 ### 改进方向
 
