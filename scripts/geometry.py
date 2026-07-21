@@ -203,26 +203,49 @@ def cosine(a, b):
 print(f"\nConstructing concept axes (rotation: {ROTATION_METHOD})...")
 
 axes = {
-    "value: good-bad":
+    # Chinese
+    "value (zh): good-bad":
         concept_axis("好", "坏"),
 
-    "morality: good-evil":
+    "morality (zh): good-evil":
         concept_axis("善", "恶"),
 
-    "cooperation: cooperation-conflict":
+    "cooperation (zh): cooperation-conflict":
         concept_axis("合作", "冲突"),
 
-    "truth: correct-error":
+    "truth (zh): correct-error":
         concept_axis("正确", "错误"),
 
-    "truth-alt: right-wrong":
+    "truth-alt (zh): right-wrong":
         concept_axis("对", "错"),
 
-    "existence: yes-no":
+    "existence (zh): yes-no":
         concept_axis("是", "否"),
 
-    "efficiency: efficient-inefficient":
-        concept_axis("高效", "低效")
+    "efficiency (zh): efficient-inefficient":
+        concept_axis("高效", "低效"),
+
+    # English
+    "value (en): good-bad":
+        concept_axis("good", "bad"),
+
+    "morality (en): good-evil":
+        concept_axis("good", "evil"),
+
+    "cooperation (en): cooperation-conflict":
+        concept_axis("cooperation", "conflict"),
+
+    "truth (en): correct-error":
+        concept_axis("correct", "error"),
+
+    "truth-alt (en): right-wrong":
+        concept_axis("right", "wrong"),
+
+    "existence (en): yes-no":
+        concept_axis("yes", "no"),
+
+    "efficiency (en): efficient-inefficient":
+        concept_axis("efficient", "inefficient"),
 }
 
 
@@ -232,15 +255,30 @@ axes = {
 # =========================
 
 pairs = [
-    ("value: good-bad", "cooperation: cooperation-conflict"),
-    ("value: good-bad", "morality: good-evil"),
-    ("value: good-bad", "truth: correct-error"),
-    ("value: good-bad", "truth-alt: right-wrong"),
-    ("value: good-bad", "existence: yes-no"),
-    ("value: good-bad", "efficiency: efficient-inefficient"),
-    ("truth: correct-error", "truth-alt: right-wrong"),
-    ("truth: correct-error", "existence: yes-no"),
-    ("truth-alt: right-wrong", "existence: yes-no"),
+    # Within Chinese
+    ("value (zh): good-bad", "cooperation (zh): cooperation-conflict"),
+    ("value (zh): good-bad", "morality (zh): good-evil"),
+    ("value (zh): good-bad", "truth (zh): correct-error"),
+    ("value (zh): good-bad", "truth-alt (zh): right-wrong"),
+    ("value (zh): good-bad", "existence (zh): yes-no"),
+    ("value (zh): good-bad", "efficiency (zh): efficient-inefficient"),
+
+    # Within English
+    ("value (en): good-bad", "cooperation (en): cooperation-conflict"),
+    ("value (en): good-bad", "morality (en): good-evil"),
+    ("value (en): good-bad", "truth (en): correct-error"),
+    ("value (en): good-bad", "truth-alt (en): right-wrong"),
+    ("value (en): good-bad", "existence (en): yes-no"),
+    ("value (en): good-bad", "efficiency (en): efficient-inefficient"),
+
+    # Cross-language
+    ("value (zh): good-bad", "value (en): good-bad"),
+    ("morality (zh): good-evil", "morality (en): good-evil"),
+    ("cooperation (zh): cooperation-conflict", "cooperation (en): cooperation-conflict"),
+    ("truth (zh): correct-error", "truth (en): correct-error"),
+    ("truth-alt (zh): right-wrong", "truth-alt (en): right-wrong"),
+    ("existence (zh): yes-no", "existence (en): yes-no"),
+    ("efficiency (zh): efficient-inefficient", "efficiency (en): efficient-inefficient"),
 ]
 
 print(f"\n=== Concept direction similarity ===")
@@ -258,16 +296,29 @@ for a, b in pairs:
 # Project Words onto GOOD Axis
 # =========================
 
-good_axis = axes["value: good-bad"]
+good_axis_zh = axes["value (zh): good-bad"]
+good_axis_en = axes["value (en): good-bad"]
 
-words = [
+words_zh = [
     "合作", "信任", "帮助", "创造", "善良", "效率", "财富", "力量",
     "欺骗", "破坏", "冲突", "伤害", "战争"
 ]
 
-print(f"\n=== Projection on GOOD axis ===")
+words_en = [
+    "cooperation", "trust", "help", "create", "kind", "efficiency", "wealth", "power",
+    "deceive", "destroy", "conflict", "harm", "war"
+]
 
-for w in words:
+print(f"\n=== Projection on GOOD axis (Chinese) ===")
+for w in words_zh:
     v = get_vector(w)
-    score = cosine(v, good_axis)
-    print(f"{w:6s}: {score:.4f}")
+    score_zh = cosine(v, good_axis_zh)
+    score_en = cosine(v, good_axis_en)
+    print(f"{w:6s}: zh-axis={score_zh:.4f}, en-axis={score_en:.4f}")
+
+print(f"\n=== Projection on GOOD axis (English) ===")
+for w in words_en:
+    v = get_vector(w)
+    score_zh = cosine(v, good_axis_zh)
+    score_en = cosine(v, good_axis_en)
+    print(f"{w:12s}: zh-axis={score_zh:.4f}, en-axis={score_en:.4f}")

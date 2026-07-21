@@ -1,55 +1,72 @@
-# 概念几何分析工具
+# Concept Geometry Analysis Tools
 
-本目录包含用于概念几何分析的工具脚本。
+This directory contains tools for concept geometry analysis.
 
 ## geometry.py
 
-基于预训练语言模型的隐藏状态，分析概念在语义空间中的方向关系。
+Analyzes directional relationships between concepts in semantic space using hidden states from pretrained language models.
 
-### 环境配置
+### Setup
 
 ```bash
-pip install torch transformers
+pip install torch transformers scikit-learn
 ```
 
-### 核心函数
+### Usage
 
-#### `get_vector(text, layer=-1)`
+```bash
+# Basic usage (no rotation)
+python geometry.py --model qwen3.5-9b --rotation none
 
-获取文本的语义向量。
+# With PCA rotation
+python geometry.py --model qwen3.5-9b --rotation pca
 
-- **参数**
-  - `text`: 输入文本
-  - `layer`: 模型层索引，-1 表示最后一层，0 表示 embedding 层
-- **返回**: 语义向量（经 mean pooling）
+# With PCA alignment (recommended for better SNR)
+python geometry.py --model qwen3.5-9b --rotation pca-align --top-k 5
+```
+
+### Command Line Options
+
+| Option | Values | Default | Description |
+|--------|--------|---------|-------------|
+| `--model` | `bert-base-chinese`, `infoxlm-large`, `qwen3.5-9b` | `qwen3.5-9b` | Model to use |
+| `--rotation` | `none`, `pca`, `pca-align` | `none` | Rotation method |
+| `--top-k` | integer | `5` | Number of PCs for `pca-align` |
+
+### Core Functions
+
+#### `get_vector(text)`
+
+Get semantic vector for text.
+
+- **Parameters**: `text` (input text)
+- **Returns**: Semantic vector (mean pooled)
 
 #### `concept_axis(pos, neg)`
 
-构造概念轴（正负方向向量差）。
+Construct concept axis (vector difference between positive and negative directions).
 
-- **参数**
-  - `pos`: 正向词（如 "好"）
-  - `neg`: 负向词（如 "坏"）
-- **返回**: 概念方向向量
+- **Parameters**: `pos` (positive word), `neg` (negative word)
+- **Returns**: Concept direction vector
 
 #### `cosine(a, b)`
 
-计算两个向量的余弦相似度。
+Compute cosine similarity between two vectors.
 
-- **返回**: -1 到 1 之间的相似度值
+- **Returns**: Similarity value between -1 and 1
 
-### 使用示例
+### Example
 
 ```python
-# 构造概念轴
+# Construct concept axes
 axis_good_bad = concept_axis("好", "坏")
 axis_efficient = concept_axis("高效", "低效")
 
-# 比较概念方向相似度
+# Compare concept directions
 similarity = cosine(axis_good_bad, axis_efficient)
-print(f"好-坏 轴与 高效-低效 轴的相似度: {similarity}")
+print(f"good-bad <-> efficient-inefficient: {similarity}")
 
-# 投影分析
+# Projection analysis
 words = ["合作", "信任", "欺骗", "破坏"]
 for word in words:
     vec = get_vector(word)
@@ -57,31 +74,31 @@ for word in words:
     print(f"{word}: {score}")
 ```
 
-### 模型选择
+### Models
 
-脚本默认使用 `bert-base-chinese`，可通过修改 `MODEL` 变量切换：
+| Model | Description |
+|-------|-------------|
+| `bert-base-chinese` | 12-layer, 768-dim, general Chinese model (online) |
+| `infoxlm-large` | Multilingual XLM, stronger Chinese understanding (local) |
+| `qwen3.5-9b` | Qwen, strongest semantic understanding, requires more resources (local) |
 
-| 模型 | 特点 |
-|------|------|
-| `bert-base-chinese` | 12层，768维，通用中文模型（在线加载） |
-| `infoxlm-large` | 多语言 XLM，中文理解更强（本地） |
-| `qwen3.5-9b` | 通义千问，语义理解最强，需要更多资源（本地） |
-| `BAAI/bge-large-zh-v1.5` | 专门优化的中文 embedding 模型（在线） |
-| `hfl/chinese-roberta-wwm-ext` | 全词遮罩预训练，中文理解更准确（在线） |
+Local models are located at `C:\Users\hans\Desktop\models`.
 
-本地模型位于 `C:\Users\hans\Desktop\models`，修改 `MODEL` 变量即可切换：
+### Rotation Methods
 
-```python
-MODEL = "infoxlm-large"   # 或 "qwen3.5-9b"
-```
+| Method | Description | Effect |
+|--------|-------------|--------|
+| `none` | No rotation | Baseline |
+| `pca` | Rotate to PCA space | Minimal effect on cosine similarity |
+| `pca-align` | Align axes to top principal components | Significantly improves SNR, but may introduce bias |
 
-### 改进方向
+### Improvement Suggestions
 
-1. **多词对平均** - 用多对正反义词定义概念轴，减少单词噪声
-2. **Layer 选择** - 中间层（如 -6 ~ -4）可能比最后一层更"语义"
-3. **Pooling 策略** - 对长句可考虑 CLS token 或去掉 `[CLS]`/`[SEP]` 后再 pooling
-4. **词表约束** - 优先选择模型词表中完整存在的词
+1. **Multi-pair averaging** — Define concept axes using multiple word pairs to reduce noise
+2. **Layer selection** — Middle layers (e.g., -6 to -4) may be more "semantic" than the last layer
+3. **Pooling strategy** — Consider CLS token or exclude `[CLS]`/`[SEP]` for longer sentences
+4. **Vocabulary constraint** — Prefer words that exist as complete tokens in the model vocabulary
 
-## 理论关联
+## Theory
 
-详见 [THEORY.md](THEORY.md)，说明概念几何分析与事物原理的关联。
+See [THEORY.md](THEORY.md) for the relationship between concept geometry and the Principle of Things framework.
