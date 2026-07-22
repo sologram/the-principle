@@ -15,8 +15,8 @@ opposite_pairs:
   - [进化, 退化]
   - [竞争, 合作]
 
-# 语用轴
-pragmatic_axes:
+# 语义轴
+semantic_axes:
   价值轴:
     pos_words: [好, 优秀, 成功, 有益]
     neg_words: [坏, 差, 失败, 有害]
@@ -27,4 +27,4 @@ pragmatic_axes:
 # 阈值
 thresholds:
   positive_similarity: 0.5
-  opposite_pragmatic: -0.3
+  opposite_semantic: -0.3

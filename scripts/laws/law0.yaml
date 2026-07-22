@@ -15,8 +15,8 @@ opposite_pairs:
   - [存在, 虚无]
   - [物质, 意识]
 
-# 语用轴（可用于此定律验证）
-pragmatic_axes:
+# 语义轴（可用于此定律验证）
+semantic_axes:
   价值轴:
     pos_words: [good, excellent, success, beneficial]
     neg_words: [bad, poor, failure, harmful]
@@ -27,4 +27,4 @@ pragmatic_axes:
 # 阈值
 thresholds:
   positive_similarity: 0.5
-  opposite_pragmatic: -0.3
+  opposite_semantic: -0.3

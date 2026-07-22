@@ -2,7 +2,7 @@
 """
 Concept Geometry Analysis Tool v2.3
 
-Pragmatic space analysis for verifying the six laws of Principle of Things.
+Semantic space analysis for verifying the six laws of Principle of Things.
 
 Usage:
     python geometry.py --task all
@@ -11,7 +11,7 @@ Usage:
     python geometry.py --task opposites
 
 Config:
-    laws/law*.yaml - Law configurations with pragmatic axes and thresholds
+    laws/law*.yaml - Law configurations with semantic axes and thresholds
 """
 
 import sys
@@ -35,7 +35,7 @@ import yaml
 SCRIPT_DIR = Path(__file__).parent
 
 def load_all_laws():
-    """Load all law configs and merge pragmatic axes and thresholds."""
+    """Load all law configs and merge semantic axes and thresholds."""
     laws = {}
     laws_dir = SCRIPT_DIR / "laws"
     if not laws_dir.exists():
@@ -49,11 +49,11 @@ def load_all_laws():
     return laws
 
 
-def merge_pragmatic_axes(laws_config):
-    """Merge pragmatic axes from all laws (deduplicate)."""
+def merge_semantic_axes(laws_config):
+    """Merge semantic axes from all laws (deduplicate)."""
     merged = {}
     for law in laws_config.values():
-        for ax_name, ax_config in law.get('pragmatic_axes', {}).items():
+        for ax_name, ax_config in law.get('semantic_axes', {}).items():
             if ax_name not in merged:
                 merged[ax_name] = ax_config
     return merged
@@ -66,7 +66,7 @@ def merge_thresholds(laws_config):
             return law['thresholds']
     return {
         'positive_similarity': 0.5,
-        'opposite_pragmatic': -0.3,
+        'opposite_semantic': -0.3,
         'axis_separation_good': 1.0,
         'axis_separation_fair': 0.5,
         'law_verified': 75,
@@ -90,7 +90,7 @@ def get_vocabulary(laws_config):
 # ============================================================================
 
 class VectorExtractor:
-    """Extract pragmatic vectors from language models."""
+    """Extract semantic vectors from language models."""
 
     def __init__(self, model, tokenizer, device="cuda"):
         self.model = model
@@ -158,11 +158,11 @@ class ConceptAxis:
         return pos_proj - neg_proj
 
 
-class PragmaticSpace:
-    """Pragmatic space with orthogonal decomposition."""
+class SemanticSpace:
+    """Semantic space with orthogonal decomposition."""
 
-    def __init__(self, pragmatic_axes, vocabulary, extractor, layer=-1):
-        self.pragmatic_axes = pragmatic_axes
+    def __init__(self, semantic_axes, vocabulary, extractor, layer=-1):
+        self.semantic_axes = semantic_axes
         self.vocabulary = vocabulary
         self.extractor = extractor
         self.layer = layer
@@ -175,18 +175,18 @@ class PragmaticSpace:
         self.mean_vec = all_vecs.mean(dim=0)
         centered = all_vecs - self.mean_vec
 
-        pragmatic_dirs = [ax.axis.float() for ax in self.pragmatic_axes]
-        P = torch.stack(pragmatic_dirs)
+        semantic_dirs = [ax.axis.float() for ax in self.semantic_axes]
+        P = torch.stack(semantic_dirs)
         P_orth, _ = torch.linalg.qr(P.T)
-        self.pragmatic_basis = P_orth.T
+        self.semantic_basis = P_orth.T
 
-        proj_prag = centered @ self.pragmatic_basis.T @ self.pragmatic_basis
-        semantic_residuals = centered - proj_prag
+        proj_sem = centered @ self.semantic_basis.T @ self.semantic_basis
+        semantic_residuals = centered - proj_sem
 
-        n_semantic = min(50, len(self.vocabulary) - len(self.pragmatic_axes) - 1)
+        n_semantic = min(50, len(self.vocabulary) - len(self.semantic_axes) - 1)
         pca = PCA(n_components=max(1, n_semantic))
         pca.fit(semantic_residuals.float().cpu().numpy())
-        self.semantic_basis = torch.from_numpy(pca.components_[:min(20, n_semantic)]).float().to(self.extractor.device)
+        self.residual_basis = torch.from_numpy(pca.components_[:min(20, n_semantic)]).float().to(self.extractor.device)
 
     def similarity(self, w1, w2, space='original'):
         v1 = self.vectors.get(w1, self.extractor.get_vector(w1, self.layer))
@@ -194,18 +194,18 @@ class PragmaticSpace:
 
         if space == 'original':
             return cosine_similarity(v1, v2)
-        elif space == 'pragmatic':
-            p1 = (v1.float() - self.mean_vec) @ self.pragmatic_basis.T
-            p2 = (v2.float() - self.mean_vec) @ self.pragmatic_basis.T
-            return cosine_similarity(p1, p2)
         elif space == 'semantic':
+            s1 = (v1.float() - self.mean_vec) @ self.semantic_basis.T
+            s2 = (v2.float() - self.mean_vec) @ self.semantic_basis.T
+            return cosine_similarity(s1, s2)
+        elif space == 'syntactic':
             v1_c = v1.float() - self.mean_vec
             v2_c = v2.float() - self.mean_vec
-            proj_prag = v1_c @ self.pragmatic_basis.T @ self.pragmatic_basis
-            s1 = (v1_c - proj_prag) @ self.semantic_basis.T
-            proj_prag = v2_c @ self.pragmatic_basis.T @ self.pragmatic_basis
-            s2 = (v2_c - proj_prag) @ self.semantic_basis.T
-            return cosine_similarity(s1, s2)
+            proj_sem = v1_c @ self.semantic_basis.T @ self.semantic_basis
+            r1 = (v1_c - proj_sem) @ self.residual_basis.T
+            proj_sem = v2_c @ self.semantic_basis.T @ self.semantic_basis
+            r2 = (v2_c - proj_sem) @ self.residual_basis.T
+            return cosine_similarity(r1, r2)
 
 
 def cosine_similarity(a, b):
@@ -238,7 +238,7 @@ class ConceptGeometryAnalyzer:
 
     def __init__(self, model_name="qwen3.5-9b", layer=-1):
         self.laws_config = load_all_laws()
-        self.pragmatic_axes_config = merge_pragmatic_axes(self.laws_config)
+        self.semantic_axes_config = merge_semantic_axes(self.laws_config)
         self.thresholds = merge_thresholds(self.laws_config)
         self.layer = layer
 
@@ -246,10 +246,10 @@ class ConceptGeometryAnalyzer:
         self.model, self.tokenizer, self.device = load_model(model_name)
         self.extractor = VectorExtractor(self.model, self.tokenizer, self.device)
 
-        # Build pragmatic axes
-        self.pragmatic_axes = []
-        for name, ax_config in self.pragmatic_axes_config.items():
-            self.pragmatic_axes.append(ConceptAxis(
+        # Build semantic axes
+        self.semantic_axes = []
+        for name, ax_config in self.semantic_axes_config.items():
+            self.semantic_axes.append(ConceptAxis(
                 name=name,
                 pos_words=ax_config['pos_words'],
                 neg_words=ax_config['neg_words'],
@@ -257,14 +257,14 @@ class ConceptGeometryAnalyzer:
                 layer=layer
             ))
 
-        # Build pragmatic space
+        # Build semantic space
         vocab = get_vocabulary(self.laws_config)
-        self.pragmatic_space = PragmaticSpace(self.pragmatic_axes, vocab, self.extractor, layer)
+        self.semantic_space = SemanticSpace(self.semantic_axes, vocab, self.extractor, layer)
         print(f"Model loaded. Laws: {len(self.laws_config)}, Vocabulary: {len(vocab)}")
 
     def analyze_axis_quality(self):
         results = {}
-        for axis in self.pragmatic_axes:
+        for axis in self.semantic_axes:
             sep = axis.self_separation()
             quality = "excellent" if sep > self.thresholds.get('axis_separation_good', 1.0) else \
                       "good" if sep > self.thresholds.get('axis_separation_fair', 0.5) else "poor"
@@ -276,12 +276,12 @@ class ConceptGeometryAnalyzer:
         for law in self.laws_config.values():
             for pair in law.get('opposite_pairs', []):
                 pos, neg = pair[0], pair[1]
-                sim_orig = self.pragmatic_space.similarity(pos, neg, 'original')
-                sim_prag = self.pragmatic_space.similarity(pos, neg, 'pragmatic')
-                sim_sem = self.pragmatic_space.similarity(pos, neg, 'semantic')
-                quality = "supported" if sim_prag < self.thresholds.get('opposite_pragmatic', -0.3) else \
-                          "orthogonal" if abs(sim_prag) < 0.3 else "not supported"
-                results.append((pos, neg, sim_orig, sim_prag, sim_sem, quality))
+                sim_orig = self.semantic_space.similarity(pos, neg, 'original')
+                sim_sem = self.semantic_space.similarity(pos, neg, 'semantic')
+                sim_syn = self.semantic_space.similarity(pos, neg, 'syntactic')
+                quality = "supported" if sim_sem < self.thresholds.get('opposite_semantic', -0.3) else \
+                          "orthogonal" if abs(sim_sem) < 0.3 else "not supported"
+                results.append((pos, neg, sim_orig, sim_sem, sim_syn, quality))
         return results
 
     def verify_law(self, law_key):
@@ -292,16 +292,16 @@ class ConceptGeometryAnalyzer:
         positive_results = []
         for pair in law.get('positive_pairs', []):
             w1, w2 = pair[0], pair[1]
-            sim = self.pragmatic_space.similarity(w1, w2, 'original')
+            sim = self.semantic_space.similarity(w1, w2, 'original')
             supported = sim > self.thresholds.get('positive_similarity', 0.5)
             positive_results.append({"pair": (w1, w2), "similarity": sim, "supported": supported})
 
         opposite_results = []
         for pair in law.get('opposite_pairs', []):
             pos, neg = pair[0], pair[1]
-            sim_prag = self.pragmatic_space.similarity(pos, neg, 'pragmatic')
-            supported = sim_prag < self.thresholds.get('opposite_pragmatic', -0.3)
-            opposite_results.append({"pair": (pos, neg), "sim_pragmatic": sim_prag, "supported": supported})
+            sim_sem = self.semantic_space.similarity(pos, neg, 'semantic')
+            supported = sim_sem < self.thresholds.get('opposite_semantic', -0.3)
+            opposite_results.append({"pair": (pos, neg), "sim_semantic": sim_sem, "supported": supported})
 
         pos_supported = sum(1 for r in positive_results if r["supported"])
         opp_supported = sum(1 for r in opposite_results if r["supported"])
@@ -325,7 +325,7 @@ class ConceptGeometryAnalyzer:
 
     def print_axis_report(self):
         print("\n" + "="*60)
-        print("Pragmatic Axis Quality Analysis")
+        print("Semantic Axis Quality Analysis")
         print("="*60)
         print(f"\n{'Axis':8s} {'Separation':>12s} {'Quality':>10s}")
         print("-" * 35)
@@ -336,11 +336,11 @@ class ConceptGeometryAnalyzer:
         print("\n" + "="*60)
         print("Opposite Words Directionality Analysis")
         print("="*60)
-        print("\nKey finding: opposite words should show negative similarity in pragmatic space")
-        print(f"\n{'Pair':<12s} {'Original':>10s} {'Pragmatic':>10s} {'Semantic':>10s} {'Quality':>12s}")
+        print("\nKey finding: opposite words should show negative similarity in semantic space")
+        print(f"\n{'Pair':<12s} {'Original':>10s} {'Semantic':>10s} {'Syntactic':>10s} {'Quality':>12s}")
         print("-" * 60)
-        for pos, neg, sim_orig, sim_prag, sim_sem, quality in self.analyze_opposites():
-            print(f"{pos}-{neg:<8s} {sim_orig:10.4f} {sim_prag:10.4f} {sim_sem:10.4f} {quality:>12s}")
+        for pos, neg, sim_orig, sim_sem, sim_syn, quality in self.analyze_opposites():
+            print(f"{pos}-{neg:<8s} {sim_orig:10.4f} {sim_sem:10.4f} {sim_syn:10.4f} {quality:>12s}")
 
     def print_law_report(self, law_key):
         result = self.verify_law(law_key)
@@ -358,11 +358,11 @@ class ConceptGeometryAnalyzer:
             status = "PASS" if r["supported"] else "FAIL"
             print(f"  {w1}-{w2}: {r['similarity']:.4f} {status}")
 
-        print("\n[Opposite Pairs] Pragmatic Space Test:")
+        print("\n[Opposite Pairs] Semantic Space Test:")
         for r in result["opposite_results"]:
             pos, neg = r["pair"]
             status = "PASS" if r["supported"] else "FAIL"
-            print(f"  {pos}-{neg}: pragmatic={r['sim_pragmatic']:.4f} {status}")
+            print(f"  {pos}-{neg}: semantic={r['sim_semantic']:.4f} {status}")
 
         print(f"\nPositive: {result['positive_rate']:.0f}%")
         print(f"Opposite: {result['opposite_rate']:.0f}%")

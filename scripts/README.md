@@ -1,65 +1,107 @@
 # Concept Geometry Analysis
 
-Pragmatic space analysis for verifying the six laws of Principle of Things.
+Semantic space analysis tool for verifying the six laws of Principle of Things.
+
+Two versions available:
+- **geometry.py** — Manual semantic axes (v2.3)
+- **geometry4.py** — Auto-discovered semantic axes (v4.0, recommended)
 
 ## Quick Start
 
+### v4.0 Auto-discovery (Recommended)
+
 ```bash
-python geometry.py --task all
-python geometry.py --task law --law law1
+# Full analysis
+python geometry4.py --task all
+
+# Learn semantic axes only
+python geometry4.py --task learn
+
+# Verify opposite pairs
+python geometry4.py --task opposites
+
+# Verify laws
+python geometry4.py --task verify
 ```
 
-See [THEORY.md](THEORY.md) for detailed verification results.
+### v2.3 Manual Version
 
-## Core Problem
+```bash
+# Full analysis
+python geometry.py --task all
 
-Word vectors contain two types of information:
+# Verify single law
+python geometry.py --task law1
+```
 
-1. **Pragmatic information** — Evaluative dimensions (good/bad, right/wrong, good/evil)
-2. **Syntactic information** — Formal linguistic representation (not our concern)
+## Version Comparison
 
-When mixed, opposite words (e.g., "good-bad") show **high similarity**, contradicting intuition.
+| Feature | v2.3 (geometry.py) | v4.0 (geometry4.py) |
+|---------|-------------------|---------------------|
+| Semantic Axes | Manually defined | Auto-learned from opposite pairs |
+| Verification Method | Single cosine similarity | Multi-method (cosine, projection, angle) |
+| Opposite Pair Rate | 0-33% | **89%** |
+| Laws Verified | 0/6 | **6/6** |
+| Axis Count | Fixed 4 | Configurable (default 8) |
 
-## Solution: Pragmatic Space Analysis
+## v4.0 Command Line Arguments
 
-Extract the **pragmatic space**, where opposite words show **negative similarity** (opposite directions).
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| `--model` | str | `infoxlm-large` | Language model |
+| `--layer` | str | `0` | Extraction layer |
+| `--task` | str | `all` | Analysis task |
+| `--n-axes` | int | `8` | Number of semantic axes to learn |
 
-## Pragmatic Axes
+### v4.0 Task Types
 
-| Axis | Positive | Negative | Theory |
-|------|----------|----------|--------|
-| Value | good | bad | good = efficiency |
-| Truth | right | wrong | right = complete |
-| Moral | kind | evil | kind = cooperation |
-| Aesthetic | beautiful | ugly | beautiful = efficiency |
+| Value | Description |
+|-------|-------------|
+| `learn` | Learn semantic axes from opposite pairs |
+| `opposites` | Verify opposite word pairs |
+| `positives` | Verify positive word pairs |
+| `verify` | Verify all laws |
+| `all` | Full analysis pipeline |
 
-## Config Files
+## v4.0 Verification Methods
 
-Each law config (`laws/law*.yaml`) contains:
+Three methods combined for opposite pair verification:
+
+1. **Cosine similarity**: Similarity < -0.3 in semantic space
+2. **Projection separation**: Separation > 0.5 on best-matching axis
+3. **Angle method**: Angle > 90° in semantic space
+
+Criteria: At least two methods must pass.
+
+## Configuration Files
+
+Law configurations in `laws/law*.yaml`:
 
 ```yaml
 name: Complete is Correct
 theory: No correctness allows any omission
-positive_pairs: [[complete, correct]]
-opposite_pairs: [[complete, incomplete]]
-pragmatic_axes:
-  value:
-    pos_words: [good, excellent]
-    neg_words: [bad, poor]
-thresholds:
-  positive_similarity: 0.5
-  opposite_pragmatic: -0.3
+
+positive_pairs:
+  - [complete, correct]
+  - [determined, objective]
+
+opposite_pairs:
+  - [complete, incomplete]
+  - [correct, error]
 ```
 
-## Adding New Laws
+**Note**: v4.0 doesn't need `semantic_axes` or `thresholds` fields.
 
-Create `laws/law6.yaml` then run:
+## Verification Status
 
-```bash
-python geometry.py --task law --law law6
-```
+| Status | Rate | Description |
+|--------|------|-------------|
+| `verified` | ≥ 75% | Strong support |
+| `partial` | 50% - 74% | Partial support |
+| `not supported` | < 50% | Not supported |
 
 ## Reference
 
-- [THEORY.md](THEORY.md) — Detailed verification results
-- [../zh/GLOSSARIES-FULL.md](../zh/GLOSSARIES-FULL.md) — Term definitions
+- [geometry.md](geometry.md) — Algorithm principles (Chinese)
+- [THEORY.md](THEORY.md) — Experimental results (Chinese)
+- [README-zh.md](README-zh.md) — Chinese documentation
