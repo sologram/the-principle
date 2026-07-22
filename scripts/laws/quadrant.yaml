@@ -1,0 +1,115 @@
+# 四象限反义词配置
+# 用于测试四象限结构
+
+name: 四象限反义词测试
+theory: 对角线词对是真正的反义词
+
+# 四象限词组
+quadrant_groups:
+  order_freedom_slavery_chaos:
+    words: [秩序, 自由, 奴役, 放任]
+    dimensions: [已知, 二阶已知]
+    quadrants:
+      order: [已知, 二阶已知]
+      freedom: [已知, 二阶未知]
+      slavery: [未知, 二阶已知]
+      chaos: [未知, 二阶未知]
+    diagonals:
+      - [秩序, 放任]
+      - [自由, 奴役]
+    adjacents:
+      - [秩序, 自由]
+      - [秩序, 奴役]
+      - [自由, 放任]
+      - [奴役, 放任]
+
+  science_religion_engineering_philosophy:
+    words: [科学, 宗教, 工程, 哲学]
+    dimensions: [承诺, 兑现]
+    quadrants:
+      science: [有承诺, 有兑现]
+      religion: [有承诺, 无兑现]
+      engineering: [无承诺, 有兑现]
+      philosophy: [无承诺, 无兑现]
+    diagonals:
+      - [科学, 哲学]
+      - [宗教, 工程]
+    adjacents:
+      - [科学, 宗教]
+      - [科学, 工程]
+      - [宗教, 哲学]
+      - [工程, 哲学]
+
+  democracy_populism_autocracy_dictatorship:
+    words: [民主, 民粹, 专制, 独裁]
+    dimensions: [主体, 决策]
+    quadrants:
+      democracy: [群体, 秩序]
+      populism: [群体, 放任]
+      autocracy: [个体, 秩序]
+      dictatorship: [个体, 放任]
+    diagonals:
+      - [民主, 独裁]
+      - [民粹, 专制]
+    adjacents:
+      - [民主, 民粹]
+      - [民主, 专制]
+      - [民粹, 独裁]
+      - [专制, 独裁]
+
+  good_bad_right_wrong:
+    words: [好, 坏, 对, 错]
+    dimensions: [价值, 真值]
+    quadrants:
+      good_right: [正向, 正确]
+      good_wrong: [正向, 错误]
+      bad_right: [负向, 正确]
+      bad_wrong: [负向, 错误]
+    diagonals:
+      - [好, 错]
+      - [坏, 对]
+    adjacents:
+      - [好, 坏]
+      - [好, 对]
+      - [坏, 错]
+      - [对, 错]
+
+  success_failure_efficiency_waste:
+    words: [成功, 失败, 效率, 浪费]
+    dimensions: [结果, 过程]
+    quadrants:
+      success_efficiency: [达成, 高效]
+      success_waste: [达成, 低效]
+      failure_efficiency: [未达成, 高效]
+      failure_waste: [未达成, 低效]
+    diagonals:
+      - [成功, 浪费]
+      - [失败, 效率]
+    adjacents:
+      - [成功, 失败]
+      - [成功, 效率]
+      - [失败, 浪费]
+      - [效率, 浪费]
+
+# 用于扩展词表
+vocabulary_extension:
+  # 政治类
+  - 民主
+  - 民粹
+  - 专制
+  - 独裁
+  # 科学类
+  - 科学
+  - 宗教
+  - 工程
+  - 哲学
+  # 认知类
+  - 已知
+  - 未知
+  - 确定性
+  - 不确定性
+  # 价值类
+  - 效率
+  - 浪费
+  - 成功
+  - 失败
