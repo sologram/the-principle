@@ -11,7 +11,7 @@ Usage:
     python geometry.py --task opposites
 
 Config:
-    laws/law*.yaml - Law configurations with semantic axes and thresholds
+    configs/law*.yaml - Law configurations with semantic axes and thresholds
 """
 
 import sys
@@ -37,7 +37,7 @@ SCRIPT_DIR = Path(__file__).parent
 def load_all_laws():
     """Load all law configs and merge semantic axes and thresholds."""
     laws = {}
-    laws_dir = SCRIPT_DIR / "laws"
+    laws_dir = SCRIPT_DIR / "configs"
     if not laws_dir.exists():
         return laws
 

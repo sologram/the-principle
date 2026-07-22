@@ -42,7 +42,7 @@ SCRIPT_DIR = Path(__file__).parent
 def load_all_laws():
     """Load all law configs including quadrant.yaml."""
     laws = {}
-    laws_dir = SCRIPT_DIR / "laws"
+    laws_dir = SCRIPT_DIR / "configs"
     if not laws_dir.exists():
         return laws
 
