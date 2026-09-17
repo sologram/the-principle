@@ -1,5 +1,8 @@
 # [The Principle](en/) / [事物原理](zh/)
 
+>表达重于演绎。
+>- Sologram
+
 ## [Preface](en/PREFACE.md) / [前言](zh/PREFACE.md)
 
 ## [The Zeroth Law of Existence](en/THE-0th-LAW.md) / [第零 (存在) 定律](zh/THE-0th-LAW.md)
