@@ -5,3 +5,4 @@
 - https://chatgpt.com/share/6aa956a0-7ee4-83ec-a79d-07604c83029d
 - https://chatgpt.com/share/6aaa8067-9ce4-83ec-bf68-5ed5986acb4e
 - https://arxiv.org/abs/2609.13780
+- https://chat.deepseek.com/share/x6to7t8yefs6xuw6km
