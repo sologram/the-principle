@@ -1,6 +1,6 @@
-# RLBV 工程方案
+# RLMV 工程方案
 
-RLBV 工程方案为“[事物原理](../outline.md)”在对齐的应用。
+RLMV：Reinforcement Learning with Multi-tier Verification 工程方案为“[事物原理](../outline.md)”在对齐的应用。
 	
 ## 一、主对照表
 
