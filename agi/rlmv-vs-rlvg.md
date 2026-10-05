@@ -2,9 +2,9 @@
 
 ## 一、方案概览
 
-| 维度 | RLMV | RLVG |
+| 维度 | [RLMV](./rlbv.md) | [RLVG](./rlvg.md) |
 |---|---|---|
-| **全称** | Reinforcement Learning with Bounded Verification | Reinforcement Learning with Latent Geometric Verification |
+| **全称** | Reinforcement Learning with Multi-tier Verification | Reinforcement Learning with Latent Geometric Verification |
 | **核心理念** | 全集分层 + 分层奖励 + 工程闭环修补 | 隐空间几何验证 + 白盒损失函数 + 原理闭合 |
 | **域判定方式** | 外挂判定器 D(x)（神经网络分类器），温度缩放校准 | 静态几何超平面坐标投影，SVD 分解语义子空间 |
 | **奖励机制** | 分层奖励 R₂/R₁/R₃ + 条件化软触发 + 解耦归一化 | 几何损失 L_geom + 原点坍缩 L_orig + GDPO 主损失 |
