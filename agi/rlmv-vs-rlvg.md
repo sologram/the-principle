@@ -1,8 +1,8 @@
-# RLBV v0.4 vs RLVG 方案对比分析
+# RLMV vs RLVG 方案对比分析
 
 ## 一、方案概览
 
-| 维度 | RLBV v0.4 | RLVG |
+| 维度 | RLMV | RLVG |
 |---|---|---|
 | **全称** | Reinforcement Learning with Bounded Verification | Reinforcement Learning with Latent Geometric Verification |
 | **核心理念** | 全集分层 + 分层奖励 + 工程闭环修补 | 隐空间几何验证 + 白盒损失函数 + 原理闭合 |
