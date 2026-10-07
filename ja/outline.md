@@ -1,6 +1,6 @@
 # 事物原理
 
-[العربية](../ar/outline.md) | [Deutsch](../de/outline.md) | [English](../en/outline.md) | [Español](../es/outline.md) | [Français](../fr/outline.md) | [한국어](../ko/outline.md) | [Русский](../ru/outline.md) | [中文](../zh/outline.md)
+[&lrm;العربية&lrm;](../ar/outline.md) | [Deutsch](../de/outline.md) | [English](../en/outline.md) | [Español](../es/outline.md) | [Français](../fr/outline.md) | [한국어](../ko/outline.md) | [Русский](../ru/outline.md) | [中文](../zh/outline.md)
 
 |公理	|名称		|内容		|一般化の由来
 |-		|-			|-			|-

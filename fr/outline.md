@@ -1,6 +1,6 @@
 # Le Principe
 
-[العربية](../ar/outline.md) | [Deutsch](../de/outline.md) | [English](../en/outline.md) | [Español](../es/outline.md) | [日本語](../ja/outline.md) | [한국어](../ko/outline.md) | [Русский](../ru/outline.md) | [中文](../zh/outline.md)
+[&lrm;العربية&lrm;](../ar/outline.md) | [Deutsch](../de/outline.md) | [English](../en/outline.md) | [Español](../es/outline.md) | [日本語](../ja/outline.md) | [한국어](../ko/outline.md) | [Русский](../ru/outline.md) | [中文](../zh/outline.md)
 
 |Axiome	|Nom					|Contenu						|Généralisé depuis
 |-		|-						|-								|-
