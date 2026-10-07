@@ -3,19 +3,25 @@
 >表达重于演绎。
 >- Sologram
 
+## 总纲 / [Outline](zh/outline.md)
+
 ## [Preface](en/preface.md) / [前言](zh/preface.md)
 
-## [The Zeroth Law of Existence](en/the-0th-law.md) / [第零 (存在) 定律](zh/the-0th-law.md)
+## [The Zeroth Axiom of Existence](en/the-0th-axiom.md) / [第零 (存在) 公理](zh/the-0th-axiom.md)
 
-## [First Law of Correctness](en/the-1st-law.md) / [第一 (正确) 定律](zh/the-1st-law.md)
+## [First Axiom of Correctness](en/the-1st-axiom.md) / [第一 (正确) 公理](zh/the-1st-axiom.md)
 
-## [The Second Law of Motivation](en/the-2nd-law.md) / [第二 (动机) 定律](zh/the-2nd-law.md)
+## [The Second Axiom of Intention](en/the-2nd-axiom.md) / [第二 (意图) 公理](zh/the-2nd-axiom.md)
 
-## [The Third Law of Freedom](en/the-3rd-law.md) / [第三 (自由) 定律](zh/the-3rd-law.md)
+## [The Third Axiom of Games](en/the-3rd-axiom.md) / [第三 (博弈) 公理](zh/the-3rd-axiom.md)
 
-## [The Fourth Law of Justice](en/the-4th-law.md) / [第四 (正义) 定律](zh/the-4th-law.md)
+## [The Fourth Axiom of Freedom](en/the-4th-axiom.md) / [第四 (自由) 公理](zh/the-4th-axiom.md)
 
-## The Fifth Law of Meaning / 第五 (意义) 定律
+## [The Fifth Axiom of Justice](en/the-5th-axiom.md) / [第五 (正义) 公理](zh/the-5th-axiom.md)
+
+## [The Sixth Axiom of Meaning](en/the-6th-axiom.md) / [第六 (意义) 公理](zh/the-6th-axiom.md)
+
+## [The Seventh Axiom of Optimality](en/the-7th-axiom.md) / [第七 (最优) 公理](zh/the-7th-axiom.md)
 
 ## [Science](en/science.md) / [科学](zh/science.md)
 

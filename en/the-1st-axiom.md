@@ -1,4 +1,4 @@
-# The First Law of Correct
+# The First Axiom of Correctness
 
 No correctness allows any omission.
 

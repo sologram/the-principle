@@ -1,16 +1,24 @@
 # The Principle
 
+## [Outline](../zh/outline.md)
+
 ## [Preface](preface.md)
 
-## [The Zeroth Law of Existence](the-0th-law.md)
+## [The Zeroth Axiom of Existence](the-0th-axiom.md)
 
-## [First Law of Correct](the-1st-law.md)
+## [First Axiom of Correctness](the-1st-axiom.md)
 
-## [The Second Law of Motivation](the-2nd-law.md)
+## [The Second Axiom of Intention](the-2nd-axiom.md)
 
-## [The Third Law of Freedom](the-3rd-law.md)
+## [The Third Axiom of Games](the-3rd-axiom.md)
 
-## [The Fourth Law of Justice](the-4th-law.md)
+## [The Fourth Axiom of Freedom](the-4th-axiom.md)
+
+## [The Fifth Axiom of Justice](the-5th-axiom.md)
+
+## [The Sixth Axiom of Meaning](the-6th-axiom.md)
+
+## [The Seventh Axiom of Optimality](the-7th-axiom.md)
 
 ## [Science](science.md)
 
