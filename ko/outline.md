@@ -1,5 +1,7 @@
 # 사물의 원리
 
+[العربية](../ar/outline.md) | [Deutsch](../de/outline.md) | [English](../en/outline.md) | [Español](../es/outline.md) | [Français](../fr/outline.md) | [日本語](../ja/outline.md) | [Русский](../ru/outline.md) | [中文](../zh/outline.md)
+
 |공리	|명칭		|내용			|일반화의 출처
 |-		|-			|-				|-
 |제0	|존재 공리	|존재는 차이다		|정보이론

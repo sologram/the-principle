@@ -1,5 +1,7 @@
 # The Principle
 
+[العربية](../ar/outline.md) | [Deutsch](../de/outline.md) | [Español](../es/outline.md) | [Français](../fr/outline.md) | [日本語](../ja/outline.md) | [한국어](../ko/outline.md) | [Русский](../ru/outline.md) | [中文](../zh/outline.md)
+
 |Axiom	|Name				|Content					|Generalized from
 |-		|-					|-							|-
 |Zeroth	|Axiom of Existence	|Existence is difference	|Information theory

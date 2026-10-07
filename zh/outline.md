@@ -1,5 +1,7 @@
 # 事物原理
-	
+
+[العربية](../ar/outline.md) | [Deutsch](../de/outline.md) | [English](../en/outline.md) | [Español](../es/outline.md) | [Français](../fr/outline.md) | [日本語](../ja/outline.md) | [한국어](../ko/outline.md) | [Русский](../ru/outline.md)
+
 |公理	|名称		|内容		|泛化来源
 |-		|-			|-			|-
 |第零	|存在公理	|存在即差异 	|信息论

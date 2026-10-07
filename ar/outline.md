@@ -1,5 +1,7 @@
 # مبدأ الأشياء
 
+[Deutsch](../de/outline.md) | [English](../en/outline.md) | [Español](../es/outline.md) | [Français](../fr/outline.md) | [日本語](../ja/outline.md) | [한국어](../ko/outline.md) | [Русский](../ru/outline.md) | [中文](../zh/outline.md)
+
 |البديهية	|الاسم				|المضمون						|مصدر التعميم
 |-			|-					|-								|-
 |الصفرية	|بديهية الوجود		|الوجود هو الاختلاف				|نظرية المعلومات
