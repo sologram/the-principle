@@ -1,6 +1,6 @@
 # 사물의 원리
 
-[&lrm;العربية&lrm;](../ar/outline.md) | [Deutsch](../de/outline.md) | [English](../en/outline.md) | [Español](../es/outline.md) | [Français](../fr/outline.md) | [日本語](../ja/outline.md) | [Русский](../ru/outline.md) | [中文](../zh/outline.md)
+[&lrm;العربية&lrm;](../ar/outline.md) | [Deutsch](../de/outline.md) | [English](../en/outline.md) | [Español](../es/outline.md) | [Français](../fr/outline.md) | [हिन्दी](../hi/outline.md) | [Italiano](../it/outline.md) | [日本語](../ja/outline.md) | [Português](../pt/outline.md) | [Русский](../ru/outline.md) | [中文](../zh/outline.md)
 
 |공리	|명칭		|내용			|일반화의 출처
 |-		|-			|-				|-

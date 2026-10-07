@@ -1,6 +1,6 @@
 # Das Prinzip
 
-[&lrm;العربية&lrm;](../ar/outline.md) | [English](../en/outline.md) | [Español](../es/outline.md) | [Français](../fr/outline.md) | [日本語](../ja/outline.md) | [한국어](../ko/outline.md) | [Русский](../ru/outline.md) | [中文](../zh/outline.md)
+[&lrm;العربية&lrm;](../ar/outline.md) | [English](../en/outline.md) | [Español](../es/outline.md) | [Français](../fr/outline.md) | [हिन्दी](../hi/outline.md) | [Italiano](../it/outline.md) | [日本語](../ja/outline.md) | [한국어](../ko/outline.md) | [Português](../pt/outline.md) | [Русский](../ru/outline.md) | [中文](../zh/outline.md)
 
 |Axiom	|Name						|Inhalt							|Verallgemeinert aus
 |-		|-							|-								|-
