@@ -127,7 +127,7 @@ text
 
 ## 十、预演：语义轴文件
 
-AXIS_CLASSIFICATION.md 是希尔伯特纪念进程的**操作预演**：
+axis_classification.md 是希尔伯特纪念进程的**操作预演**：
 
 - 从差异（82 对反义词）出发
 - 机械提取正交结构（64 个语义轴，PCA 正交化）

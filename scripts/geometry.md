@@ -253,4 +253,4 @@ laws/*.yaml
 ## 参考
 
 - [README-zh.md](README-zh.md) — 工具使用说明
-- [THEORY.md](THEORY.md) — 实验结果与分析
+- [theory.md](theory.md) — 实验结果与分析

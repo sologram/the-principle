@@ -103,5 +103,5 @@ opposite_pairs:
 ## Reference
 
 - [geometry.md](geometry.md) — Algorithm principles (Chinese)
-- [THEORY.md](THEORY.md) — Experimental results (Chinese)
+- [theory.md](theory.md) — Experimental results (Chinese)
 - [README-zh.md](README-zh.md) — Chinese documentation

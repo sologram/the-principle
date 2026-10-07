@@ -172,7 +172,7 @@ class QuadrantSpaceAnalyzer:
         self.quadrant_templates = self._define_templates()
 
     def _define_templates(self):
-        """Define quadrant concept templates from BINARY-CONCEPT-SPACE.md."""
+        """Define quadrant concept templates from binary-concept-space.md."""
         templates = {
             'order_freedom_slavery_chaos': {
                 'words': ['秩序', '自由', '奴役', '放任'],

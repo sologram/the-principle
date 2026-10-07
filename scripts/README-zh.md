@@ -172,5 +172,5 @@ opposite_pairs:
 ## 参考
 
 - [geometry.md](geometry.md) — 算法原理详解
-- [THEORY.md](THEORY.md) — 实验结果与分析
-- [../zh/GLOSSARIES-FULL.md](../zh/GLOSSARIES-FULL.md) — 术语定义
+- [theory.md](theory.md) — 实验结果与分析
+- [../zh/glossaries-full.md](../zh/glossaries-full.md) — 术语定义

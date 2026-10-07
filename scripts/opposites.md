@@ -172,4 +172,4 @@ python geometry4.py --task all
 
 - [README-zh.md](README-zh.md) — 工具使用指南
 - [geometry.md](geometry.md) — 语义空间分析原理
-- [THEORY.md](THEORY.md) — 实验结果
+- [theory.md](theory.md) — 实验结果

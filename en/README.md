@@ -1,21 +1,21 @@
 # The Principle
 
-## [Preface](PREFACE.md)
+## [Preface](preface.md)
 
-## [The Zeroth Law of Existence](THE-0th-LAW.md)
+## [The Zeroth Law of Existence](the-0th-law.md)
 
-## [First Law of Correct](THE-1st-LAW.md)
+## [First Law of Correct](the-1st-law.md)
 
-## [The Second Law of Motivation](THE-2nd-LAW.md)
+## [The Second Law of Motivation](the-2nd-law.md)
 
-## [The Third Law of Freedom](THE-3rd-LAW.md)
+## [The Third Law of Freedom](the-3rd-law.md)
 
-## [The Fourth Law of Justice](THE-4th-LAW.md)
+## [The Fourth Law of Justice](the-4th-law.md)
 
-## [Science](SCIENCE.md)
+## [Science](science.md)
 
-## [Order Out of Chaos](ORDER-OUT-OF-CHAOS.md)
+## [Order Out of Chaos](order-out-of-chaos.md)
 
-## [Dephilosophizing](DEPHILOSOPHIZING.md)
+## [Dephilosophizing](dephilosophizing.md)
 
-## [Glossaries](GLOSSARIES.md)
+## [Glossaries](glossaries.md)

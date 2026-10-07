@@ -275,4 +275,4 @@
 
 - [README-zh.md](README-zh.md) — 工具使用说明
 - [geometry.md](geometry.md) — 算法原理详解
-- [../zh/GLOSSARIES-FULL.md](../zh/GLOSSARIES-FULL.md) — 术语定义
+- [../zh/glossaries-full.md](../zh/glossaries-full.md) — 术语定义
