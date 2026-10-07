@@ -3,8 +3,6 @@
 >表达重于演绎。
 >- Sologram
 
-## 总纲 / [Outline](zh/outline.md)
-
 ## [Preface](en/preface.md) / [前言](zh/preface.md)
 
 ## [The Zeroth Axiom of Existence](en/the-0th-axiom.md) / [第零 (存在) 公理](zh/the-0th-axiom.md)
