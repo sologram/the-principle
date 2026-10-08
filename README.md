@@ -12,8 +12,7 @@
 >
 > —— Sologram
 >
-> Wir müssen wissen — Wir werden wissen — Wir wissen bereits.\
-> 我们必须知道，我们必将知道，我们已经知道。
+> Wir müssen wissen — Wir werden wissen — Wir wissen bereits.
 >
 > —— Sologram
 
