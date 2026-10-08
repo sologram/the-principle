@@ -50,7 +50,7 @@ Principle is optimality / 原理即最优
 
 ## Glossary / [术语](zh/glossaries.md)
 
-## License / 许可证
+## [License / 许可证](LICENSE)
 
-This project is licensed under the GNU General Public License v3.0 — see the [LICENSE](LICENSE) file.\
-本项目采用 GNU 通用公共许可证 v3.0（GPL-3.0）——详见 [LICENSE](LICENSE) 文件。
+This project is licensed under the GNU General Public License v3.0.\
+本项目采用 GNU 通用公共许可证 v3.0 (GPL-3.0)。
