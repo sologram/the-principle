@@ -1,7 +1,5 @@
 # The Principle
 
-## [Outline](outline.md)
-
 ## [Preface](preface.md)
 
 ## [The Zeroth Axiom of Existence](the-0th-axiom.md)
