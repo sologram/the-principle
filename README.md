@@ -36,7 +36,7 @@ Justice is efficiency / 正义即效率
 Meaning is price / 意义即价格
 
 ## [The Seventh Axiom of Optimality](en/the-7th-axiom.md) / [第七 (最优) 公理](zh/the-7th-axiom.md)
-The Principle is optimal / 原理即最优
+Principle is optimality / 原理即最优
 
 ## [Science](en/science.md) / [科学](zh/science.md)
 
@@ -50,6 +50,7 @@ The Principle is optimal / 原理即最优
 
 This project is licensed under the GNU General Public License v3.0 — see the [LICENSE](LICENSE) file.\
 本项目采用 GNU 通用公共许可证 v3.0（GPL-3.0）——详见 [LICENSE](LICENSE) 文件。
+
 ---
 GLM5.1 在 Prompt “别处有类似的理论吗”下给出了“[这个](zh/related-theories.md)”响应。
 
