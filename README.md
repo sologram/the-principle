@@ -1,4 +1,6 @@
 # [The Principle](en/) / [事物原理](zh/)
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 	
 > Expression over deduction.\
 > 表达重于演绎。
