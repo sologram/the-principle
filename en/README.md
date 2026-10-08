@@ -1,12 +1,12 @@
 # The Principle
 
-## [Outline](../zh/outline.md)
+## [Outline](outline.md)
 
 ## [Preface](preface.md)
 
 ## [The Zeroth Axiom of Existence](the-0th-axiom.md)
 
-## [First Axiom of Correctness](the-1st-axiom.md)
+## [The First Axiom of Correctness](the-1st-axiom.md)
 
 ## [The Second Axiom of Intention](the-2nd-axiom.md)
 
@@ -23,6 +23,8 @@
 ## [Science](science.md)
 
 ## [Order Out of Chaos](order-out-of-chaos.md)
+
+## [MI](../agi/en.md)
 
 ## [Dephilosophizing](dephilosophizing.md)
 

@@ -11,7 +11,7 @@
 |Fourth	|Axiom of Freedom	|Freedom is ignorance		|Maximum entropy principle
 |Fifth	|Axiom of Justice	|Justice is efficiency		|Coase theorem
 |Sixth	|Axiom of Meaning	|Meaning is price			|Supply and demand
-|Seventh|Axiom of Optimality|The Principle is optimal	|Occam's razor
+|Seventh|Axiom of Optimality|Principle is optimality	|Occam's razor
 
 All axioms are scale-free and self-referential.
 
@@ -33,10 +33,12 @@ Unify all of science: natural, social, formal, meta-science
 - **Matter/mind, empirical/formal** — Matter: weak expressive space; mind: strong expressive space; empirical: criterion lies outside the system; formal: criterion lies within the system itself
 - **Right/wrong, good/bad** — Right = correct = complete (1); good = efficient (4)
 - **Truth, goodness, beauty** — Truth = correctness; goodness = cooperation; beauty = competitiveness
+- **Subjective/objective** — disagreement/agreement
 
 ## Theorems
 
 (Numbers in parentheses indicate which axioms the theorem relates to)
+- **Absolute truth theorem** — absolute truth exists; at minimum the Zeroth and First Axioms of The Principle are absolute truths, independent of human understanding or acceptance (0, 1)
 - **Superposition theorem** — the engineering method of knowledge extraction
 - **Selfishness theorem** — utility maximization under constraints; the most important cornerstone of modern microeconomics. Together with the "rationality theorem" it is often called the "rational agent principle"
 - **Rationality theorem** — when a human individual obtains complete information, their behavior is determined
@@ -50,6 +52,7 @@ Unify all of science: natural, social, formal, meta-science
 - **Philosophy democracy law** — philosophy's legitimacy derives from authorization by public ignorance
 - **Philosophy autocracy law** — the validity of dialectics derives from the dialectician's power
 - **Trustworthy deduction must be based on axioms** — its basis of judgment must be traceable to explicit, stable fundamental principles (otherwise don't bullshit me)
+- **Darwinian boundary principle** — adjusting a thing's boundary is an effective means of evolving toward completeness
 - **Scientific truth law** — scientific principles must be absolutely correct (1)
 - **Scientific theorem law** — scientific principles must be committed to correctness (1)
 - **Scientific eternity law** — scientific principles must not change (1)
