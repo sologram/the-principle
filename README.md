@@ -1,8 +1,8 @@
 # [The Principle](en/) / [事物原理](zh/)
 
-> Expression over deduction.
+> Expression over deduction.\
+> 表达重于演绎。
 > 
-> 表达重于演绎。\
 > —— Sologram
 >
 > The Principle presents [the same content](en/outline.md) to both humans and machines in explicit natural language. Evidence shows that machines can already understand and apply these principles effectively; as for how humans choose, they are free to do as they please.\
