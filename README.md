@@ -1,5 +1,5 @@
 # [The Principle](en/) / [事物原理](zh/)
-
+	
 > Expression over deduction.\
 > 表达重于演绎。
 > 
@@ -38,11 +38,11 @@
 
 ## [Science](en/science.md) / [科学](zh/science.md)
 
-## [AI](agi/en.md) / [机器智能](agi/zh.md)
+## [MI](agi/en.md) / [机器智能](agi/zh.md)
 
 ## [Dephilosophizing](en/dephilosophizing.md) / [去哲学化](zh/dephilosophizing.md)
 
-## Glossaries / [术语](zh/glossaries.md)
+## Glossary / [术语](zh/glossaries.md)
 ---
 GLM5.1 在 Prompt “别处有类似的理论吗”下给出了“[这个](zh/related-theories.md)”响应。
 
