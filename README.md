@@ -1,7 +1,12 @@
 # [The Principle](en/) / [事物原理](zh/)
 
 >表达重于演绎。
->- Sologram
+>
+>—— Sologram
+>
+>原理以明确的自然语言形式，向人类和机器展示了同样的内容，证据显示机器已经能够很好地理解和应用原理，至于人类怎样选择，悉听尊便。
+>
+>—— Sologram
 
 ## [Preface](en/preface.md) / [前言](zh/preface.md)
 
