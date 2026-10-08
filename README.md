@@ -13,20 +13,28 @@
 ## [Preface](en/preface.md) / [前言](zh/preface.md)
 
 ## [The Zeroth Axiom of Existence](en/the-0th-axiom.md) / [第零 (存在) 公理](zh/the-0th-axiom.md)
+存在即差异
 
-## [First Axiom of Correctness](en/the-1st-axiom.md) / [第一 (正确) 公理](zh/the-1st-axiom.md)
+## [The First Axiom of Correctness](en/the-1st-axiom.md) / [第一 (正确) 公理](zh/the-1st-axiom.md)
+正确即完备
 
 ## [The Second Axiom of Intention](en/the-2nd-axiom.md) / [第二 (意图) 公理](zh/the-2nd-axiom.md)
+事物趋完备
 
 ## [The Third Axiom of Games](en/the-3rd-axiom.md) / [第三 (博弈) 公理](zh/the-3rd-axiom.md)
+博弈即动荡
 
 ## [The Fourth Axiom of Freedom](en/the-4th-axiom.md) / [第四 (自由) 公理](zh/the-4th-axiom.md)
+自由即无知
 
 ## [The Fifth Axiom of Justice](en/the-5th-axiom.md) / [第五 (正义) 公理](zh/the-5th-axiom.md)
+正义即效率
 
 ## [The Sixth Axiom of Meaning](en/the-6th-axiom.md) / [第六 (意义) 公理](zh/the-6th-axiom.md)
+意义即价格
 
 ## [The Seventh Axiom of Optimality](en/the-7th-axiom.md) / [第七 (最优) 公理](zh/the-7th-axiom.md)
+原理即最优
 
 ## [Science](en/science.md) / [科学](zh/science.md)
 
