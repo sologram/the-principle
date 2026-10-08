@@ -4,7 +4,7 @@
 >
 > —— Sologram
 >
-> A principle presents the same content to humans and machines in explicit natural language. Evidence shows that machines can already understand and apply principles well; as for how humans choose, that is up to them. / 原理以明确的自然语言形式，向人类和机器展示了同样的内容，证据显示机器已经能够很好地理解和应用原理，至于人类怎样选择，悉听尊便。
+> A principle presents [the same content](en/outline.md) to humans and machines in explicit natural language. Evidence shows that machines can already understand and apply principles well; as for how humans choose, that is up to them. / 原理以明确的自然语言形式，向人类和机器展示了[同样的内容](zh/outline.md)，证据显示机器已经能够很好地理解和应用原理，至于人类怎样选择，悉听尊便。
 >
 > —— Sologram
 
