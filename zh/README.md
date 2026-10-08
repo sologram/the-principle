@@ -1,7 +1,5 @@
 # 事物原理
 
-## [总纲](outline.md)
-
 ## [前言](preface.md)
 
 ## [第零 (存在) 公理](the-0th-axiom.md)
