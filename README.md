@@ -48,7 +48,7 @@ Principle is optimality / 原理即最优
 
 ## [Dephilosophizing](en/dephilosophizing.md) / [去哲学化](zh/dephilosophizing.md)
 
-## Glossary / [术语](zh/glossaries.md)
+## Glossary / [术语](zh/glossary.md)
 
 ## [License / 许可证](LICENSE)
 

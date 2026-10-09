@@ -26,4 +26,4 @@
 
 ## [Dephilosophizing](dephilosophizing.md)
 
-## [Glossaries](glossaries.md)
+## [Glossary](glossary.md)
