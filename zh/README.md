@@ -1,22 +1,22 @@
 # 事物原理
 
 ## [前言](preface.md)
+### 行会的黄昏
+### 一点点迷信
+### 四元组
+### 一大团迷信
+### 平凡的常识
+### 愚昧之至
 
-## [第零 (存在) 公理](the-0th-axiom.md)
-
-## [第一 (正确) 公理](the-1st-axiom.md)
-
-## [第二 (意图) 公理](the-2nd-axiom.md)
-
-## [第三 (博弈) 公理](the-3rd-axiom.md)
-
-## [第四 (自由) 公理](the-4th-axiom.md)
-
-## [第五 (正义) 公理](the-5th-axiom.md)
-
-## [第六 (意义) 公理](the-6th-axiom.md)
-
-## [第七 (最优) 公理](the-7th-axiom.md)
+## 事物原理
+### [第零 (存在) 公理](the-0th-axiom.md)
+### [第一 (正确) 公理](the-1st-axiom.md)
+### [第二 (意图) 公理](the-2nd-axiom.md)
+### [第三 (博弈) 公理](the-3rd-axiom.md)
+### [第四 (自由) 公理](the-4th-axiom.md)
+### [第五 (正义) 公理](the-5th-axiom.md)
+### [第六 (意义) 公理](the-6th-axiom.md)
+### [第七 (最优) 公理](the-7th-axiom.md)
 
 ## [拨乱反正](order-out-of-chaos.md)
 
@@ -24,7 +24,7 @@
 
 ## 应用
 
-## [术语](glossaries.md)
+## [术语](glossary.md)
 
 ---
 GLM5.1 在 Prompt “别处有类似的理论吗”下给出了“[这个](related-theories.md)”响应。
