@@ -1,5 +1,7 @@
 # 事物原理
 
+[&lrm;العربية&lrm;](../ar/) | [Deutsch](../de/) | [English](../en/) | [Español](../es/) | [Français](../fr/) | [हिन्दी](../hi/) | [Italiano](../it/) | [日本語](../ja/) | [한국어](../ko/) | [Português](../pt/) | [Русский](../ru/)
+
 ## [前言](preface.md)
 ### 行会的黄昏
 ### 一点点迷信
