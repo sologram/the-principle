@@ -35,15 +35,15 @@
 
 在度量空间中，完备性定义如下：
 
-> 度量空间 \((X,d)\) 是完备的，当且仅当 \(X\) 中每个柯西序列都收敛于 \(X\) 中的某点。
+> 度量空间 $(X,d)$ 是完备的，当且仅当 $X$ 中每个柯西序列都收敛于 $X$ 中的某点。
 
 形式化地：
 
-\[
+$$
 \forall (x_n)\subseteq X,\ \text{若 }(x_n)\text{ 是柯西列，则 }\exists x\in X,\ x_n\to x.
-\]
+$$
 
-直观上，完备空间没有“缺失的极限点”。有理数集 \(\mathbb{Q}\) 不是完备的：可以构造有理数柯西列逼近 \(\sqrt2\)，但其极限不在 \(\mathbb{Q}\) 中。实数集 \(\mathbb{R}\) 是完备的，并且 \(\mathbb{R}\) 是 \(\mathbb{Q}\) 的完备化。
+直观上，完备空间没有“缺失的极限点”。有理数集 $\mathbb{Q}$ 不是完备的：可以构造有理数柯西列逼近 $\sqrt2$，但其极限不在 $\mathbb{Q}$ 中。实数集 $\mathbb{R}$ 是完备的，并且 $\mathbb{R}$ 是 $\mathbb{Q}$ 的完备化。
 
 “实数完备性”则常指一组等价定理：确界原理、单调有界定理、闭区间套定理、有限覆盖定理、聚点定理、柯西收敛准则等。这些命题在实数系中彼此等价，但它们属于同一领域内的等价族，不等同于一般度量空间的完备性。
 
@@ -53,17 +53,17 @@
 
 第一，**逻辑系统的完备性**。一阶逻辑的强完备性可表述为：
 
-\[
+$$
 \Gamma\vDash \varphi \Rightarrow \Gamma\vdash \varphi.
-\]
+$$
 
-即：凡是语义上由 \(\Gamma\) 推出的公式，都能在证明系统中被证明。哥德尔完备性定理说的正是这个意义上一阶逻辑的完备性。
+即：凡是语义上由 $\Gamma$ 推出的公式，都能在证明系统中被证明。哥德尔完备性定理说的正是这个意义上一阶逻辑的完备性。
 
-第二，**理论的完备性**。一个形式理论 \(T\) 是完备的，当且仅当对每个句子 \(\varphi\)：
+第二，**理论的完备性**。一个形式理论 $T$ 是完备的，当且仅当对每个句子 $\varphi$：
 
-\[
+$$
 T\vdash \varphi \quad \text{或} \quad T\vdash \neg\varphi.
-\]
+$$
 
 即理论能判定每个句子。哥德尔第一不完备性定理指出：足够强、递归公理化且一致的理论，如皮亚诺算术，是不完备的。
 
@@ -73,21 +73,21 @@ T\vdash \varphi \quad \text{或} \quad T\vdash \neg\varphi.
 
 在计算理论中，“图灵完备”指一个计算系统能模拟图灵机，从而能计算所有可计算函数。大多数通用编程语言是图灵完备的。图灵完备并不意味着能解决所有问题，因为停机问题等是不可计算的。
 
-“NP 完全”则是另一个意义上的“完全”。一个问题 \(L\) 是 NP 完全的，若：
+“NP 完全”则是另一个意义上的“完全”。一个问题 $L$ 是 NP 完全的，若：
 
-1. \(L\in \mathrm{NP}\)；
-2. 对任意 \(L'\in \mathrm{NP}\)，都有 \(L'\le_p L\)。
+1. $L\in \mathrm{NP}$；
+2. 对任意 $L'\in \mathrm{NP}$，都有 $L'\le_p L$。
 
 这里的“完全”更接近“在归约意义下代表整个类”，而不是“对极限封闭”。它属于“完全性”词族的边缘成员，与图灵完备不在同一层面。
 
 ### 2.4 统计完备
 
-在统计推断中，统计量 \(T\) 是完备的，若对任意可测函数 \(g\)，有：
+在统计推断中，统计量 $T$ 是完备的，若对任意可测函数 $g$，有：
 
-\[
+$$
 E_\theta[g(T)]=0,\ \forall \theta \in \Theta
 \Rightarrow g(T)=0 \quad \text{几乎处处}.
-\]
+$$
 
 直观上，完备统计量不包含关于参数的“冗余零信息”。它与度量完备、逻辑完备没有直接推出关系。
 
@@ -117,13 +117,13 @@ E_\theta[g(T)]=0,\ \forall \theta \in \Theta
 
 因此：
 
-- **领域内**：某些完备性表述确实等价。例如实数完备性的诸定理在 \(\mathbb{R}\) 中等价；度量空间完备性的多种刻画等价。
+- **领域内**：某些完备性表述确实等价。例如实数完备性的诸定理在 $\mathbb{R}$ 中等价；度量空间完备性的多种刻画等价。
 - **跨领域**：一般不等效，不能互推。
 - **跨对象**：甚至不可比较。
 
 举几个反例：
 
-1. **度量完备不推出完备格**。给任意集合 \(X\) 赋予离散度量，它是度量完备的；但若 \(|X|\ge 2\)，把 \(X\) 看成离散偏序集，它通常不是完备格，因为 \(\{a,b\}\) 没有上确界。它仍可能是 Dedekind 完备的，因为“有上界的非空子集”极少，因此这里严格说是不推出“完备格”，而非不推出所有序完备性。
+1. **度量完备不推出完备格**。给任意集合 $X$ 赋予离散度量，它是度量完备的；但若 $|X|\ge 2$，把 $X$ 看成离散偏序集，它通常不是完备格，因为 $\{a,b\}$ 没有上确界。它仍可能是 Dedekind 完备的，因为“有上界的非空子集”极少，因此这里严格说是不推出“完备格”，而非不推出所有序完备性。
 2. **逻辑完备不推出理论完备**。一阶逻辑是逻辑完备的，但皮亚诺算术作为理论不完备。
 3. **图灵完备不推出逻辑完备**。一种编程语言可以图灵完备，但其类型系统或逻辑系统未必完备。
 4. **统计完备与范畴完备无关**。一个统计量可以完备，同时其样本空间作为范畴未必小极限封闭。
@@ -138,12 +138,12 @@ E_\theta[g(T)]=0,\ \forall \theta \in \Theta
 
 ### 4.1 不同意义的谓词可以同时为真
 
-不同领域的“完备”是不同的谓词。设 \(C_1(x)\) 表示“\(x\) 度量完备”，\(C_2(x)\) 表示“\(x\) 逻辑完备”。它们适用于不同对象，因此通常不会冲突。
+不同领域的“完备”是不同的谓词。设 $C_1(x)$ 表示“$x$ 度量完备”，$C_2(x)$ 表示“$x$ 逻辑完备”。它们适用于不同对象，因此通常不会冲突。
 
 例如：
 
-- \(\mathbb{R}\) 是度量完备的；
-- \(\mathbb{R}\) 作为序集也是序完备的；
+- $\mathbb{R}$ 是度量完备的；
+- $\mathbb{R}$ 作为序集也是序完备的；
 - 一阶逻辑是逻辑完备的；
 - 皮亚诺算术不是理论完备的；
 - 某编程语言是图灵完备的；
@@ -153,12 +153,12 @@ E_\theta[g(T)]=0,\ \forall \theta \in \Theta
 
 ### 4.2 同一对象可同时满足多种完备性
 
-以实数集 \(\mathbb{R}\) 为例：
+以实数集 $\mathbb{R}$ 为例：
 
 - 它是度量完备的；
 - 它是序完备的；
 - 实数完备性的多种定理成立；
-- 其理论 \(\mathrm{Th}(\mathbb{R})\) 作为一阶理论是完备的。
+- 其理论 $\mathrm{Th}(\mathbb{R})$ 作为一阶理论是完备的。
 
 这些“完备”并不同义，但可以同时成立。这说明“不等效”不等于“不相容”。
 
@@ -178,10 +178,10 @@ E_\theta[g(T)]=0,\ \forall \theta \in \Theta
 
 ### 4.4 真正的不相容
 
-真正的不相容只发生在同一论域、同一意义下同时断言 \(P\) 与 \(\neg P\)。例如：
+真正的不相容只发生在同一论域、同一意义下同时断言 $P$ 与 $\neg P$。例如：
 
 - “这个度量空间是完备的”与“这个度量空间不是完备的”不相容；
-- “理论 \(T\) 是完备的”与“理论 \(T\) 不是完备的”不相容。
+- “理论 $T$ 是完备的”与“理论 $T$ 不是完备的”不相容。
 
 但这是同一完备概念内部的矛盾，不是不同完备概念之间的冲突。
 
@@ -193,17 +193,17 @@ E_\theta[g(T)]=0,\ \forall \theta \in \Theta
 
 虽然这些“完备”不等效，但它们并非毫无联系。它们共享一个抽象图式：
 
-> 系统 \(S\) 相对于某类操作 \(O\) 是完备的，若 \(O\) 所要求的极限、结果、证明或计算都能在 \(S\) 内实现或被 \(S\) 捕获。
+> 系统 $S$ 相对于某类操作 $O$ 是完备的，若 $O$ 所要求的极限、结果、证明或计算都能在 $S$ 内实现或被 $S$ 捕获。
 
 可形式化地理解为：
 
-\[
+$$
 \text{完备性} = \text{封闭性} + \text{存在性/可达性}.
-\]
+$$
 
-必须强调，这是一个**事后描述性的概括**，而非**事前定义性的本质**。它不追求共同本质，只刻画家族相似中的重叠网络。不同领域选择不同的 \(O\)：
+必须强调，这是一个**事后描述性的概括**，而非**事前定义性的本质**。它不追求共同本质，只刻画家族相似中的重叠网络。不同领域选择不同的 $O$：
 
-| 领域 | 系统 \(S\) | 操作 \(O\) | 完备性含义 |
+| 领域 | 系统 $S$ | 操作 $O$ | 完备性含义 |
 |---|---|---|---|
 | 度量空间 | 度量空间 | 柯西极限 | 每个柯西列收敛于空间内 |
 | 实数 | 实数系 | 确界、极限、覆盖 | 确界原理等成立 |
@@ -252,11 +252,11 @@ E_\theta[g(T)]=0,\ \forall \theta \in \Theta
 
 1. Rudin, W. *Principles of Mathematical Analysis*. 3rd ed. New York: McGraw-Hill, 1976.
 2. Munkres, J. R. *Topology*. 2nd ed. Upper Saddle River: Prentice Hall, 2000.
-3. Enderton, H. B. *A Mathematical Introduction to Logic*. 2nd ed. San Diego: Harcourt, 2001.
+3. Enderton, H. B. *A Mathematical Introduction to Logic*. 2nd ed. San Diego: Harcourt/Academic Press, 2001.
 4. Gödel, K. “Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I.” *Monatshefte für Mathematik und Physik* 38 (1931): 173–198.
-5. Hopcroft, J. E., R. Motwani, and J. D. Ullman. *Introduction to Automata Theory, Languages, and Computation*. 3rd ed. Boston: Pearson, 2006.
-6. Casella, G., and R. L. Berger. *Statistical Inference*. 2nd ed. Pacific Grove: Duxbury, 2002.
+5. Hopcroft, J. E., R. Motwani, and J. D. Ullman. *Introduction to Automata Theory, Languages, and Computation*. 3rd ed. Boston: Pearson Addison-Wesley, 2006.
+6. Casella, G., and R. L. Berger. *Statistical Inference*. 2nd ed. Pacific Grove: Duxbury/Thomson Learning, 2002.
 7. Mac Lane, S. *Categories for the Working Mathematician*. 2nd ed. New York: Springer, 1998.
 8. Awodey, S. *Category Theory*. 2nd ed. Oxford: Oxford University Press, 2010.
 9. Davey, B. A., and H. A. Priestley. *Introduction to Lattices and Order*. 2nd ed. Cambridge: Cambridge University Press, 2002.
-10. Wittgenstein, L. *Philosophical Investigations*. Oxford: Blackwell, 1953.
+10. Wittgenstein, L. *Philosophical Investigations*. Oxford: Basil Blackwell, 1953.
