@@ -12,6 +12,10 @@ Many current theories are erroneous imitations of external characteristics.
 
 Getting things right requires getting all elements right, while getting things wrong only requires breaking one of them.
 
+## Science
+
+Science is correct doctrine.
+
 ## Rebuttals
 
 - Was the geocentric model complete? Why was it wrong?

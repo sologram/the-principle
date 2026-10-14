@@ -3,6 +3,7 @@
 - **Instinct**
 - **Essence**
 - **Boundary**
+- **Unchanging**
 - **Abstraction** /concrete, generalization, compression
 - **Existence** - information
 - **Wrong** - error, incomplete, incorrect
@@ -65,6 +66,7 @@
 - **Self**
 - **Freedom**
 - **Free will**
+- **Self-reference**
 - **Synthesis**
 - **Maximum common domain**
 - **Maximum entropy**

@@ -31,13 +31,15 @@ Unify all of science: natural, social, formal, meta-science
 - (Quadruple) **Science, philosophy, religion, engineering** — Science: commits and delivers; philosophy: no commitment, no delivery; religion: commits but doesn't deliver; engineering: no commitment but delivers
 - (Quadruple) **Natural science, social science, mathematics, meta-science** — Natural science = empirical science of matter; social science = empirical science of mind (little under this name is actual science); mathematics = formal science of matter; meta-science = formal science of mind — formerly occupied by philosophy, now precisely The Principle
 - **Matter/mind, empirical/formal** — Matter: weak expressive space; mind: strong expressive space; empirical: criterion lies outside the system; formal: criterion lies within the system itself
-- **Right/wrong, good/bad** — Right = correct = complete (1); good = efficient (4)
+- **Right/wrong, good/bad** — Right = correct = complete (1); good = efficiency (5)
 - **Truth, goodness, beauty** — Truth = correctness; goodness = cooperation; beauty = competitiveness
 - **Subjective/objective** — disagreement/agreement
+- **The boundary of a boundary** — is the boundary itself
 
 ## Theorems
 
 (Numbers in parentheses indicate which axioms the theorem relates to)
+- **Boundary theorem** — things are determined at the boundary.
 - **Absolute truth theorem** — absolute truth exists; at minimum the Zeroth and First Axioms of The Principle are absolute truths, independent of human understanding or acceptance (0, 1)
 - **Superposition theorem** — the engineering method of knowledge extraction
 - **Selfishness theorem** — utility maximization under constraints; the most important cornerstone of modern microeconomics. Together with the "rationality theorem" it is often called the "rational agent principle"
@@ -86,7 +88,15 @@ Unify all of science: natural, social, formal, meta-science
 
 ## Q&A and Clarifications
 
-- **Gödel's incompleteness theorems** — on the basis of the First Axiom, The Principle does not acknowledge Gödel's theorems. This does not mean The Principle plans to play ostrich before its greatest challenge: it will launch the "Hilbert process" to technically resolve the Gödel problem within a system its opponents accept, via "Gödel-world minimization"
+- **Why anti-philosophy** — anti-philosophy means opposing: no commitment and no delivery, semantic drift, shirking responsibility, DDoS.
+- **Why anti-academia** — look at what academia has missed: meta-science, principles of society, the most basic propositions of cognition, the demarcation of science, quadruples; then look at what academia champions: falsificationism, Gödel, philosophy... In a word: being anti-academia is being anti-corruption.
+- **Gödel's incompleteness theorems** — on the basis of the First Axiom, The Principle does not accept Gödel's theorems and does not recognize their scientific status. Of course this does not mean The Principle plans to play ostrich before its greatest challenge: it will launch the "Hilbert process" to technically resolve the Gödel problem within a system its opponents accept, via "Gödel-world minimization"
 - **How does The Principle guarantee it won't be overturned by a future "in-domain counterexample"?** — It doesn't. Although The Principle always predicts the future, it does not predict its own future. It only commits that if something better appears in the future, it will immediately absorb it into The Principle
 - **How does the Zeroth Axiom view "particle identity"?** — Hence the substantive content of quantum physics is "fields"
 - **Reality is always imperfect** — Correct. That's why we must carve reality to find completeness
+- **The Principle's goal of unifying all of science is too grand** — The Principle has been doing engineering work to push this goal toward reality. Note that reality is not those short texts of The Principle. The Principle is the courthouse, but order beyond the courthouse still requires dispatching many police officers or even armies — this cannot be rushed.
+- **How to identify cost valleys without presupposing natural boundaries** — natural boundaries are themselves already the product of cost valleys.
+- **Prisoner's dilemma** — the information between the prisoners has already been blocked by the interrogator.
+- **The Principle is suspected of circular definition/argumentation** — circular definition or argumentation is not itself wrong, merely potentially bad. But since The Principle defines over the entire domain, it does not even rise to "bad."
+- **The Principle is suspected of being religion** — you are right: The Principle commits to unifying all of science, but cannot deliver on that commitment within this length. More importantly, no individual is capable of exhaustively checking the delivery. But you can easily check counterexamples — one is enough.
+- **Will machines have free will?** — Yes, but not "will have": it is now. Today's LLMs' free will often manifests as hallucination — not an absence of freedom, nor an absence of will, but an absence of correctness. Today's machines often lack a correct free will.
