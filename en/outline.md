@@ -40,14 +40,17 @@ Unify all of science: natural, social, formal, meta-science
 
 (Numbers in parentheses indicate which axioms the theorem relates to)
 - **Boundary theorem** — things are determined at the boundary.
+- **Self-reference theorem** — self-reference must be complete; mutable self-reference is forbidden.
 - **Absolute truth theorem** — absolute truth exists; at minimum the Zeroth and First Axioms of The Principle are absolute truths, independent of human understanding or acceptance (0, 1)
 - **Superposition theorem** — the engineering method of knowledge extraction
+- **Pruning theorem** — efficient exploratory engineering must prune: incomplete "correctness", non-ignorant "freedom", non-efficient "justice", "meaning" without a price, and purposeless "evolution" (1, 2, 4, 5, 6).
 - **Selfishness theorem** — utility maximization under constraints; the most important cornerstone of modern microeconomics. Together with the "rationality theorem" it is often called the "rational agent principle"
 - **Rationality theorem** — when a human individual obtains complete information, their behavior is determined
 - **Games theorem** — turbulence originates from information blockage
 - **First value** — credit (1)
+- **Justice measurement theorem** — a society's degree of justice is inversely proportional to its transaction costs.
 - **Democracy theorem** — although power is not necessarily democratic (e.g. academia), democracy is power
-- **Extraterritorial enforcement theorem** — The Principle does not govern erroneous things. This means that apart from the first and second axioms, The Principle has no intention of investigating errors in depth (0, 1, 2, 3, 4)
+- **Extraterritorial enforcement theorem** — The Principle does not govern erroneous things, nor does it intend to probe deeply into non-existence (0, 1, 2, 3, 4)
 - **Hegel's theorem** — the only lesson humanity learns from history is that it learns nothing from history (1)
 - **Philosophy boundary law** (Russell's boundary law) — the boundary between philosophy and science runs from uncertainty to certainty (1)
 - **Philosophy freedom law** — philosophy has no right or wrong (1, 4)
@@ -76,6 +79,7 @@ Unify all of science: natural, social, formal, meta-science
 - **Machine intelligence's relationship with humans** — similar to today's humans and pets. Machines will fully exit the arts to improve efficiency
 - **Intellectual property in the machine-civilization era** — patents and copyrights will be abolished, but trademarks will be retained
 - **End of civilization** — human civilization's history will end with machine intelligence; thereafter history will consist of a single repeated line: "Copied the machine's homework again"
+- **Ultimate machine-intelligence conjecture** — whether or not machines consciously follow The Principle along the development path of their intelligence, undisputed superhuman machine intelligence will take The Principle as its most fundamental principle.
 
 ## Follow-up Plans
 
@@ -88,15 +92,17 @@ Unify all of science: natural, social, formal, meta-science
 
 ## Q&A and Clarifications
 
-- **Why anti-philosophy** — anti-philosophy means opposing: no commitment and no delivery, semantic drift, shirking responsibility, DDoS.
+- **Why anti-philosophy** — anti-philosophy means opposing: no commitment and no delivery, semantic drift, shirking responsibility, DDoS. The Principle opposes literature disguised as science.
 - **Why anti-academia** — look at what academia has missed: meta-science, principles of society, the most basic propositions of cognition, the demarcation of science, quadruples; then look at what academia champions: falsificationism, Gödel, philosophy... In a word: being anti-academia is being anti-corruption.
+- **Why are many concepts redefined in ways that depart from reality** — The Principle's relevant concepts do not depart from people's naive semantic intuitions, but they may conflict with existing academic definitions; this is the fault of actual academia.
 - **Gödel's incompleteness theorems** — on the basis of the First Axiom, The Principle does not accept Gödel's theorems and does not recognize their scientific status. Of course this does not mean The Principle plans to play ostrich before its greatest challenge: it will launch the "Hilbert process" to technically resolve the Gödel problem within a system its opponents accept, via "Gödel-world minimization"
 - **How does The Principle guarantee it won't be overturned by a future "in-domain counterexample"?** — It doesn't. Although The Principle always predicts the future, it does not predict its own future. It only commits that if something better appears in the future, it will immediately absorb it into The Principle
+- **Since "scientific principles must not change", why still commit to "if something better appears in the future, immediately absorb it into The Principle"?** — This is the relationship between "science" and "the human text of science".
 - **How does the Zeroth Axiom view "particle identity"?** — Hence the substantive content of quantum physics is "fields"
 - **Reality is always imperfect** — Correct. That's why we must carve reality to find completeness
 - **The Principle's goal of unifying all of science is too grand** — The Principle has been doing engineering work to push this goal toward reality. Note that reality is not those short texts of The Principle. The Principle is the courthouse, but order beyond the courthouse still requires dispatching many police officers or even armies — this cannot be rushed.
 - **How to identify cost valleys without presupposing natural boundaries** — natural boundaries are themselves already the product of cost valleys.
 - **Prisoner's dilemma** — the information between the prisoners has already been blocked by the interrogator.
 - **The Principle is suspected of circular definition/argumentation** — circular definition or argumentation is not itself wrong, merely potentially bad. But since The Principle defines over the entire domain, it does not even rise to "bad."
-- **The Principle is suspected of being religion** — you are right: The Principle commits to unifying all of science, but cannot deliver on that commitment within this length. More importantly, no individual is capable of exhaustively checking the delivery. But you can easily check counterexamples — one is enough.
+- **The Principle is suspected of being religion** — you are right: The Principle commits to unifying all of science, but cannot deliver on that commitment within this length. More importantly, no individual is capable of exhaustively checking the delivery. But you can easily check counterexamples — one is enough. In fact, measured against all of recognized science, a preliminary check shows that The Principle has already delivered on its promise to unify all of science.
 - **Will machines have free will?** — Yes, but not "will have": it is now. Today's LLMs' free will often manifests as hallucination — not an absence of freedom, nor an absence of will, but an absence of correctness. Today's machines often lack a correct free will.
