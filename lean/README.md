@@ -20,12 +20,15 @@
 
 ## 文件结构
 
-- **[the-principle.lean](the-principle.lean)**：核心形式化源码
-  - **基础载体**：状态（State）、边界（Boundary）、系统（System）、跨界（Crossing）、赋值（Valuation）；
-  - **八大公理规制**：存在公理（0）、正确公理（1）、意图公理（2）、博弈公理（3）、自由公理（4）、正义公理（5）、意义公理（6）、最优公理（7）；
-  - **`FormalDeduction` 命名空间**：将元科学公理实例化规制形式演绎系统，包含严格证明的定理：
-    - `godel_sentence_violates_correctness`：证明包含不可判定命题的理论在第一公理下必为 $\neg \text{Correct}$；
-    - `hilbert_process_restores_correctness`：证明通过边界约束收缩至希尔伯特核心，理论恢复正确性。
+- **[the-principle.lean](the-principle.lean)**：核心形式化源码（**Zero sorry** 完整闭合规范）
+  - **基础载体**：状态（State）、边界（Boundary）、系统（System）、跨界（Crossing）、时序演化赋值（`valuationAt`）；
+  - **八大公理规制**：存在公理（0）、正确公理（1）、意图公理（2，双层读法 + 极限趋完备定理 `exists_correct_time`）、博弈公理（3）、自由公理（4）、正义公理（5）、意义公理（6）、最优公理（7，MDL）；
+  - **`FormalDeduction` 命名空间**：将元科学公理实例化规制形式演绎系统，包含严格证明的定理与元定理：
+    - `undecided_sentence_refutes_correctness`：证明包含不可判定命题的理论在第一公理下必为 $\neg \text{Correct}$；
+    - `hilbert_process_restores_correctness`：证明通过边界约束收缩至希尔伯特核心，理论恢复正确性；
+    - `theoryValuation_ne_unassigned_iff`：追查判据的可操作化等价定理（已判定 $\iff$ 可证 $\lor$ 可驳）；
+    - `theoryCorrect_iff_domain_traceable`：元语句机械化，证明理论正确性等价于域内全命题可追查；
+    - `domain_counterexample_breaks_consistency`：核心反例元定理，证明任何追溯到公理的域内反例（`Challenge`）必致体系一致性瓦解（$T \vdash \bot$），兑现“一个反例即可证伪”的法庭承诺。
 - **[lakefile.toml](lakefile.toml)**：Lake 构建配置文件，声明对 `mathlib` 的依赖；
 - **[lean-toolchain](lean-toolchain)**：工具链版本锁定（`leanprover/lean4:v4.35.0`）。
 

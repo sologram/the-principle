@@ -5,3 +5,7 @@ version = "0.1.0"
 name = "mathlib"
 scope = "leanprover-community"
 rev = "master"
+
+[[lean_lib]]
+name = "ThePrinciple"
+srcDir = "."
