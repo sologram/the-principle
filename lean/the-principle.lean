@@ -104,29 +104,29 @@ axiom axiom_7_principle_is_mdl :
 
 /- =========================================================================
    Instantiation: Regulating Mathematical Deductive Systems
-   元科学对形式演绎体系的规范化落地
+   The meta-scientific normative landing for formal deductive systems
    ========================================================================= -/
 
 namespace FormalDeduction
 
 open Classical
 
-/- 命题空间（状态载体） -/
+/- Proposition space (state carrier) -/
 variable (Sentence : Type)
 
-/- 证明结果的三态赋值（映射至 Valuation ProofStatus） -/
+/- Three-state valuation of proof outcomes (mapped to Valuation ProofStatus) -/
 inductive ProofStatus where
   | proved_true  : ProofStatus
   | proved_false : ProofStatus
 
-/- 形式理论（系统实例化） -/
+/- Formal theory (system instance) -/
 structure Theory where
   domain : Set Sentence
   provable : Sentence → Prop
   refutable : Sentence → Prop
   consistent : ∀ φ, ¬ (provable φ ∧ refutable φ)
 
-/- 理论的赋值函数：将命题映射到赋状态 -/
+/- Valuation function of a theory: maps propositions to valuation states -/
 noncomputable def theoryValuation (T : Theory Sentence) (φ : Sentence) : Valuation ProofStatus :=
   if T.provable φ then
     Valuation.assigned ProofStatus.proved_true
@@ -135,15 +135,17 @@ noncomputable def theoryValuation (T : Theory Sentence) (φ : Sentence) : Valuat
   else
     Valuation.unassigned
 
-/- 哥德尔未决命题（独立性命题 / 悬空状态） -/
+/- Gödelian undecidable propositions (independent propositions / dangling states) -/
 def IsUndecided (T : Theory Sentence) (φ : Sentence) : Prop :=
   theoryValuation Sentence T φ = Valuation.unassigned
 
-/- 第一公理规制：理论的“正确性”法定等价于其管辖域内的全状态完备赋值 -/
+/- First regulatory axiom: the "correctness" of a theory is legally equivalent to
+   complete valuation of all states within its jurisdiction -/
 def TheoryCorrect (T : Theory Sentence) : Prop :=
   ∀ φ ∈ T.domain, theoryValuation Sentence T φ ≠ Valuation.unassigned
 
-/- 法庭裁判 1：哥德尔未决命题直接裁定系统违规（不满足 Correct 规范） -/
+/- Court ruling 1: Gödelian undecidable propositions directly rule the system
+   in violation (failing the Correct criterion) -/
 theorem godel_sentence_violates_correctness
     (T : Theory Sentence) (φ : Sentence)
     (h_in : φ ∈ T.domain)
@@ -153,18 +155,20 @@ theorem godel_sentence_violates_correctness
   have h_assigned := h_corr φ h_in
   exact h_assigned h_undec
 
-/- 希尔伯特进程（达尔文边界重构）：识别可赋值的希尔伯特核心 H -/
+/- Hilbertian process (Darwinian boundary refactoring): identify the assignable
+   Hilbertian core H -/
 def HilbertCore (T : Theory Sentence) : Set Sentence :=
   { φ ∈ T.domain | theoryValuation Sentence T φ ≠ Valuation.unassigned }
 
-/- 边界剪枝操作：将理论管辖域约束在子集 S 上 -/
+/- Boundary pruning operation: constrain the theory's jurisdiction to a subset S -/
 def RestrictDomain (T : Theory Sentence) (S : Set Sentence) : Theory Sentence where
   domain := T.domain ∩ S
   provable := T.provable
   refutable := T.refutable
   consistent := T.consistent
 
-/- 法庭裁判 2：通过希尔伯特进程（剪除哥德尔域 G），依法恢复系统的完备与正确 -/
+/- Court ruling 2: through the Hilbertian process (pruning away the Gödelian
+   domain G), the system's completeness and correctness are lawfully restored -/
 theorem hilbert_process_restores_correctness
     (T : Theory Sentence) :
     TheoryCorrect Sentence (RestrictDomain Sentence T (HilbertCore Sentence T)) := by
