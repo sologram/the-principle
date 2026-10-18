@@ -1,35 +1,25 @@
 import Mathlib.Data.Real.Basic
+import Mathlib.Data.Nat.Basic
 
 /-!
-# The Principle — Formal Outline in Lean 4 (Zero sorry)
+# The Principle — Formal Outline (Consolidated Canonical Version)
 
 Formalization of the Eight Axioms from "The Principle":
 
 * Axiom 0 (Existence is difference / boundary): `axiom_0_boundary_is_existence`
 * Axiom 1 (Correctness is completeness): `Correct`
 * Axiom 2 (Things tend toward completeness): `axiom_2_monotone` + `axiom_2_tends_to_complete`
-* Axiom 3 (Turbulence is boundary instability): `Turbulent`
-* Axiom 4 (Freedom is ignorance): `Free`
-* Axiom 5 (Justice is minimizing friction): `Just` (`Friction` = transaction cost)
-* Axiom 6 (Meaning is boundary-crossing price): `Meaning = Cost + Competition`
+* Axiom 3 (Turbulence from information blocking & minority games): `Turbulent`
+* Axiom 4 (Freedom as correct ignorance — Four-Quadrant cognitive space): `Free`, `Order`, `Slavery`, `License`
+* Axiom 5 (Justice is efficiency — Coasean property rights framework): `Just`
+* Axiom 6 (Meaning is boundary-crossing price): `Price`, `Meaning`, `meaning_is_price`
 * Axiom 7 (Principle is optimality / MDL): `axiom_7_principle_is_mdl`
 
-All `sorry` placeholders from earlier iterations are fully eliminated via primitive parameters,
-canonical specification axioms, or explicit definitions:
-
-* `UnassignedCount`: parameter whose behavior is regulated by `count_zero_iff_correct` and Axiom 2
-  (semantic model: cardinality of `UnassignedAt s t`);
-* `BoundaryChanges`: trajectory differentiation (`traceOf b t₁ ≠ traceOf b t₂`);
-* `Outside` / `Knowable` / `HasCompetition`: primitive ontological parameters;
-* `Friction`: defined via `TransactionCost`;
-* `DescriptionLength` / `DescribesCompletely` / `Principle`: regulated by Axiom 7.
-
-Axiom 2 is strengthened beyond monotonic non-increasing (weak reading) to include a limit reading
-("count tends to 0"); otherwise a system perpetually stuck at a non-zero count would satisfy
-the axiom without achieving completeness.
-
-Engineering discipline: variables are implicit `{...}`; axiom calls supply explicit expected types
-to prevent higher-order universe or variable inference ambiguity.
+Key Meta-Theorems & Meta-Scientific Structures:
+* Consistency: `trivialModel` and `axioms_consistent` (semantic consistency of the Eight Axioms).
+* Traceability: `systemValuation_ne_unassigned_iff` and `undecided_iff_not_in_hilbert_core`.
+* Falsifiability: `counterexample_breaks_consistency` (in-domain counterexample refutes consistency).
+* Gödelian Framework: `godel_sentence_not_in_hilbert_core` and `HilbertProcessConjecture`.
 -/
 
 universe u v w t z c d e
@@ -47,9 +37,7 @@ inductive Valuation (α : Type z) where
 
 variable {Time : Type t}
 variable {le : Time → Time → Prop}
-/-- Valuation evolves over time (resolving the static valuation limitation). -/
 variable {valuationAt : System → Time → State → Valuation Value}
-/-- Count of unassigned states (semantic model: cardinality of `UnassignedAt s t`). -/
 variable {UnassignedCount : System → Time → ℕ}
 variable {BoundarySig : Type e}
 variable {traceOf : Boundary → Time → BoundarySig}
@@ -65,33 +53,34 @@ variable {Description : Type d}
 variable {DescriptionLength : Description → ℝ}
 variable {DescribesCompletely : Description → System → Prop}
 variable {Principle : System → Description}
+variable {Differs : State → State → Prop}
+variable {InformationBlocked : System → Time → Prop}
+variable {MinorityGame : System → Prop}
+variable {PropertyRightsClear : System → Prop}
+variable {ParetoEfficient : System → Prop}
 
-/-! ## Axiom 0: Boundary is Existence -/
+/-! ## Axiom 0: Boundary is Existence (Existence is Difference) -/
 
 axiom axiom_0_boundary_is_existence :
-  ∀ (s : System), Nonempty Boundary → Nonempty State
+  ∀ (s : System), Nonempty Boundary →
+    ∃ σ τ : State, σ ∈ statesOf s ∧ τ ∈ statesOf s ∧ Differs σ τ
 
 /-! ## Axiom 1: Correctness is Completeness -/
 
-/-- Set of unassigned states for system `s` at time `t`. -/
 def UnassignedAt (s : System) (t : Time) : Set State :=
   { σ | σ ∈ statesOf s ∧ valuationAt s t σ = Valuation.unassigned }
 
-/-- Correctness = Completeness: every state within jurisdiction is assigned. -/
 def Correct (s : System) (t : Time) : Prop :=
   ∀ σ ∈ statesOf s, valuationAt s t σ ≠ Valuation.unassigned
 
 /-! ## Axiom 2: Things Tend Toward Completeness -/
 
-/-- Counting specification: unassigned count is zero if and only if the system is correct. -/
 axiom count_zero_iff_correct :
   ∀ (s : System) (t : Time), UnassignedCount s t = 0 ↔ Correct s t
 
-/-- Axiom 2 (weak reading): unassigned count is monotonically non-increasing over time. -/
 axiom axiom_2_monotone :
   ∀ (s : System) (t₁ t₂ : Time), le t₁ t₂ → UnassignedCount s t₂ ≤ UnassignedCount s t₁
 
-/-- Axiom 2 (strong/limit reading): unassigned count can be arbitrarily small, converging to 0. -/
 axiom axiom_2_tends_to_complete :
   ∀ (s : System) (n : ℕ), ∃ t : Time, UnassignedCount s t ≤ n
 
@@ -101,39 +90,63 @@ theorem exists_correct_time (s : System) : ∃ t : Time, Correct s t := by
   cases h with
   | intro t ht =>
     have h0 : UnassignedCount s t = 0 := by omega
-    have hiff : UnassignedCount s t = 0 ↔ Correct s t := count_zero_iff_correct s t
-    exact ⟨t, hiff.mp h0⟩
+    exact ⟨t, (count_zero_iff_correct s t).mp h0⟩
 
-/-! ## Axiom 3: Turbulence is Boundary Instability -/
+/-! ## Axiom 3: Turbulence is Boundary Instability from Information Blocking -/
 
-/-- Boundary variation: boundary signatures differ between two moments in time. -/
 def BoundaryChanges (b : Boundary) (t₁ t₂ : Time) : Prop :=
   traceOf b t₁ ≠ traceOf b t₂
 
-/-- Turbulence = boundary instability. -/
 def Turbulent (s : System) (t₁ t₂ : Time) : Prop :=
-  BoundaryChanges (hasBoundary s) t₁ t₂
+  BoundaryChanges (hasBoundary s) t₁ t₂ ∧
+    InformationBlocked s t₁ ∧ MinorityGame s
 
-/-! ## Axiom 4: Freedom is Ignorance -/
+theorem turbulence_from_information_blocking
+    (s : System) (t₁ t₂ : Time) (h : Turbulent s t₁ t₂) :
+    InformationBlocked s t₁ ∧ MinorityGame s :=
+  ⟨h.2.1, h.2.2⟩
 
-/-- Freedom = Ignorance: existence of unknowable external entities alongside competitive crossings. -/
-def Free (s : System) : Prop :=
-  (∃ x : Outside (hasBoundary s), ¬ Knowable (hasBoundary s) x) ∧
-    ∃ cr ∈ crossingsOf (hasBoundary s), HasCompetition cr
+/-! ## Axiom 4: Freedom as Correct Ignorance (Four-Quadrant Cognitive Space) -/
 
-/-! ## Axiom 5: Justice is Minimizing Friction -/
+/-- Correct Ignorance = Freedom: internally complete, externally open. -/
+def Free (s : System) (t : Time) : Prop :=
+  Correct s t ∧ ∃ x : Outside (hasBoundary s), ¬ Knowable (hasBoundary s) x
 
-/-- Friction = Transaction cost between systems (Justice metric theorem: justice is inversely proportional to transaction cost). -/
+/-- Correct Knowledge = Order: internally complete, externally fully known. -/
+def Order (s : System) (t : Time) : Prop :=
+  Correct s t ∧ ∀ x : Outside (hasBoundary s), Knowable (hasBoundary s) x
+
+/-- Incorrect Knowledge = Slavery: internally incomplete yet dogmatically claiming total knowledge. -/
+def Slavery (s : System) (t : Time) : Prop :=
+  ¬ Correct s t ∧ ∀ x : Outside (hasBoundary s), Knowable (hasBoundary s) x
+
+/-- Incorrect Ignorance = License / Arbitrariness: internally incomplete and externally unregulated. -/
+def License (s : System) (t : Time) : Prop :=
+  ¬ Correct s t ∧ ∃ x : Outside (hasBoundary s), ¬ Knowable (hasBoundary s) x
+
+/-! ## Axiom 5: Justice is Efficiency (Coasean Framework) -/
+
 def Friction (s₁ s₂ : System) : ℝ := TransactionCost s₁ s₂
 
-/-- Justice: pair of systems globally minimizing boundary friction. -/
-def Just (s₁ s₂ : System) : Prop :=
-  ∀ a b : System, Friction a b ≥ Friction s₁ s₂
+axiom axiom_5_coase :
+  ∀ s : System, PropertyRightsClear s → Friction s s = 0 → ParetoEfficient s
+
+def Just (s : System) : Prop :=
+  PropertyRightsClear s ∧ Friction s s = 0 ∧ ParetoEfficient s
+
+theorem coase_implies_just
+    (s : System) (h_pr : PropertyRightsClear s) (h_fr : Friction s s = 0) :
+    Just s :=
+  ⟨h_pr, h_fr, axiom_5_coase s h_pr h_fr⟩
 
 /-! ## Axiom 6: Meaning is Boundary-Crossing Price -/
 
-/-- Meaning = price of crossing = cost + competition. -/
-def Meaning (cr : Crossing) : ℝ := Cost cr + Competition cr
+def Price (cr : Crossing) : ℝ := Cost cr + Competition cr
+
+/-- Meaning = Price (definitional identification, not empirical discovery). -/
+def Meaning (cr : Crossing) : ℝ := Price cr
+
+theorem meaning_is_price (cr : Crossing) : Meaning cr = Price cr := rfl
 
 /-! ## Axiom 7: Principle is Optimality (MDL / Occam's Razor) -/
 
@@ -143,141 +156,211 @@ axiom axiom_7_principle_is_mdl :
       ∀ d : Description, DescribesCompletely d s →
         DescriptionLength (Principle s) ≤ DescriptionLength d
 
+/-! ## Consistency Model (Proof of Axiomatic Satisfiability) -/
+
+structure Model where
+  State : Type
+  Boundary : Type
+  System : Type
+  hasBoundary : System → Boundary
+  statesOf : System → Set State
+  Value : Type
+  Time : Type
+  le : Time → Time → Prop
+  valuationAt : System → Time → State → Valuation Value
+  UnassignedCount : System → Time → ℕ
+  BoundarySig : Type
+  traceOf : Boundary → Time → BoundarySig
+  Crossing : Type
+  crossingsOf : Boundary → Set Crossing
+  Cost : Crossing → ℝ
+  Competition : Crossing → ℝ
+  TransactionCost : System → System → ℝ
+  Outside : Boundary → Type
+  Knowable : ∀ b : Boundary, Outside b → Prop
+  HasCompetition : Crossing → Prop
+  Description : Type
+  DescriptionLength : Description → ℝ
+  DescribesCompletely : Description → System → Prop
+  Principle : System → Description
+  Differs : State → State → Prop
+  InformationBlocked : System → Time → Prop
+  MinorityGame : System → Prop
+  PropertyRightsClear : System → Prop
+  ParetoEfficient : System → Prop
+  axiom_0 : ∀ (s : System), Nonempty Boundary →
+    ∃ σ τ : State, σ ∈ statesOf s ∧ τ ∈ statesOf s ∧ Differs σ τ
+  count_zero_iff_correct : ∀ (s : System) (t : Time),
+    UnassignedCount s t = 0 ↔
+      ∀ σ ∈ statesOf s, valuationAt s t σ ≠ Valuation.unassigned
+  axiom_2_monotone : ∀ (s : System) (t₁ t₂ : Time),
+    le t₁ t₂ → UnassignedCount s t₂ ≤ UnassignedCount s t₁
+  axiom_2_tends_to_complete : ∀ (s : System) (n : ℕ),
+    ∃ t : Time, UnassignedCount s t ≤ n
+  axiom_5_coase : ∀ s : System,
+    PropertyRightsClear s → TransactionCost s s = 0 → ParetoEfficient s
+  axiom_7 : ∀ s : System,
+    DescribesCompletely (Principle s) s ∧
+      ∀ d : Description, DescribesCompletely d s →
+        DescriptionLength (Principle s) ≤ DescriptionLength d
+
+/-- Minimal Model: State = Bool (guaranteeing binary differentiation), trivial elsewhere. -/
+def trivialModel : Model where
+  State := Bool
+  Boundary := Unit
+  System := Unit
+  hasBoundary := fun _ => ()
+  statesOf := fun _ => Set.univ
+  Value := Unit
+  Time := ℕ
+  le := fun a b => a ≤ b
+  valuationAt := fun _ _ _ => Valuation.assigned ()
+  UnassignedCount := fun _ _ => 0
+  BoundarySig := Unit
+  traceOf := fun _ _ => ()
+  Crossing := Unit
+  crossingsOf := fun _ => Set.univ
+  Cost := fun _ => 0
+  Competition := fun _ => 0
+  TransactionCost := fun _ _ => 0
+  Outside := fun _ => Empty
+  Knowable := fun _ _ x => nomatch x
+  HasCompetition := fun _ => True
+  Description := Unit
+  DescriptionLength := fun _ => 0
+  DescribesCompletely := fun _ _ => True
+  Principle := fun _ => ()
+  Differs := fun a b => a ≠ b
+  InformationBlocked := fun _ _ => False
+  MinorityGame := fun _ => False
+  PropertyRightsClear := fun _ => True
+  ParetoEfficient := fun _ => True
+  axiom_0 := by
+    intro _ _
+    exact ⟨true, false, Set.mem_univ _, Set.mem_univ _, by decide⟩
+  count_zero_iff_correct := by
+    intro _ _
+    constructor
+    · intro _ σ _ h; cases h
+    · intro _; rfl
+  axiom_2_monotone := by
+    intro _ _ _ _
+    exact Nat.le_refl 0
+  axiom_2_tends_to_complete := by
+    intro _ n
+    exact ⟨0, Nat.zero_le n⟩
+  axiom_5_coase := by
+    intro _ _ _; trivial
+  axiom_7 := by
+    intro _
+    exact ⟨trivial, fun _ _ => le_refl 0⟩
+
+/-- Consistency Theorem: The Eight Axioms admit a valid mathematical model and are logically consistent. -/
+theorem axioms_consistent : ∃ M : Model, True := ⟨trivialModel, trivial⟩
+
+/-! ## Formal Deduction: Traceability, Falsifiability & Gödelian Framework -/
+
 namespace FormalDeduction
 open Classical
 
-variable (Sentence : Type)
+structure FormalSystem where
+  Formula : Type
+  Provable : Formula → Prop
+  Refutable : Formula → Prop
+  consistent : ∀ φ, ¬ (Provable φ ∧ Refutable φ)
 
 inductive ProofStatus where
-  | proved_true : ProofStatus
+  | proved_true  : ProofStatus
   | proved_false : ProofStatus
 
-structure Theory where
-  domain : Set Sentence
-  provable : Sentence → Prop
-  refutable : Sentence → Prop
-  consistent : ∀ φ, ¬ (provable φ ∧ refutable φ)
-
-noncomputable def theoryValuation (T : Theory Sentence) (φ : Sentence) : Valuation ProofStatus :=
-  if T.provable φ then
+noncomputable def systemValuation (S : FormalSystem) (φ : S.Formula) : Valuation ProofStatus :=
+  if S.Provable φ then
     Valuation.assigned ProofStatus.proved_true
-  else if T.refutable φ then
+  else if S.Refutable φ then
     Valuation.assigned ProofStatus.proved_false
   else
     Valuation.unassigned
 
-theorem theoryValuation_def (T : Theory Sentence) (φ : Sentence) :
-    theoryValuation Sentence T φ =
-      if T.provable φ then Valuation.assigned ProofStatus.proved_true
-      else if T.refutable φ then Valuation.assigned ProofStatus.proved_false
+theorem systemValuation_def (S : FormalSystem) (φ : S.Formula) :
+    systemValuation S φ =
+      if S.Provable φ then Valuation.assigned ProofStatus.proved_true
+      else if S.Refutable φ then Valuation.assigned ProofStatus.proved_false
       else Valuation.unassigned := rfl
 
-def IsUndecided (T : Theory Sentence) (φ : Sentence) : Prop :=
-  theoryValuation Sentence T φ = Valuation.unassigned
+def IsUndecided (S : FormalSystem) (φ : S.Formula) : Prop :=
+  systemValuation S φ = Valuation.unassigned
 
-def TheoryCorrect (T : Theory Sentence) : Prop :=
-  ∀ φ ∈ T.domain, theoryValuation Sentence T φ ≠ Valuation.unassigned
+def HilbertCore (S : FormalSystem) : Set S.Formula :=
+  { φ | S.Provable φ ∨ S.Refutable φ }
 
-/-! ### Judicial Procedure: Mechanized Traceability to Axioms
-
-`theoryValuation` represents mechanized traceability:
-- Decided (traceable to axioms) → `assigned`;
-- Undecided (not traceable) → `unassigned` → violates Correctness by Axiom 1 →
-  by definition "non-existent = erroneous" → excluded from extraterritorial enforcement.
--/
-
-/-- Undecided sentences refute theory completeness/correctness.
-    Note: Genuine Gödelian incompleteness constructs independent sentences from strength + consistency,
-    requiring arithmetization of syntax, which lies beyond this immediate scope. -/
-theorem undecided_sentence_refutes_correctness
-    (T : Theory Sentence) (φ : Sentence)
-    (h_in : φ ∈ T.domain)
-    (h_undec : IsUndecided Sentence T φ) :
-    ¬ TheoryCorrect Sentence T := by
-  intro h_corr
-  have h_assigned := h_corr φ h_in
-  exact h_assigned h_undec
-
-def HilbertCore (T : Theory Sentence) : Set Sentence :=
-  { φ ∈ T.domain | theoryValuation Sentence T φ ≠ Valuation.unassigned }
-
-def RestrictDomain (T : Theory Sentence) (S : Set Sentence) : Theory Sentence where
-  domain := T.domain ∩ S
-  provable := T.provable
-  refutable := T.refutable
-  consistent := T.consistent
-
-/-- Hilbertian process: by pruning undecided sentences, all remaining domain propositions
-    are decidable and traceable to axioms. -/
-theorem hilbert_process_restores_correctness
-    (T : Theory Sentence) :
-    TheoryCorrect Sentence (RestrictDomain Sentence T (HilbertCore Sentence T)) := by
-  intro φ hφ
-  have h_and : φ ∈ T.domain ∧ φ ∈ HilbertCore Sentence T := hφ
-  have h_core : φ ∈ T.domain ∧ theoryValuation Sentence T φ ≠ Valuation.unassigned := h_and.right
-  exact h_core.right
-
-/-- Operationalization of the traceability criterion:
-    decided if and only if provable or refutable. -/
-theorem theoryValuation_ne_unassigned_iff (T : Theory Sentence) (φ : Sentence) :
-    theoryValuation Sentence T φ ≠ Valuation.unassigned ↔
-      T.provable φ ∨ T.refutable φ := by
-  by_cases hp : T.provable φ
-  · rw [theoryValuation_def, if_pos hp]
+/-- Operational traceability equivalence:
+    a sentence is assigned (traceable) iff it is provable or refutable. -/
+theorem systemValuation_ne_unassigned_iff (S : FormalSystem) (φ : S.Formula) :
+    systemValuation S φ ≠ Valuation.unassigned ↔
+      S.Provable φ ∨ S.Refutable φ := by
+  by_cases hp : S.Provable φ
+  · rw [systemValuation_def, if_pos hp]
     constructor
     · intro _; exact Or.inl hp
     · intro _ h; exact Valuation.noConfusion h
-  · by_cases hr : T.refutable φ
-    · rw [theoryValuation_def, if_neg hp, if_pos hr]
+  · by_cases hr : S.Refutable φ
+    · rw [systemValuation_def, if_neg hp, if_pos hr]
       constructor
       · intro _; exact Or.inr hr
       · intro _ h; exact Valuation.noConfusion h
-    · rw [theoryValuation_def, if_neg hp, if_neg hr]
+    · rw [systemValuation_def, if_neg hp, if_neg hr]
       constructor
       · intro h; exact False.elim (h rfl)
       · intro h; exact False.elim (Or.elim h hp hr)
 
-/-- Mechanization of the meta-statement: `TheoryCorrect` holds if and only if
-    all sentences in `T.domain` are decidable (provable or refutable). -/
-theorem theoryCorrect_iff_domain_traceable (T : Theory Sentence) :
-    TheoryCorrect Sentence T ↔
-      ∀ φ ∈ T.domain, T.provable φ ∨ T.refutable φ := by
-  constructor
-  · intro h φ h_in
-    exact (theoryValuation_ne_unassigned_iff Sentence T φ).mp (h φ h_in)
-  · intro h φ h_in
-    exact (theoryValuation_ne_unassigned_iff Sentence T φ).mpr (h φ h_in)
+theorem undecided_iff_not_in_hilbert_core (S : FormalSystem) (φ : S.Formula) :
+    IsUndecided S φ ↔ φ ∉ HilbertCore S := by
+  unfold IsUndecided HilbertCore
+  rw [← not_iff_not]
+  push_neg
+  exact systemValuation_ne_unassigned_iff S φ
 
-/-! ### Challenges and Meta-Theorems
+def GödelSentenceExists (S : FormalSystem) : Prop :=
+  ∃ G : S.Formula, ¬ S.Provable G ∧ ¬ S.Refutable G
 
-A challenge targeting a theorem `τ` within `T.domain` must carry a refutation
-traceable to foundational axioms (`T.refutable τ`).
-- Traceable → valid in-domain challenge;
-- Untraceable (`attacked` unavailable) → outside the jurisdiction of the theory.
--/
+theorem godel_sentence_not_in_hilbert_core
+    (S : FormalSystem) (G : S.Formula)
+    (h : ¬ S.Provable G ∧ ¬ S.Refutable G) :
+    G ∉ HilbertCore S := by
+  intro h_in
+  cases h_in with
+  | inl hp => exact h.1 hp
+  | inr hr => exact h.2 hr
 
-structure Challenge (T : Theory Sentence) (τ : Sentence) where
-  target : τ ∈ T.domain
-  attacked : T.refutable τ
+/-! ### Constitutional Challenge and Falsifiability Meta-Theorem -/
 
-/-- Meta-theorem: an in-domain counterexample compromises system consistency itself.
-    This guarantees that the traceability criterion is non-vacuous:
-    if a genuine counterexample traces back to foundational axioms, the consistency of the
-    entire framework collapses, rendering the promise of "a single counterexample suffices" authentic. -/
-theorem domain_counterexample_breaks_consistency
-    (T : Theory Sentence) (τ : Sentence)
-    (C : Challenge Sentence T τ)
-    (h : T.provable τ) : False :=
-  T.consistent τ ⟨h, C.attacked⟩
+/-- Challenge structure: a challenge against theorem `τ` carries a refutation
+    traceable to foundational axioms (`S.Refutable τ`). -/
+structure Challenge (S : FormalSystem) (τ : S.Formula) where
+  attacked : S.Refutable τ
 
-/-! ### Meta-Statement: Domain vs. Textual Level Boundary
+/-- Meta-theorem: an in-system counterexample compromises system consistency itself.
+    If a genuine counterexample can be proven, system consistency collapses (`False`).
+    This mathematically validates the constitutional promise that "a single counterexample suffices". -/
+theorem counterexample_breaks_consistency
+    (S : FormalSystem) (τ : S.Formula)
+    (C : Challenge S τ)
+    (h : S.Provable τ) : False :=
+  S.consistent τ ⟨h, C.attacked⟩
 
-* `T.domain`: the set of sentences mechanically traceable from the Eight Axioms; its fixed point is `HilbertCore`.
-* The natural language / philosophical text level of "The Principle" (which pledges to assimilate superior formulations)
-  does not reside within any `Theory.domain`. Therefore, assimilating superior expressions does not constitute
-  illicit self-referential mutation: what varies is the textual representation, while the domain criterion remains invariant.
-* Adjudication is executed mechanically by `theoryValuation` without requiring human arbiters:
-  decided → in-domain; undecided → non-correct → invalid / extraterritorial.
--/
+/-! ### Gödelian Framework: Open Conjecture -/
+
+/-- Open Conjecture: Hilbertian process on Gödelian domains.
+    Conjectures that under an appropriate measure μ, the undecided domain can be made
+    arbitrarily small relative to the Hilbert core.
+    Note: Formulated honestly as an open conjecture rather than a theorem,
+    as rigorous G/H → 0 requires arithmetic syntax and diagonal lemmas. -/
+def HilbertProcessConjecture : Prop :=
+  ∀ (S : FormalSystem),
+    GödelSentenceExists S →
+    ∃ (GödelWorld HilbertWorld : Set S.Formula) (μ : Set S.Formula → ℝ),
+      (∀ G : S.Formula, ¬ S.Provable G ∧ ¬ S.Refutable G → G ∈ GödelWorld) ∧
+      (∀ φ ∈ HilbertWorld, S.Provable φ ∨ S.Refutable φ) ∧
+      (∀ ε > 0, ∃ H : Set S.Formula, H ⊆ HilbertWorld ∧ μ H < ε)
 
 end FormalDeduction

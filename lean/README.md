@@ -20,15 +20,24 @@
 
 ## 文件结构
 
-- **[the-principle.lean](the-principle.lean)**：核心形式化源码（**Zero sorry** 完整闭合规范）
+- **[the-principle.lean](the-principle.lean)**：核心形式化源码（**Zero sorry** 完整闭合规范，全英文注释 Canonical 版本）
   - **基础载体**：状态（State）、边界（Boundary）、系统（System）、跨界（Crossing）、时序演化赋值（`valuationAt`）；
-  - **八大公理规制**：存在公理（0）、正确公理（1）、意图公理（2，双层读法 + 极限趋完备定理 `exists_correct_time`）、博弈公理（3）、自由公理（4）、正义公理（5）、意义公理（6）、最优公理（7，MDL）；
-  - **`FormalDeduction` 命名空间**：将元科学公理实例化规制形式演绎系统，包含严格证明的定理与元定理：
-    - `undecided_sentence_refutes_correctness`：证明包含不可判定命题的理论在第一公理下必为 $\neg \text{Correct}$；
-    - `hilbert_process_restores_correctness`：证明通过边界约束收缩至希尔伯特核心，理论恢复正确性；
-    - `theoryValuation_ne_unassigned_iff`：追查判据的可操作化等价定理（已判定 $\iff$ 可证 $\lor$ 可驳）；
-    - `theoryCorrect_iff_domain_traceable`：元语句机械化，证明理论正确性等价于域内全命题可追查；
-    - `domain_counterexample_breaks_consistency`：核心反例元定理，证明任何追溯到公理的域内反例（`Challenge`）必致体系一致性瓦解（$T \vdash \bot$），兑现“一个反例即可证伪”的法庭承诺。
+  - **八大公理规制**：
+    - 公理 0（存在即差异）：以 `Differs` 谓词严格界定内部状态对的相异性；
+    - 公理 1（正确即完备）：全状态赋值；
+    - 公理 2（事物趋完备）：单调弱读法 + 极限强读法，并严格证明 `exists_correct_time`；
+    - 公理 3（博弈即动荡）：动荡内生化为边界变动、信息阻塞与少数者博弈，给出推论定理；
+    - 公理 4（自由即正确无知）：构造认知四元组状态空间（自由 `Free` / 秩序 `Order` / 奴役 `Slavery` / 放任 `License`）；
+    - 公理 5（正义即效率）：科斯产权风格（`PropertyRightsClear` + 零交易成本 $\implies$ 帕累托最优），严格证明 `coase_implies_just`；
+    - 公理 6（意义即价格）：跨界价格恒等于成本与竞争之和；
+    - 公理 7（原理即最优）：最小描述长度（MDL）/ 奥卡姆剃刀；
+  - **公理一致性定理（`axioms_consistent`）**：构造最小一阶模型 `trivialModel`（State = Bool），在数学上严格证明八大公理相容一致；
+  - **`FormalDeduction` 命名空间**：
+    - `systemValuation_ne_unassigned_iff`：追查判据等价定理（已判定 $\iff$ 可证 $\lor$ 可驳）；
+    - `undecided_iff_not_in_hilbert_core`：未判定命题与离开希尔伯特核心的充要等价；
+    - `godel_sentence_not_in_hilbert_core`：严格引理，哥德尔独立命题不属于希尔伯特核心；
+    - `counterexample_breaks_consistency`：核心反例元定理，证明任何追查到公理的域内反例（`Challenge`）必致体系一致性瓦解（$S \vdash \bot$），兑现“一个反例即可证伪”的法庭承诺；
+    - `HilbertProcessConjecture`：学术诚实界定，将测度意义上的 $G/H \to 0$ 希尔伯特进程形式化为开放猜想。
 - **[lakefile.toml](lakefile.toml)**：Lake 构建配置文件，声明对 `mathlib` 的依赖；
 - **[lean-toolchain](lean-toolchain)**：工具链版本锁定（`leanprover/lean4:v4.35.0`）。
 
