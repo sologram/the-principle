@@ -20,7 +20,7 @@
 
 ## 文件结构
 
-- **[ThePrinciple.lean](ThePrinciple.lean)**：核心形式化源码（**Zero sorry** 完整闭合规范，全英文注释 Canonical 集大成版本，`lake build` 的库根模块）
+- **[the_principle.lean](the_principle.lean)**：核心形式化源码（**Zero sorry** 完整闭合规范，全英文注释 Canonical 集大成版本，`lake build` 的库根模块）
   - **基础载体与态射**：状态（State）、边界（Boundary）、系统（System）、边界自指映射（`boundaryOf`）、跨界（Crossing）、时序演化赋值（`valuationAt`）；
   - **八大公理规制（Axioms 0–7）**：
     - 公理 0（存在即差异）：以 `Differs` 谓词严格界定内部相异状态对的存在性；
@@ -105,9 +105,9 @@ lake build
 ```bash
 lake update              # 拉取依赖并生成 lake-manifest.json（首次必跑）
 lake exe cache get       # 下载 mathlib 预编译缓存（数 GB，一次性）
-lake build               # 编译库根模块 ThePrinciple.lean
-lake env lean ThePrinciple.lean   # 或单独类型检查该文件
+lake build               # 编译库根模块 the_principle.lean
+lake env lean the_principle.lean   # 或单独类型检查该文件
 ```
 
-当前状态：`ThePrinciple.lean` **0 错误 / 0 警告 / 0 sorry**（mathlib v4.35.0 实测通过）。
+当前状态：`the_principle.lean` **0 错误 / 0 警告 / 0 sorry**（mathlib v4.35.0 实测通过）。
 `the-principle-2/3/4.lean` 为历史迭代稿，不参与构建，未随正典版同步修复。
