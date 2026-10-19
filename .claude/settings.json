@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(lake --version)",
+      "Bash(lake update *)",
+      "Bash(lake exe *)",
+      "Bash(cat /private/tmp/claude-501/-Users-charlie-Desktop-the-principle/c2be1c4f-160f-442f-94d7-b2cc6653c22a/tasks/b62h7pmdw.output; echo '==='; ls /Users/charlie/Desktop/the-principle/lean/; echo '==='; ls /Users/charlie/Desktop/the-principle/lean/.lake/packages/ 2>&1; ls ~/.cache/mathlib 2>/dev/null | head)",
+      "Read(//Users/charlie/.cache/mathlib/**)"
+    ]
+  }
+}
