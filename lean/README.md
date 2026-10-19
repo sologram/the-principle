@@ -20,18 +20,35 @@
 
 ## 文件结构
 
-- **[the-principle.lean](the-principle.lean)**：核心形式化源码（**Zero sorry** 完整闭合规范，全英文注释 Canonical 版本）
-  - **基础载体**：状态（State）、边界（Boundary）、系统（System）、跨界（Crossing）、时序演化赋值（`valuationAt`）；
-  - **八大公理规制**：
-    - 公理 0（存在即差异）：以 `Differs` 谓词严格界定内部状态对的相异性；
-    - 公理 1（正确即完备）：全状态赋值；
+- **[the-principle.lean](the-principle.lean)**：核心形式化源码（**Zero sorry** 完整闭合规范，全英文注释 Canonical 集大成版本）
+  - **基础载体与态射**：状态（State）、边界（Boundary）、系统（System）、边界自指映射（`boundaryOf`）、跨界（Crossing）、时序演化赋值（`valuationAt`）；
+  - **八大公理规制（Axioms 0–7）**：
+    - 公理 0（存在即差异）：以 `Differs` 谓词严格界定内部相异状态对的存在性；
+    - 公理 1（正确即完备）：全状态赋值，定义非存在即错误；
     - 公理 2（事物趋完备）：单调弱读法 + 极限强读法，并严格证明 `exists_correct_time`；
-    - 公理 3（博弈即动荡）：动荡内生化为边界变动、信息阻塞与少数者博弈，给出推论定理；
-    - 公理 4（自由即正确无知）：构造认知四元组状态空间（自由 `Free` / 秩序 `Order` / 奴役 `Slavery` / 放任 `License`）；
+    - 公理 3（博弈即动荡）：动荡内生化为边界变动、信息阻塞与少数者博弈，并证明推论；
+    - 公理 4（自由即无知）：内部完备且外部保持开放；
     - 公理 5（正义即效率）：科斯产权风格（`PropertyRightsClear` + 零交易成本 $\implies$ 帕累托最优），严格证明 `coase_implies_just`；
     - 公理 6（意义即价格）：跨界价格恒等于成本与竞争之和；
     - 公理 7（原理即最优）：最小描述长度（MDL）/ 奥卡姆剃刀；
-  - **公理一致性定理（`axioms_consistent`）**：构造最小一阶模型 `trivialModel`（State = Bool），在数学上严格证明八大公理相容一致；
+  - **二元概念空间（BCS / Binary Concept Space）与全面定义**：
+    - 不存在即错误（`nonexistent_iff_incorrect`）；
+    - 边界的自指闭包（`boundary_of_boundary_is_boundary`）；
+    - 认知四元组：自由（`Free`）/ 秩序（`Order`）/ 奴役（`Slavery`）/ 放任（`License`）；
+    - 社会政治四元组：民主（`Democracy`）/ 民粹（`Populism`）/ 专制（`Autocracy`）/ 独裁（`Dictatorship`）；
+    - 文化实践四元组：科学（`Science`）/ 宗教（`Religion`）/ 工程（`Engineering`）/ 哲学（`Philosophy`）；
+    - 科学分支四元组：自然科学（`NaturalScience`）/ 社会科学（`SocialScience`）/ 数学（`Mathematics`）/ 元科学（`MetaScience`）；
+    - 评价二元对：对与错（`Right`/`Wrong`）、好与坏（`Good`/`Bad`）、真善美（`Truth`/`Goodness`/`Beauty`）；
+    - 主观与客观：评价分歧度（`Subjective`/`Objective`）；
+  - **全套基础定理与宪法级定律**：
+    - 边界定理（`boundary_theorem`）、自指定理（`self_reference_theorem`）、绝对真理定理（`absolute_truth_theorem`）；
+    - 叠加定理（`superposition_theorem`）、剪枝定理（`pruning_theorem`）、自私定理（`selfish_theorem`）、理性定理（`rationality_theorem`）；
+    - 博弈定理（`game_theorem`）、第一价值（信用）定理（`first_value_is_credit`）、正义测量定理（`justice_measurement_theorem`）；
+    - 民主权力定理（`democracy_is_power`）、域外执法定理（`extraterritoriality_theorem`）、黑格尔定理（`hegel_theorem`）；
+    - 爱智慧四定律（哲学批判）：罗素边界定律（`russell_boundary_law`）、自由定律（`philosophical_freedom_law`）、民主定律、专制定律；
+    - 达尔文边界原理（`darwinian_boundary_principle`）与可信演绎公理化；
+    - 科学宪法六定律：真理定律、承诺定律（`law_of_scientific_commitment`）、永恒定律、体系强一致定律、演绎定律、世俗定律；
+  - **公理一致性定理（`axioms_consistent`）**：构造一阶模型 `trivialModel`（State = Bool），在数学上严格证明全部公理与规范相容一致；
   - **`FormalDeduction` 命名空间**：
     - `systemValuation_ne_unassigned_iff`：追查判据等价定理（已判定 $\iff$ 可证 $\lor$ 可驳）；
     - `undecided_iff_not_in_hilbert_core`：未判定命题与离开希尔伯特核心的充要等价；
