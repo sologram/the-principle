@@ -1,6 +1,6 @@
 # The Principle in Lean 4 / 事物原理的 Lean 4 形式化
 
-本项目是《事物原理》（The Principle）在交互式定理证明器 **Lean 4** 中的形式化规范工程。
+本项目是《[事物原理](../zh/)》（The Principle）在交互式定理证明器 **Lean 4** 中的形式化规范工程。
 
 事物原理在此并非作为传统数学的分支或内部演绎体系存在，而是作为**元科学层的规范体系（Normative System / Specification）**，为包括数学形式演绎系统在内的全域系统确立宪法级的规制标准（法庭判准）。
 
