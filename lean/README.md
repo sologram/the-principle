@@ -110,4 +110,4 @@ lake env lean the_principle.lean   # 或单独类型检查该文件
 ```
 
 当前状态：`the_principle.lean` **0 错误 / 0 警告 / 0 sorry**（mathlib v4.35.0 实测通过）。
-`the-principle-2/3/4.lean` 为历史迭代稿，不参与构建，未随正典版同步修复。
+`the_principle_2/3/4.lean` 为历史迭代稿，不参与构建，未随正典版同步修复。
