@@ -44,7 +44,7 @@ Justice is efficiency / 正义即效率
 ## [The Sixth Axiom of Meaning](en/the-6th-axiom.md) / [第六 (意义) 公理](zh/the-6th-axiom.md)
 Meaning is price / 意义即价格
 
-## [The Seventh Axiom of Optimality](en/the-7th-axiom.md) / [第七 (最优) 公理](zh/the-7th-axiom.md)
+## [The Seventh Axiom of Optimality](en/the-7th-axiom.md) / [第七 (原理) 公理](zh/the-7th-axiom.md)
 Principle is optimality / 原理即最优
 
 ## [Science](en/science.md) / [科学](zh/science.md)
