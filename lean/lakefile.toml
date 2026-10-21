@@ -10,3 +10,4 @@ rev = "v4.35.0"
 [[lean_lib]]
 name = "the_principle"
 srcDir = "."
+roots = ["the_principle", "ThePrinciple.Basic"]

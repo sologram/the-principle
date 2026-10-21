@@ -22,47 +22,21 @@
 
 ### 正典（参与构建）
 
-- **[the_principle.lean](the_principle.lean)**：**唯一的正典形式化源码**，`lake build` 的库根模块（`lakefile.toml` 中 `defaultTargets = ["the_principle"]`）。
-  - 采用 Lean 模块系统（文件头 `module`，导入为 `public import`），下游可直接 `import the_principle` 使用其公开 API。
-  - **基础载体与态射**：
-    - `Valuation`（赋值 / 未赋值）、`Env`（完整环境：数据载体 + 公理约束）；
-    - 状态（`State`）、边界（`Boundary`）、系统（`System`）、时间（`Time`）、跨界（`Crossing`）、描述（`Description`）；
-    - 边界自指映射（`boundaryOf`）、跨界集合（`crossingsOf`）、时序演化赋值（`valuationAt`）、知识算子（`Knows`）。
-  - **公理字段（作为 `Env` 的字段，可由具体模型逐条验证）**：
-    - 公理 0（存在即差异）：`axiom_0`；
-    - 公理 1（正确即完备）：`count_zero_iff_correct`（`UnassignedCount = 0` ⟺ 全状态已赋值）；
-    - 公理 2（事物趋完备）：`axiom_2_monotone`（单调）+ `axiom_2_tends_to_complete`（极限）；
-    - 公理 3（博弈即动荡）：`turbulence_from_information_blocking`（信息阻塞 + 少数者博弈 ⟹ 边界变动）；
-    - 公理 5（正义即效率）：`axiom_5_coase`（科斯产权风格：产权清晰 + 零交易成本 ⟹ 帕累托最优）；
-    - 公理 7（原理即最优）：`axiom_7`（MDL / 奥卡姆剃刀）；
-    - 边界幂等：`axiom_boundary_idempotent`；
-    - 四元组互斥：`material_conscious_exclusive`、`empirical_formal_exclusive`；
-    - 正义测量：`justice_measurement_theorem`（系统间摩擦越小，正义度越高）；
-    - 自指定理：`self_reference_theorem`（仅约束自指系统，避开与公理 2 的冲突）；
-    - 科学不变性：`law_of_scientific_invariance`；科学世俗：`law_of_secular_science`。
-  - **二元概念空间（BCS / Binary Concept Space）**：
-    - 正确性：`Correct`；不存在即错误：`Nonexistent` / `Wrong`；
-    - 认识论四元组：自由（`Free`）/ 秩序（`Order`）/ 奴役（`Slavery`）/ 放任（`License`），六条两两互斥定理（`free_order_exclusive` 等）；
-    - 文化实践四元组：科学（`Science`）/ 宗教（`Religion`）/ 工程（`Engineering`）/ 哲学（`Philosophy`），三条互斥定理；
-    - 科学分支四元组：自然科学（`NaturalScience`）/ 社会科学（`SocialScience`）/ 数学（`Mathematics`）/ 元科学（`MetaScience`），四条互斥定理；
-    - 民主四元组：民主（`Democracy`）/ 民粹（`Populism`）/ 专制（`Autocracy`）/ 独裁（`Dictatorship`）；
-    - 真善美：`Truthful` / `Good` / `Beautiful`；
-    - 主观与客观：`Agree` / `Objective` / `Subjective`；
-    - 信用：`Credit`。
-  - **定理**：
-    - 博弈定理（`game_theorem`）、正义定理（`coase_implies_just`、`justice_measurement_theorem'`）、剪枝定理（`pruning_incorrect`）；
-    - 存在即错误、黑格尔定理（`HegelTheorem`，已移出 `Env` 以避免与 `LearnsFromHistory` 冲突）。
-  - **一致性模型**：
-    - `canonicalEnv`：退化模型（`Unit` 系统，`Knows = False`），用于快速逐条验证；
-    - `nontrivialEnv`：**非平凡模型**（两系统 `true` / `false` × `ℕ` 时间，交易成本非对称 `TC true false = 1` < `TC false true = 2`，正义度 `1` / `0`）；
-    - `axioms_consistent : Nonempty Env`（由 `nontrivialEnv` 见证）；
-    - 非平凡性验证：`nontrivial_free_exists`、`nontrivial_order_exists`、`nontrivial_license_exists`、`nontrivial_democracy_exists`、`nontrivial_dictatorship_exists`、`nontrivial_free_not_order`。
-  - **`Gödel` 命名空间**：
-    - `FormalSystem`（公式 / 可证 / 可驳 / 一致性）、`ProofStatus`、`systemValuation`；
-    - `IsGödel`、`HilbertCore`；
-    - `godel_not_in_hilbert_core`：严格引理，哥德尔独立命题不属于希尔伯特核心（零公理依赖）；
-    - `HilbertProcessConjecture`：学术诚实界定，将“哥德尔世界极小化”形式化为**开放猜想**（非已解决定理）。
-- **[lakefile.toml](lakefile.toml)**：Lake 构建配置文件，声明对 `mathlib` 的依赖与库根模块 `the_principle`；
+- **[the_principle.lean](the_principle.lean)**：**正典形式化的入口模块**，`lake build` 的库根模块（`lakefile.toml` 中 `defaultTargets = ["the_principle"]`），`public import` 以下全部子模块；下游可直接 `import the_principle` 使用其公开 API。
+- **[ThePrinciple/](ThePrinciple/)**：正典内容按层拆分的子模块，依赖链自上而下：
+
+  | 模块 | 内容 |
+  |---|---|
+  | [Basic.lean](ThePrinciple/Basic.lean) | **基础载体**：`Valuation`（赋值/未赋值）、`Env`（完整环境：数据载体 + 公理约束）、`Correct`；状态（`State`）、边界（`Boundary`）、系统（`System`）、时间（`Time`）、跨界（`Crossing`）、描述（`Description`）；边界自指映射（`boundaryOf`）、跨界集合（`crossingsOf`）、时序演化赋值（`valuationAt`）、知识算子（`Knows`）。**公理字段**（作为 `Env` 的字段，可由具体模型逐条验证）：公理 0（`axiom_0`）、公理 1（`count_zero_iff_correct`）、公理 2（`axiom_2_monotone` + `axiom_2_tends_to_complete`）、公理 3（`turbulence_from_information_blocking`）、公理 5（`axiom_5_coase`）、公理 7（`axiom_7`）、边界幂等（`axiom_boundary_idempotent`）、四元组互斥（`material_conscious_exclusive`、`empirical_formal_exclusive`）、正义测量（`justice_measurement_theorem`）、自指定理（`self_reference_theorem`）、科学不变性（`law_of_scientific_invariance`）、科学世俗（`law_of_secular_science`） |
+  | [Epistemic.lean](ThePrinciple/Epistemic.lean) | **认识论四元组**：自由（`Free`）/ 秩序（`Order`）/ 奴役（`Slavery`）/ 放任（`License`），六条两两互斥定理（`free_order_exclusive` 等） |
+  | [Quadruples.lean](ThePrinciple/Quadruples.lean) | **二元概念空间（BCS）**：文化实践四元组（`Science`/`Religion`/`Engineering`/`Philosophy`，三条互斥定理）；科学分支四元组（`NaturalScience`/`SocialScience`/`Mathematics`/`MetaScience`，四条互斥定理）；民主四元组（`Democracy`/`Populism`/`Autocracy`/`Dictatorship`）；真善美（`Truthful`/`Good`/`Beautiful`）；主观与客观（`Agree`/`Objective`/`Subjective`）；不存在即错误（`Nonexistent`/`Wrong`）；信用（`Credit`）；动荡（`Turbulent`/`game_theorem`）；意义（`Price`/`Meaning`） |
+  | [Justice.lean](ThePrinciple/Justice.lean) | **正义**：`Friction`/`Just`/`JustBetween`；正义定理（`coase_implies_just`、`justice_measurement_theorem'`）；黑格尔定理（`HegelTheorem`，已移出 `Env` 以避免与 `LearnsFromHistory` 冲突） |
+  | [Pruning.lean](ThePrinciple/Pruning.lean) | **剪枝**：`ShouldPrune` 与 `pruning_incorrect` |
+  | [Models/Canonical.lean](ThePrinciple/Models/Canonical.lean) | **退化模型** `canonicalEnv`（`Unit` 系统，`Knows = False`），用于快速逐条验证 |
+  | [Models/Nontrivial.lean](ThePrinciple/Models/Nontrivial.lean) | **非平凡模型** `nontrivialEnv`（两系统 `true`/`false` × `ℕ` 时间，交易成本非对称 `TC true false = 1` < `TC false true = 2`，正义度 `1`/`0`）；一致性定理 `axioms_consistent : Nonempty Env`（由 `nontrivialEnv` 见证）；非平凡性验证：`nontrivial_free_exists`、`nontrivial_order_exists`、`nontrivial_license_exists`、`nontrivial_democracy_exists`、`nontrivial_dictatorship_exists`、`nontrivial_free_not_order` |
+  | [Godel.lean](ThePrinciple/Godel.lean) | **`Gödel` 命名空间**：`FormalSystem`（公式/可证/可驳/一致性）、`ProofStatus`、`systemValuation`；`IsGödel`、`HilbertCore`；`godel_not_in_hilbert_core`（严格引理，零公理依赖）；`HilbertProcessConjecture`（学术诚实界定：将"哥德尔世界极小化"形式化为**开放猜想**，非已解决定理） |
+
+- **[lakefile.toml](lakefile.toml)**：Lake 构建配置文件，声明对 `mathlib` 的依赖与库根（`roots = ["the_principle", "ThePrinciple.Basic"]`，入口模块 + 子模块树）；
 - **[lean-toolchain](lean-toolchain)**：工具链版本锁定（`leanprover/lean4:v4.35.0`）。
 
 ### 历史迭代稿（不参与构建）
@@ -78,6 +52,7 @@
 | [the_principle_5.lean](the_principle_5.lean) | 过渡稿 | 4 错误 |
 | [the_principle_6.lean](the_principle_6.lean) | 过渡稿 | 8 错误 |
 | [the_principle_7.lean](the_principle_7.lean) | v7 稿（[review_8.md](review_8.md) 的修复对象） | 26 错误 |
+| [the_principle_8.lean](the_principle_8.lean) | v8 稿：拆分前最后的单文件正典（内容同拆分前的 the_principle.lean） | 已被多模块结构取代 |
 
 配套文档：
 
