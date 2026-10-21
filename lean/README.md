@@ -22,7 +22,7 @@
 
 ### 正典（参与构建）
 
-- **[the_principle.lean](the_principle.lean)**：**正典形式化的入口模块**，`lake build` 的库根模块（`lakefile.toml` 中 `defaultTargets = ["the_principle"]`），`public import` 以下全部子模块；下游可直接 `import the_principle` 使用其公开 API。
+- **[ThePrinciple.lean](ThePrinciple.lean)**：**正典形式化的入口模块**，`lake build` 的库根模块（`lakefile.toml` 中 `defaultTargets = ["the_principle"]`），`public import` 以下全部子模块；下游可直接 `import ThePrinciple` 使用其公开 API。
 - **[ThePrinciple/](ThePrinciple/)**：正典内容按层拆分的子模块，依赖链自上而下：
 
   | 模块 | 内容 |
@@ -36,7 +36,7 @@
   | [Models/Nontrivial.lean](ThePrinciple/Models/Nontrivial.lean) | **非平凡模型** `nontrivialEnv`（两系统 `true`/`false` × `ℕ` 时间，交易成本非对称 `TC true false = 1` < `TC false true = 2`，正义度 `1`/`0`）；一致性定理 `axioms_consistent : Nonempty Env`（由 `nontrivialEnv` 见证）；非平凡性验证：`nontrivial_free_exists`、`nontrivial_order_exists`、`nontrivial_license_exists`、`nontrivial_democracy_exists`、`nontrivial_dictatorship_exists`、`nontrivial_free_not_order` |
   | [Godel.lean](ThePrinciple/Godel.lean) | **`Gödel` 命名空间**：`FormalSystem`（公式/可证/可驳/一致性）、`ProofStatus`、`systemValuation`；`IsGödel`、`HilbertCore`；`godel_not_in_hilbert_core`（严格引理，零公理依赖）；`HilbertProcessConjecture`（学术诚实界定：将"哥德尔世界极小化"形式化为**开放猜想**，非已解决定理） |
 
-- **[lakefile.toml](lakefile.toml)**：Lake 构建配置文件，声明对 `mathlib` 的依赖与库根（`roots = ["the_principle", "ThePrinciple.Basic"]`，入口模块 + 子模块树）；
+- **[lakefile.toml](lakefile.toml)**：Lake 构建配置文件，声明对 `mathlib` 的依赖与库根（`roots = ["ThePrinciple"]`，lake 由此递归发现整棵模块树）；
 - **[lean-toolchain](lean-toolchain)**：工具链版本锁定（`leanprover/lean4:v4.35.0`）。
 
 ### 历史迭代稿（不参与构建）
@@ -52,12 +52,12 @@
 | [the_principle_5.lean](the_principle_5.lean) | 过渡稿 | 4 错误 |
 | [the_principle_6.lean](the_principle_6.lean) | 过渡稿 | 8 错误 |
 | [the_principle_7.lean](the_principle_7.lean) | v7 稿（[review_8.md](review_8.md) 的修复对象） | 26 错误 |
-| [the_principle_8.lean](the_principle_8.lean) | v8 稿：拆分前最后的单文件正典（内容同拆分前的 the_principle.lean） | 已被多模块结构取代 |
+| [the_principle_8.lean](the_principle_8.lean) | v8 稿：拆分前最后的单文件正典（内容同拆分前的 ThePrinciple.lean） | 已被多模块结构取代 |
 
 配套文档：
 
 - [review_7.md](review_7.md)：v7 轮审查报告（漏检约 27 处证明级错误）；
-- [review_8.md](review_8.md)：v8 轮审查报告（`the_principle_7.lean` 的 10 类修复清单；其修复成果已扶正为 [the_principle.lean](the_principle.lean)）；
+- [review_8.md](review_8.md)：v8 轮审查报告（`the_principle_7.lean` 的 10 类修复清单；其修复成果已扶正为 [ThePrinciple.lean](ThePrinciple.lean)）；
 - [roadmap_7.md](roadmap_7.md)：v7 配套路线图（A 工程收尾 / B 形式化加强 / C 哥德尔进程 / D 原理自指 / E 纲领推进 / F 发布协作）。
 
 ---
@@ -87,8 +87,8 @@ ln -s ~/.lean-shared/packages .lake/packages
 ```bash
 lake update              # 拉取依赖并生成 lake-manifest.json（首次必跑）
 lake exe cache get       # 下载 mathlib 预编译缓存（数 GB，一次性）
-lake build               # 编译库根模块 the_principle.lean
-lake env lean the_principle.lean   # 或单独类型检查该文件
+lake build               # 编译库根模块 ThePrinciple.lean
+lake env lean ThePrinciple.lean    # 或单独类型检查该文件
 ```
 
 ---
