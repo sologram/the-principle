@@ -18,7 +18,7 @@
 ### [第四 (自由) 公理](the-4th-axiom.md)
 ### [第五 (正义) 公理](the-5th-axiom.md)
 ### [第六 (意义) 公理](the-6th-axiom.md)
-### [第七 (最优) 公理](the-7th-axiom.md)
+### [第七 (原理) 公理](the-7th-axiom.md)
 
 ## [拨乱反正](order-out-of-chaos.md)
 
