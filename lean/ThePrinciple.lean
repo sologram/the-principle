@@ -43,8 +43,14 @@ and `_2`–`_7` are historical drafts and do not participate in the build.
 - Scientific quadruple: natural science / social science / mathematics / metascience.
 - Democratic quadruple: democracy / populism / autocracy / dictatorship.
 - Justice: `Just` (local Coase), `JustBetween` (between systems), `JusticeDegree`.
-- Meaning: `Price` / `Meaning`.
-- Pruning: `ShouldPrune`.
+- Meaning: `Price` (engineering layer) / `Meaning` (definition layer, a Prop).
+- Truth-goodness-beauty: `Truthful` = correct; `Good` = efficiency;
+  `Cooperative` = 善; `Beautiful` = competitiveness on a crossing.
+- Credit: `Credit` = commitment ∧ fulfillment (a record, not a degree).
+- Pruning: the five prunings + the pruning theorem
+  (`pruning_theorem`, `pruning_pseudo_just`, `pruning_pseudo_free`, …).
+- Extraterritorial enforcement: `judgment_via_count` / `jurisdiction_local`.
+- Axiom 2 as a statistical trend (`axiom_2_trend`, evolving systems only).
 - Gödel framework and `HilbertProcessConjecture` (open conjecture).
 
 ## Not yet formalized (future work)
@@ -52,10 +58,8 @@ and `_2`–`_7` are historical drafts and do not participate in the build.
 - Full semantics of "nonexistent = wrongly existing"
   (only the `Nonexistent` / `Wrong` skeletons are given).
 - Substantive content of "credit as the first value"
-  (only approximated by `JusticeDegree`).
+  (`Credit` is the binary record; the numeric ledger is future work).
 - The statistical claim that "very little of what is called social science is science".
-- Substantive content of "beauty = competitiveness"
-  (only approximated by `HasPower`).
 - Engineering plans such as atomic utility theory, the twin-market model,
   and the Principle SFT corpus.
 

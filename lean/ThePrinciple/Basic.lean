@@ -39,6 +39,10 @@ structure Env where
   Cost : Crossing → ℝ
   Competition : Crossing → ℝ
   TransactionCost : System → System → ℝ
+  /-- Aggregate transaction cost of a society (the "social friction"). -/
+  SocialCost : System → ℝ
+  /-- The system claims to be just. -/
+  ClaimsJustice : System → Prop
   Knows : System → Time → State → Prop
   DescriptionLength : Description → ℝ
   DescribesCompletely : Description → System → Prop
@@ -80,10 +84,12 @@ structure Env where
   count_zero_iff_correct : ∀ (s : System) (t : Time),
     UnassignedCount s t = 0 ↔
       ∀ σ ∈ statesOf s, valuationAt s t σ ≠ Valuation.unassigned
-  axiom_2_monotone : ∀ (s : System) (t₁ t₂ : Time),
-    le t₁ t₂ → UnassignedCount s t₂ ≤ UnassignedCount s t₁
-  axiom_2_tends_to_complete : ∀ (s : System) (n : ℕ),
-    ∃ t : Time, UnassignedCount s t ≤ n
+  /- Axiom 2 (engineering layer): trend toward completeness, stated statistically.
+     Per the text, a single trajectory need not be monotone; the trend applies
+     to evolving systems only (copyable / mutable / selective). -/
+  Evolving : System → Prop
+  axiom_2_trend : ∀ (s : System), Evolving s →
+    ∀ (n : ℕ), ∃ t : Time, UnassignedCount s t ≤ n
   /- Axiom 3: turbulence originates from information blocking -/
   turbulence_from_information_blocking :
     ∀ (s : System) (t₁ t₂ : Time),

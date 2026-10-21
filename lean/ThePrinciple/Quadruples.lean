@@ -69,9 +69,20 @@ def Dictatorship (s : E.System) (t : E.Time) : Prop :=
 
 /-! ### Truth, goodness, beauty (simplified) -/
 
+/-- 真 = 正确即完备 (axiom 1). -/
 def Truthful (s : E.System) (t : E.Time) : Prop := Correct E s t
-def Good (s : E.System) : Prop := E.IsCollective s
-def Beautiful (s : E.System) : Prop := E.HasPower s
+
+/-- 好 = 效率：无内摩擦且帕累托有效 (axiom 5's "A 即 B"). -/
+def Good (s : E.System) : Prop :=
+  E.TransactionCost s s = 0 ∧ E.ParetoEfficient s
+
+/-- 善 = 协作：产权明晰且对他者交易成本不高（可合作）. -/
+def Cooperative (s : E.System) : Prop :=
+  E.PropertyRightsClear s ∧ ∀ s₂ : E.System, E.TransactionCost s s₂ ≤ E.TransactionCost s₂ s
+
+/-- 美 = 竞争力：在跨界上承受真实竞争而仍存活（工程层标注于 `Competition`）. -/
+def Beautiful (s : E.System) : Prop :=
+  ∃ cr ∈ E.crossingsOf (E.hasBoundary s), E.Competition cr > 0
 
 /-! ### Subjective/objective -/
 
@@ -82,7 +93,8 @@ def Subjective (s₁ s₂ : E.System) (t : E.Time) : Prop := ¬ Agree E s₁ s�
 
 /-! ### Credit and nonexistence -/
 
-def Credit (s : E.System) : ℝ := E.JusticeDegree s
+/-- 信用 = 承诺/兑现的记录：有承诺且兑现（工程层以二值记录起步）. -/
+def Credit (s : E.System) : Prop := E.HasCommitment s ∧ E.HasFulfillment s
 def Nonexistent (s : E.System) : Prop := ¬ (E.statesOf s).Nonempty
 def Wrong (s : E.System) (t : E.Time) : Prop := ¬ Correct E s t
 
@@ -98,5 +110,14 @@ theorem game_theorem (s : E.System) (t₁ t₂ : E.Time)
 
 /-! ### Meaning -/
 
+/-- 价格 = 供需均衡的工程层标注：成本（供给侧）+ 竞争（需求侧约束）. -/
 def Price (cr : E.Crossing) : ℝ := E.Cost cr + E.Competition cr
-def Meaning (cr : E.Crossing) : ℝ := Price E cr
+
+/-- 意义是二值范畴：跨界产生选择倾向即有意义（定义层）；价格是其工程层数值. -/
+def Meaning (cr : E.Crossing) : Prop := cr ∈ setOf fun c => Price E c > 0
+
+theorem meaningful_of_price_pos (cr : E.Crossing) (h : Price E cr > 0) :
+    Meaning E cr := h
+
+theorem price_of_meaning_pos (cr : E.Crossing) (h : Meaning E cr) :
+    Price E cr > 0 := h

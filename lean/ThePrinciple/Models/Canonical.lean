@@ -32,11 +32,14 @@ def canonicalEnv : Env where
   Cost _ := 1
   Competition _ := 1
   TransactionCost _ _ := 0
+  SocialCost _ := 0
+  ClaimsJustice _ := False
   Knows _ _ _ := False
   DescriptionLength _ := 0
   DescribesCompletely _ _ := True
   Principle _ := ()
   Differs a b := a ≠ b
+  Evolving _ := True
   InformationBlocked _ _ := False
   MinorityGame _ := False
   PropertyRightsClear _ := True
@@ -70,10 +73,8 @@ def canonicalEnv : Env where
     constructor
     · intro _ σ _ h; cases h
     · intro _; rfl
-  axiom_2_monotone := by
-    intro _ _ _ _; exact Nat.le_refl 0
-  axiom_2_tends_to_complete := by
-    intro _ n
+  axiom_2_trend := by
+    intro _ _ n
     exact ⟨0, Nat.zero_le n⟩
   turbulence_from_information_blocking := by
     intro _ _ _ h _; exact False.elim h

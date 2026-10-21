@@ -28,7 +28,16 @@ def ntJD : Bool → ℝ
   | true => 1
   | false => 0
 
+def ntSocialCost : Bool → ℝ
+  | true => 0
+  | false => 2
+
+def ntClaimsJustice (_ : Bool) : Prop := True
+def ntPareto (s : Bool) : Prop := s = true
+
 def ntCollective (s : Bool) : Prop := s = true
+
+theorem ntCollective_false : ¬ ntCollective false := by simp [ntCollective]
 def ntIndividual (s : Bool) : Prop := s = false
 def ntHasCommitment (s : Bool) : Prop := s = true
 def ntHasFulfillment (s : Bool) : Prop := s = true
@@ -70,15 +79,18 @@ def nontrivialEnv : Env where
   Cost _ := 1
   Competition _ := 1
   TransactionCost := ntTC
+  SocialCost := ntSocialCost
+  ClaimsJustice := ntClaimsJustice
   Knows := ntKnows
   DescriptionLength _ := 0
   DescribesCompletely _ _ := True
   Principle _ := ()
   Differs a b := a ≠ b
+  Evolving _ := True
   InformationBlocked := ntInformationBlocked
   MinorityGame := ntMinorityGame
-  PropertyRightsClear _ := True
-  ParetoEfficient _ := True
+  PropertyRightsClear := ntCollective
+  ParetoEfficient := ntPareto
   IsCollective := ntCollective
   IsIndividual := ntIndividual
   HasCommitment := ntHasCommitment
@@ -108,26 +120,17 @@ def nontrivialEnv : Env where
     by_cases h : s = false ∧ t = 0
     · simp [ntUC, ntVal, h]
     · simp [ntUC, ntVal, h]
-  axiom_2_monotone := by
-    intro s t₁ t₂ hle
-    by_cases h1 : s = false ∧ t₁ = 0
-    · have : ntUC s t₂ ≤ 1 := by
-        unfold ntUC
-        split <;> omega
-      simpa [ntUC, h1] using this
-    · have h2 : ¬(s = false ∧ t₂ = 0) := by
-        intro h2
-        apply h1
-        exact ⟨h2.1, by omega⟩
-      simp [ntUC, h1, h2]
-  axiom_2_tends_to_complete := by
-    intro s n
+  axiom_2_trend := by
+    intro s _ n
     refine ⟨1, ?_⟩
     simp [ntUC]
   turbulence_from_information_blocking := by
     intro _ _ _ h _; exact False.elim h
   axiom_5_coase := by
-    intro _ _ _; trivial
+    intro s hpr _
+    cases s
+    · exact absurd hpr ntCollective_false
+    · rfl
   axiom_7 := by
     intro _
     exact ⟨trivial, fun _ _ => le_refl 0⟩
@@ -194,3 +197,13 @@ theorem nontrivial_dictatorship_exists : Dictatorship nontrivialEnv false 0 :=
 theorem nontrivial_free_not_order :
     ¬ (Free nontrivialEnv false 1 ∧ Order nontrivialEnv false 1) :=
   free_order_exclusive nontrivialEnv false 1
+
+/-- The pseudo-just `false` (claims justice, not Pareto-efficient in aggregate) is pruned. -/
+theorem nontrivial_pseudo_just_pruned : PruneInefficient nontrivialEnv false :=
+  ⟨True.intro, by simp [nontrivialEnv, ntPareto]⟩
+
+/-- The license state `false @ t = 0` is pruned by the first judgment
+(incorrect), not the second — 放任 is cut for incompleteness, 伪自由 for order. -/
+theorem nontrivial_license_pruned_incorrect :
+    PruneIncorrect nontrivialEnv false 0 := fun h =>
+  nontrivial_license_exists.1 h
