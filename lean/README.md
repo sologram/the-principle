@@ -20,43 +20,70 @@
 
 ## 文件结构
 
-- **[the_principle.lean](the_principle.lean)**：核心形式化源码（**Zero sorry** 完整闭合规范，全英文注释 Canonical 集大成版本，`lake build` 的库根模块）
-  - **基础载体与态射**：状态（State）、边界（Boundary）、系统（System）、边界自指映射（`boundaryOf`）、跨界（Crossing）、时序演化赋值（`valuationAt`）；
-  - **八大公理规制（Axioms 0–7）**：
-    - 公理 0（存在即差异）：以 `Differs` 谓词严格界定内部相异状态对的存在性；
-    - 公理 1（正确即完备）：全状态赋值，定义非存在即错误；
-    - 公理 2（事物趋完备）：单调弱读法 + 极限强读法，并严格证明 `exists_correct_time`；
-    - 公理 3（博弈即动荡）：动荡内生化为边界变动、信息阻塞与少数者博弈，并证明推论；
-    - 公理 4（自由即无知）：内部完备且外部保持开放；
-    - 公理 5（正义即效率）：科斯产权风格（`PropertyRightsClear` + 零交易成本 $\implies$ 帕累托最优），严格证明 `coase_implies_just`；
-    - 公理 6（意义即价格）：跨界价格恒等于成本与竞争之和；
-    - 公理 7（原理即最优）：最小描述长度（MDL）/ 奥卡姆剃刀；
-  - **二元概念空间（BCS / Binary Concept Space）与全面定义**：
-    - 不存在即错误（`nonexistent_iff_incorrect`）；
-    - 边界的自指闭包（`boundary_of_boundary_is_boundary`）；
-    - 认知四元组：自由（`Free`）/ 秩序（`Order`）/ 奴役（`Slavery`）/ 放任（`License`）；
-    - 社会政治四元组：民主（`Democracy`）/ 民粹（`Populism`）/ 专制（`Autocracy`）/ 独裁（`Dictatorship`）；
-    - 文化实践四元组：科学（`Science`）/ 宗教（`Religion`）/ 工程（`Engineering`）/ 哲学（`Philosophy`）；
-    - 科学分支四元组：自然科学（`NaturalScience`）/ 社会科学（`SocialScience`）/ 数学（`Mathematics`）/ 元科学（`MetaScience`）；
-    - 评价二元对：对与错（`Right`/`Wrong`）、好与坏（`Good`/`Bad`）、真善美（`Truth`/`Goodness`/`Beauty`）；
-    - 主观与客观：评价分歧度（`Subjective`/`Objective`）；
-  - **全套基础定理与宪法级定律**：
-    - 边界定理（`boundary_theorem`）、自指定理（`self_reference_theorem`）、绝对真理定理（`absolute_truth_theorem`）；
-    - 叠加定理（`superposition_theorem`）、剪枝定理（`pruning_theorem`）、自私定理（`selfish_theorem`）、理性定理（`rationality_theorem`）；
-    - 博弈定理（`game_theorem`）、第一价值（信用）定理（`first_value_is_credit`）、正义测量定理（`justice_measurement_theorem`）；
-    - 民主权力定理（`democracy_is_power`）、域外执法定理（`extraterritoriality_theorem`）、黑格尔定理（`hegel_theorem`）；
-    - 爱智慧四定律（哲学批判）：罗素边界定律（`russell_boundary_law`）、自由定律（`philosophical_freedom_law`）、民主定律、专制定律；
-    - 达尔文边界原理（`darwinian_boundary_principle`）与可信演绎公理化；
-    - 科学宪法六定律：真理定律、承诺定律（`law_of_scientific_commitment`）、永恒定律、体系强一致定律、演绎定律、世俗定律；
-  - **公理一致性定理（`axioms_consistent`）**：构造一阶模型 `trivialModel`（State = Bool），在数学上严格证明全部公理与规范相容一致；
-  - **`FormalDeduction` 命名空间**：
-    - `systemValuation_ne_unassigned_iff`：追查判据等价定理（已判定 $\iff$ 可证 $\lor$ 可驳）；
-    - `undecided_iff_not_in_hilbert_core`：未判定命题与离开希尔伯特核心的充要等价；
-    - `godel_sentence_not_in_hilbert_core`：严格引理，哥德尔独立命题不属于希尔伯特核心；
-    - `counterexample_breaks_consistency`：核心反例元定理，证明任何追查到公理的域内反例（`Challenge`）必致体系一致性瓦解（$S \vdash \bot$），兑现“一个反例即可证伪”的法庭承诺；
-    - `HilbertProcessConjecture`：学术诚实界定，将测度意义上的 $G/H \to 0$ 希尔伯特进程形式化为开放猜想。
-- **[lakefile.toml](lakefile.toml)**：Lake 构建配置文件，声明对 `mathlib` 的依赖；
+### 正典（参与构建）
+
+- **[the_principle.lean](the_principle.lean)**：**唯一的正典形式化源码**，`lake build` 的库根模块（`lakefile.toml` 中 `defaultTargets = ["the_principle"]`）。
+  - 采用 Lean 模块系统（文件头 `module`，导入为 `public import`），下游可直接 `import the_principle` 使用其公开 API。
+  - **基础载体与态射**：
+    - `Valuation`（赋值 / 未赋值）、`Env`（完整环境：数据载体 + 公理约束）；
+    - 状态（`State`）、边界（`Boundary`）、系统（`System`）、时间（`Time`）、跨界（`Crossing`）、描述（`Description`）；
+    - 边界自指映射（`boundaryOf`）、跨界集合（`crossingsOf`）、时序演化赋值（`valuationAt`）、知识算子（`Knows`）。
+  - **公理字段（作为 `Env` 的字段，可由具体模型逐条验证）**：
+    - 公理 0（存在即差异）：`axiom_0`；
+    - 公理 1（正确即完备）：`count_zero_iff_correct`（`UnassignedCount = 0` ⟺ 全状态已赋值）；
+    - 公理 2（事物趋完备）：`axiom_2_monotone`（单调）+ `axiom_2_tends_to_complete`（极限）；
+    - 公理 3（博弈即动荡）：`turbulence_from_information_blocking`（信息阻塞 + 少数者博弈 ⟹ 边界变动）；
+    - 公理 5（正义即效率）：`axiom_5_coase`（科斯产权风格：产权清晰 + 零交易成本 ⟹ 帕累托最优）；
+    - 公理 7（原理即最优）：`axiom_7`（MDL / 奥卡姆剃刀）；
+    - 边界幂等：`axiom_boundary_idempotent`；
+    - 四元组互斥：`material_conscious_exclusive`、`empirical_formal_exclusive`；
+    - 正义测量：`justice_measurement_theorem`（系统间摩擦越小，正义度越高）；
+    - 自指定理：`self_reference_theorem`（仅约束自指系统，避开与公理 2 的冲突）；
+    - 科学不变性：`law_of_scientific_invariance`；科学世俗：`law_of_secular_science`。
+  - **二元概念空间（BCS / Binary Concept Space）**：
+    - 正确性：`Correct`；不存在即错误：`Nonexistent` / `Wrong`；
+    - 认识论四元组：自由（`Free`）/ 秩序（`Order`）/ 奴役（`Slavery`）/ 放任（`License`），六条两两互斥定理（`free_order_exclusive` 等）；
+    - 文化实践四元组：科学（`Science`）/ 宗教（`Religion`）/ 工程（`Engineering`）/ 哲学（`Philosophy`），三条互斥定理；
+    - 科学分支四元组：自然科学（`NaturalScience`）/ 社会科学（`SocialScience`）/ 数学（`Mathematics`）/ 元科学（`MetaScience`），四条互斥定理；
+    - 民主四元组：民主（`Democracy`）/ 民粹（`Populism`）/ 专制（`Autocracy`）/ 独裁（`Dictatorship`）；
+    - 真善美：`Truthful` / `Good` / `Beautiful`；
+    - 主观与客观：`Agree` / `Objective` / `Subjective`；
+    - 信用：`Credit`。
+  - **定理**：
+    - 博弈定理（`game_theorem`）、正义定理（`coase_implies_just`、`justice_measurement_theorem'`）、剪枝定理（`pruning_incorrect`）；
+    - 存在即错误、黑格尔定理（`HegelTheorem`，已移出 `Env` 以避免与 `LearnsFromHistory` 冲突）。
+  - **一致性模型**：
+    - `canonicalEnv`：退化模型（`Unit` 系统，`Knows = False`），用于快速逐条验证；
+    - `nontrivialEnv`：**非平凡模型**（两系统 `true` / `false` × `ℕ` 时间，交易成本非对称 `TC true false = 1` < `TC false true = 2`，正义度 `1` / `0`）；
+    - `axioms_consistent : Nonempty Env`（由 `nontrivialEnv` 见证）；
+    - 非平凡性验证：`nontrivial_free_exists`、`nontrivial_order_exists`、`nontrivial_license_exists`、`nontrivial_democracy_exists`、`nontrivial_dictatorship_exists`、`nontrivial_free_not_order`。
+  - **`Gödel` 命名空间**：
+    - `FormalSystem`（公式 / 可证 / 可驳 / 一致性）、`ProofStatus`、`systemValuation`；
+    - `IsGödel`、`HilbertCore`；
+    - `godel_not_in_hilbert_core`：严格引理，哥德尔独立命题不属于希尔伯特核心（零公理依赖）；
+    - `HilbertProcessConjecture`：学术诚实界定，将“哥德尔世界极小化”形式化为**开放猜想**（非已解决定理）。
+- **[lakefile.toml](lakefile.toml)**：Lake 构建配置文件，声明对 `mathlib` 的依赖与库根模块 `the_principle`；
 - **[lean-toolchain](lean-toolchain)**：工具链版本锁定（`leanprover/lean4:v4.35.0`）。
+
+### 历史迭代稿（不参与构建）
+
+以下文件为历史版本，**不随正典版同步修复**，仅作演进留档：
+
+| 文件 | 说明 | 编译状态 |
+|---|---|---|
+| [the_principle_1.lean](the_principle_1.lean) | 前任正典：宪法级定律全量版（25 条 `axiom`、科学宪法六定律、`FormalDeduction` 命名空间、`counterexample_breaks_consistency`） | 0 错误（不含 `module` 头） |
+| [the_principle_2.lean](the_principle_2.lean) | 早期骨架稿 | 9 错误 |
+| [the_principle_3.lean](the_principle_3.lean) | 早期骨架稿 | 17 错误 |
+| [the_principle_4.lean](the_principle_4.lean) | 早期骨架稿 | 42 错误 |
+| [the_principle_5.lean](the_principle_5.lean) | 过渡稿 | 4 错误 |
+| [the_principle_6.lean](the_principle_6.lean) | 过渡稿 | 8 错误 |
+| [the_principle_7.lean](the_principle_7.lean) | v7 稿（[review_8.md](review_8.md) 的修复对象） | 26 错误 |
+
+配套文档：
+
+- [review_7.md](review_7.md)：v7 轮审查报告（漏检约 27 处证明级错误）；
+- [review_8.md](review_8.md)：v8 轮审查报告（`the_principle_7.lean` 的 10 类修复清单；其修复成果已扶正为 [the_principle.lean](the_principle.lean)）；
+- [roadmap_7.md](roadmap_7.md)：v7 配套路线图（A 工程收尾 / B 形式化加强 / C 哥德尔进程 / D 原理自指 / E 纲领推进 / F 发布协作）。
 
 ---
 
@@ -83,8 +110,10 @@ ln -s ~/.lean-shared/packages .lake/packages
 
 ### 3. 构建与验证
 ```bash
-lake update
-lake build
+lake update              # 拉取依赖并生成 lake-manifest.json（首次必跑）
+lake exe cache get       # 下载 mathlib 预编译缓存（数 GB，一次性）
+lake build               # 编译库根模块 the_principle.lean
+lake env lean the_principle.lean   # 或单独类型检查该文件
 ```
 
 ---
@@ -93,21 +122,7 @@ lake build
 
 - [ChatGPT 研讨记录 1](https://chatgpt.com/share/6aa94cb2-0f50-83ec-aae5-d7360d906273)
 - [ChatGPT 研讨记录 2](https://chatgpt.com/share/6aa9566d-b95c-83ec-b04f-6277ed069c71)
-- [ChatGPT 研讨记录 3](https://chatgpt.com/share/6aa956a0-7ee4-83ec-a79d-07604c83029d)
+- [ChatGPT 研讨记录 3](https://chatgpt.com/share/6aa9566a-7ee4-83ec-a79d-07604c83029d)
 - [ChatGPT 研讨记录 4](https://chatgpt.com/share/6aaa8067-9ce4-83ec-bf68-5ed5986acb4e)
 - [arXiv:2609.13780](https://arxiv.org/abs/2609.13780)
 - [DeepSeek 研讨记录](https://chat.deepseek.com/share/x6to7t8yefs6xuw6km)
-
-## 构建与验证
-
-前置：[elan](https://github.com/leanprover/elan)（Lean 工具链管理器）。工具链与 mathlib 版本已分别锁定在 `lean-toolchain`（v4.35.0）与 `lakefile.toml`（`rev = "v4.35.0"`）。
-
-```bash
-lake update              # 拉取依赖并生成 lake-manifest.json（首次必跑）
-lake exe cache get       # 下载 mathlib 预编译缓存（数 GB，一次性）
-lake build               # 编译库根模块 the_principle.lean
-lake env lean the_principle.lean   # 或单独类型检查该文件
-```
-
-当前状态：`the_principle.lean` **0 错误 / 0 警告 / 0 sorry**（mathlib v4.35.0 实测通过）。
-`the_principle_2/3/4.lean` 为历史迭代稿，不参与构建，未随正典版同步修复。

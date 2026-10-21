@@ -4,6 +4,8 @@
 > 状态：v7 编译修复已完成，文件级零错误
 > 原则：诚实标注。不宣称"哥德尔已解决"，不宣称"统一科学已兑现"。
 
+> **文件命名说明（后续更新）**：本报告的修复成果最终落在 `the_principle_8.lean`，该文件现已扶正为正典 **[the_principle.lean](the_principle.lean)**（`lake build` 的库根模块）。`the_principle_7.lean` 保留为修复前的历史稿，本报告中的行号均以 v7 稿为准。
+
 ---
 
 ## 一、本轮做了什么
@@ -65,13 +67,13 @@
 
 ## 五、遗留缺口
 
-1. **`lake build` 不覆盖 v7**（工程，阻塞 A.1 验收与 A.2 CI）：需改 `lakefile.toml` 的 `defaultTargets`/roots 指向 v7，或将 v7 更名为库根。
+1. ~~**`lake build` 不覆盖 v7**（工程，阻塞 A.1 验收与 A.2 CI）~~ —— **已解决**：v8 成果已扶正为 `the_principle.lean`（库根模块），`lake build` 现覆盖正典，验证通过。
 2. review_7 的 P0–P4 内容层建议（公理补全、互斥定理、`ShouldPrune` 语义、`Env` 拆分）全部悬置。
 3. roadmap B–F 层级全部未启动。
 
 ## 六、下一步（按优先级）
 
-1. 改 `lakefile.toml` 让 `lake build` 编译 v7，然后 A.2 CI（GitHub Actions + `leanprover/lean-action`）。
+1. ~~改 `lakefile.toml` 让 `lake build` 编译 v7~~ —— 已完成（A.1 验收达成），接着做 A.2 CI（GitHub Actions + `leanprover/lean-action`）。
 2. P0：形式化公理 1（正确即完备）——绝对真理定理与科学定律链的推导基础。
 3. P1：民主四元组互斥定理、`ShouldPrune` 补全五情形。
 4. P2：审查 `ShouldPrune` 的 `Order` 条件语义。
@@ -90,3 +92,31 @@ $ #print axioms nontrivialEnv
 $ #print axioms Gödel.godel_not_in_hilbert_core
 'Gödel.godel_not_in_hilbert_core' does not depend on any axioms
 ```
+
+---
+
+## 附二：正典扶正后的复验（the_principle.lean）
+
+v8 成果扶正为库根模块 `the_principle.lean` 后，追加了 Lean 模块系统改造（文件头 `module` + `public import` + `public section`），复验结果：
+
+```
+$ lake build
+✔ [812/813] Built the_principle
+Build completed successfully (813 jobs).
+
+$ lake env lean the_principle.lean
+(无输出，退出码 0)   -- 0 错误 / 0 警告 / 0 sorry
+
+$ #print axioms axioms_consistent
+'axioms_consistent' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+$ #print axioms Gödel.godel_not_in_hilbert_core
+'Gödel.godel_not_in_hilbert_core' does not depend on any axioms
+```
+
+模块系统改造的注意点（供后续参考）：
+
+1. 文件头必须是 `module`（裸关键字），不是 `module ThePrinciple`；后者无法解析。
+2. 导入需写成 `public import Mathlib.…`，否则 `Set` / `ℝ` / `Nat` 在 `public section` 中不可见（报 `Unknown identifier`）。
+3. 声明需置于 `@[expose] public section` 之下，否则下游 `import the_principle` 拿不到 `Correct` 等顶层定义（会退化为 `_private.…`）。
+

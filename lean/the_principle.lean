@@ -1,58 +1,57 @@
-import Mathlib.Basic.Real.Basic
-import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Set.Basic
+module
+
+public import Mathlib.Basic.Real.Basic
+public import Mathlib.Data.Set.Basic
+public import Mathlib.Data.Nat.Basic
 
 /-!
-# The Principle — Comprehensive Formalization in Lean 4 (Zero sorry)
+# The Principle — Lean 4 形式化（正典版 v8）
 
-Complete formalization of "The Principle" Outline (事物原理纲要):
+本文件是 `lake build` 的库根模块（`lakefile.toml` 中 `defaultTargets = ["the_principle"]`），
+即本工程唯一的正典形式化。`the_principle_1.lean` 及 `_2`–`_7` 为历史迭代稿，不参与构建。
 
-1. **The Eight Foundational Axioms (八大公理)**:
-   - Axiom 0: Boundary is existence / Existence is difference (`axiom_0_boundary_is_existence`)
-   - Axiom 1: Correctness is completeness (`Correct`)
-   - Axiom 2: Things tend toward completeness (`axiom_2_monotone` + `axiom_2_tends_to_complete`)
-   - Axiom 3: Turbulence is boundary instability from information blocking (`Turbulent`)
-   - Axiom 4: Freedom as ignorance (`Free`)
-   - Axiom 5: Justice is efficiency / Coasean zero transaction cost (`Just`)
-   - Axiom 6: Meaning is boundary-crossing price (`Meaning = Cost + Competition`)
-   - Axiom 7: Principle is optimality / MDL Occam's Razor (`axiom_7_principle_is_mdl`)
+相对 v6/v7 的关键修复：
 
-2. **Binary Concept Space (BCS / 二元概念空间)**:
-   - Cognitive Four-Quadrant: Freedom / Order / Slavery / License
-   - Societal-Political Four-Quadrant: Democracy / Populism / Autocracy / Dictatorship
-   - Cultural Practice Four-Quadrant: Science / Religion / Engineering / Philosophy
-   - Scientific Domain Four-Quadrant: Natural Science / Social Science / Mathematics / Meta-Science
-   - Evaluative Duals: Right vs Wrong, Good vs Bad, Truth / Goodness / Beauty
-   - Epistemological Duals: Subjective vs Objective, Boundary Idempotence
+1. `nomatch` 改为 `cases`，确保编译。
+2. `axioms_consistent` 改为 `Nonempty Env`，由 `nontrivialEnv` 见证。
+3. `ShouldPrune` 第二项改为 `Order`，不再恒假。
+4. 新增 `JustBetween`，统一 `Just` 与 `justice_measurement_theorem` 的摩擦概念。
+5. 新增非平凡模型 `nontrivialEnv`。
+6. `hegel_theorem` 移出 `Env`，改为独立 `HegelTheorem`。
+7. 新增 `SelfReferring` 字段，修复 `self_reference_theorem` 与 `axiom_2` 的潜在冲突。
+8. 补充民主四元组、真善美、主观/客观、信用、不存在等定义。
 
-3. **Foundational Theorems & Laws (定理与定律)**:
-   - Boundary Theorem, Self-Reference Theorem, Absolute Truth Theorem
-   - Superposition Theorem, Pruning Theorem, Selfishness Theorem, Rationality Theorem
-   - Game Theorem, First Value (Credit) Theorem, Justice Measurement Theorem
-   - Democracy-Power Theorem, Extraterritoriality Theorem, Hegel's Theorem
-   - Four Laws of Philosophy (Love of Wisdom / 爱智慧四定律)
-   - Traceable Deduction Theorem, Darwinian Boundary Principle
-   - Six Constitutional Laws of Science (科学六定律)
+## 已形式化
 
-4. **Semantic Model Consistency (模型相容性)**:
-   - Concrete `trivialModel` satisfying all axioms and specifications simultaneously
-   - Proof of theorem `axioms_consistent : ∃ M : Model, True`
+- 公理 0, 2, 3, 5, 7；边界幂等；四元组互斥。
+- 认识论四元组：自由 / 秩序 / 奴役 / 放任。
+- 文化实践四元组：科学 / 哲学 / 宗教 / 工程。
+- 科学四元组：自然科学 / 社会科学 / 数学 / 元科学。
+- 民主四元组：民主 / 民粹 / 专制 / 独裁。
+- 正义：`Just`（局部科斯）、`JustBetween`（系统间）、`JusticeDegree`。
+- 意义：`Price` / `Meaning`。
+- 剪枝：`ShouldPrune`。
+- 哥德尔框架与 `HilbertProcessConjecture`（开放猜想）。
 
-5. **Formal Deduction & Meta-Theorems (形式裁定与元定理)**:
-   - Operational Traceability Equivalence
-   - Constitutional Challenge & Consistency Refutation (`counterexample_breaks_consistency`)
-   - Gödelian Framework & Open Conjecture (`HilbertProcessConjecture`)
+## 未形式化（后续计划）
+
+- “不存在 = 错误”的完整语义（仅给出 `Nonexistent` / `Wrong` 骨架）。
+- “第一价值 = 信用”的实质内容（仅用 `JusticeDegree` 近似）。
+- “社会科学名义下极少是科学”的统计性断言。
+- “美 = 竞争力”的实质内容（仅用 `HasPower` 近似）。
+- 原子效用论、孪生市场模型、原理 SFT 语料等工程计划。
+
+诚实标注：本文件是骨架，不是“哥德尔已解决”，也不是“统一科学已兑现”。
 -/
 
-/-! ## I. Basic Carriers and Morphisms -/
+@[expose] public section
 
 inductive Valuation (α : Type) where
   | assigned : α → Valuation α
   | unassigned : Valuation α
 
-/-- The ambient expressive environment of The Principle:
-    all basic carriers (types and morphisms) bundled as one class. -/
-class Env where
+/-- 完整环境：数据载体 + 公理约束。 -/
+structure Env where
   State : Type
   Boundary : Type
   System : Type
@@ -61,6 +60,7 @@ class Env where
   BoundarySig : Type
   Crossing : Type
   Description : Type
+
   hasBoundary : System → Boundary
   boundaryOf : Boundary → Boundary
   statesOf : System → Set State
@@ -72,9 +72,7 @@ class Env where
   Cost : Crossing → ℝ
   Competition : Crossing → ℝ
   TransactionCost : System → System → ℝ
-  Outside : Boundary → Type
-  Knowable : ∀ b : Boundary, Outside b → Prop
-  HasCompetition : Crossing → Prop
+  Knows : System → Time → State → Prop
   DescriptionLength : Description → ℝ
   DescribesCompletely : Description → System → Prop
   Principle : System → Description
@@ -92,13 +90,6 @@ class Env where
   IsEmpirical : System → Prop
   IsFormal : System → Prop
   Judgment : System → System → Prop
-  SelfReferential : System → Prop
-  Utility : System → State → ℝ
-  FeasibleSet : System → Set State
-  OptimalChoice : System → State
-  CompleteInformation : System → Time → Prop
-  BehaviorDeterministic : System → Time → Prop
-  JusticeDegree : System → ℝ
   HasPower : System → Prop
   GovernedByPrinciple : System → Time → Prop
   LearnsFromHistory : System → Prop
@@ -110,428 +101,13 @@ class Env where
   Contradicts : System → System → Prop
   ChallengesScience : System → System → Prop
   InflictsPhysicalPunishment : System → System → Prop
-
-variable [env : Env]
-
-/-! ## II. The Eight Axioms of The Principle -/
-
-/-! ### Axiom 0: Boundary is Existence (Existence is Difference) -/
-
-axiom axiom_0_boundary_is_existence :
-  ∀ (s : env.System), Nonempty env.Boundary →
-    ∃ σ τ : env.State, σ ∈ env.statesOf s ∧ τ ∈ env.statesOf s ∧ env.Differs σ τ
-
-/-! ### Axiom 1: Correctness is Completeness -/
-
-def UnassignedAt (s : env.System) (t : env.Time) : Set env.State :=
-  { σ | σ ∈ env.statesOf s ∧ env.valuationAt s t σ = Valuation.unassigned }
-
-def Correct (s : env.System) (t : env.Time) : Prop :=
-  ∀ σ ∈ env.statesOf s, env.valuationAt s t σ ≠ Valuation.unassigned
-
-/-! ### Axiom 2: Things Tend Toward Completeness -/
-
-axiom count_zero_iff_correct :
-  ∀ (s : env.System) (t : env.Time), env.UnassignedCount s t = 0 ↔ Correct s t
-
-axiom axiom_2_monotone :
-  ∀ (s : env.System) (t₁ t₂ : env.Time), env.le t₁ t₂ → env.UnassignedCount s t₂ ≤ env.UnassignedCount s t₁
-
-axiom axiom_2_tends_to_complete :
-  ∀ (s : env.System) (n : ℕ), ∃ t : env.Time, env.UnassignedCount s t ≤ n
-
-/-- Corollary: Every system admits an epoch of completeness (correctness). -/
-theorem exists_correct_time (s : env.System) : ∃ t : env.Time, Correct s t := by
-  have h : ∃ t : env.Time, env.UnassignedCount s t ≤ 0 := axiom_2_tends_to_complete s 0
-  cases h with
-  | intro t ht =>
-    have h0 : env.UnassignedCount s t = 0 := by omega
-    exact ⟨t, (count_zero_iff_correct s t).mp h0⟩
-
-/-! ### Axiom 3: Turbulence from Information Blocking -/
-
-def BoundaryChanges (b : env.Boundary) (t₁ t₂ : env.Time) : Prop :=
-  env.traceOf b t₁ ≠ env.traceOf b t₂
-
-def Turbulent (s : env.System) (t₁ t₂ : env.Time) : Prop :=
-  BoundaryChanges (env.hasBoundary s) t₁ t₂ ∧
-    env.InformationBlocked s t₁ ∧ env.MinorityGame s
-
-theorem turbulence_from_information_blocking
-    (s : env.System) (t₁ t₂ : env.Time) (h : Turbulent s t₁ t₂) :
-    env.InformationBlocked s t₁ ∧ env.MinorityGame s :=
-  ⟨h.2.1, h.2.2⟩
-
-/-! ### Axiom 4: Freedom as Ignorance -/
-
-def Free (s : env.System) (t : env.Time) : Prop :=
-  Correct s t ∧ ∃ x : env.Outside (env.hasBoundary s), ¬ env.Knowable (env.hasBoundary s) x
-
-/-! ### Axiom 5: Justice is Efficiency (Coasean Property Rights) -/
-
-def Friction (s₁ s₂ : env.System) : ℝ := env.TransactionCost s₁ s₂
-
-axiom axiom_5_coase :
-  ∀ s : env.System, env.PropertyRightsClear s → Friction s s = 0 → env.ParetoEfficient s
-
-def Just (s : env.System) : Prop :=
-  env.PropertyRightsClear s ∧ Friction s s = 0 ∧ env.ParetoEfficient s
-
-theorem coase_implies_just
-    (s : env.System) (h_pr : env.PropertyRightsClear s) (h_fr : Friction s s = 0) :
-    Just s :=
-  ⟨h_pr, h_fr, axiom_5_coase s h_pr h_fr⟩
-
-/-! ### Axiom 6: Meaning is Boundary-Crossing Price -/
-
-def Price (cr : env.Crossing) : ℝ := env.Cost cr + env.Competition cr
-
-def Meaning (cr : env.Crossing) : ℝ := Price cr
-
-theorem meaning_is_price (cr : env.Crossing) : Meaning cr = Price cr := rfl
-
-/-! ### Axiom 7: Principle is Optimality (MDL / Occam's Razor) -/
-
-axiom axiom_7_principle_is_mdl :
-  ∀ s : env.System,
-    env.DescribesCompletely (env.Principle s) s ∧
-      ∀ d : env.Description, env.DescribesCompletely d s →
-        env.DescriptionLength (env.Principle s) ≤ env.DescriptionLength d
-
-/-! ## III. Binary Concept Space (BCS) & Comprehensive Definitions -/
-
-/-! ### 1. Ontology of Non-Existence -/
-
-/-- Non-existence = Error (incorrectly existing): state space lacks complete valuation. -/
-def NonExistent (s : env.System) (t : env.Time) : Prop := ¬ Correct s t
-
-theorem nonexistent_iff_incorrect (s : env.System) (t : env.Time) :
-    NonExistent s t ↔ ¬ Correct s t := Iff.rfl
-
-/-! ### 2. Boundary Idempotence (Boundary of Boundary is Boundary) -/
-
-axiom axiom_boundary_idempotent :
-  ∀ b : env.Boundary, env.boundaryOf (env.boundaryOf b) = env.boundaryOf b
-
-theorem boundary_of_boundary_is_boundary (b : env.Boundary) :
-    env.boundaryOf (env.boundaryOf b) = env.boundaryOf b :=
-  axiom_boundary_idempotent b
-
-/-! ### 3. Cognitive Four-Quadrant Space -/
-
-/-- Order: Correct Knowledge (internally complete, externally known). -/
-def Order (s : env.System) (t : env.Time) : Prop :=
-  Correct s t ∧ ∀ x : env.Outside (env.hasBoundary s), env.Knowable (env.hasBoundary s) x
-
-/-- Slavery: Incorrect Knowledge (internally incomplete yet claiming full knowledge). -/
-def Slavery (s : env.System) (t : env.Time) : Prop :=
-  ¬ Correct s t ∧ ∀ x : env.Outside (env.hasBoundary s), env.Knowable (env.hasBoundary s) x
-
-/-- License / Arbitrariness: Incorrect Ignorance (internally incomplete and unregulated). -/
-def License (s : env.System) (t : env.Time) : Prop :=
-  ¬ Correct s t ∧ ∃ x : env.Outside (env.hasBoundary s), ¬ env.Knowable (env.hasBoundary s) x
-
-/-! ### 4. Societal-Political Four-Quadrant Space -/
-
-
-/-- Democracy = Collective Order. -/
-def Democracy (s : env.System) (t : env.Time) : Prop :=
-  env.IsCollective s ∧ Order s t
-
-/-- Populism = Collective License. -/
-def Populism (s : env.System) (t : env.Time) : Prop :=
-  env.IsCollective s ∧ License s t
-
-/-- Autocracy = Individual Order. -/
-def Autocracy (s : env.System) (t : env.Time) : Prop :=
-  env.IsIndividual s ∧ Order s t
-
-/-- Dictatorship = Individual License. -/
-def Dictatorship (s : env.System) (t : env.Time) : Prop :=
-  env.IsIndividual s ∧ License s t
-
-/-! ### 5. Cultural Practice Four-Quadrant Space (Commitment vs. Fulfillment) -/
-
-
-/-- Science = Has Commitment ∧ Has Fulfillment. -/
-def Science (s : env.System) : Prop :=
-  env.HasCommitment s ∧ env.HasFulfillment s
-
-/-- Religion = Has Commitment ∧ Lacks Fulfillment (fulfilled beyond mortal life). -/
-def Religion (s : env.System) : Prop :=
-  env.HasCommitment s ∧ ¬ env.HasFulfillment s
-
-/-- Engineering = Lacks Commitment ∧ Has Fulfillment. -/
-def Engineering (s : env.System) : Prop :=
-  ¬ env.HasCommitment s ∧ env.HasFulfillment s
-
-/-- Philosophy = Lacks Commitment ∧ Lacks Fulfillment. -/
-def Philosophy (s : env.System) : Prop :=
-  ¬ env.HasCommitment s ∧ ¬ env.HasFulfillment s
-
-/-! ### 6. Scientific Domain Four-Quadrant Space (Material/Conscious × Empirical/Formal) -/
-
-
-/-- Natural Science = Material Empirical Science (weak expressive space, external criterion). -/
-def NaturalScience (s : env.System) : Prop :=
-  env.IsMaterial s ∧ env.IsEmpirical s
-
-/-- Social Science = Conscious Empirical Science (strong expressive space, external criterion). -/
-def SocialScience (s : env.System) : Prop :=
-  env.IsConscious s ∧ env.IsEmpirical s
-
-/-- Mathematics = Material Formal Science (weak expressive space, internal criterion). -/
-def Mathematics (s : env.System) : Prop :=
-  env.IsMaterial s ∧ env.IsFormal s
-
-/-- Meta-Science (The Principle) = Conscious Formal Science (strong expressive space, internal criterion). -/
-def MetaScience (s : env.System) : Prop :=
-  env.IsConscious s ∧ env.IsFormal s
-
-/-! ### 7. Evaluative Duals: Right/Wrong, Good/Bad, Truth/Goodness/Beauty -/
-
-def Right (s : env.System) (t : env.Time) : Prop := Correct s t
-def Wrong (s : env.System) (t : env.Time) : Prop := ¬ Correct s t
-
-def Good (s : env.System) : Prop := env.ParetoEfficient s
-def Bad (s : env.System) : Prop := ¬ env.ParetoEfficient s
-
-/-- Truth = Correctness (Axiom 1). -/
-def Truth (s : env.System) (t : env.Time) : Prop := Correct s t
-
-/-- Goodness = Frictionless Cooperation (Axiom 5). -/
-def Goodness (s : env.System) : Prop := Friction s s = 0
-
-/-- Beauty = Crossing Competitiveness (Axiom 6). -/
-def Beauty (cr : env.Crossing) : Prop := env.Competition cr > 0
-
-/-! ### 8. Subjective vs. Objective -/
-
-
-/-- Subjective = Evaluation admits divergence across observers. -/
-def Subjective (target : env.System) : Prop :=
-  ∃ a b : env.System, env.Judgment a target ≠ env.Judgment b target
-
-/-- Objective = Evaluation achieves complete consensus across all observers. -/
-def Objective (target : env.System) : Prop :=
-  ∀ a b : env.System, env.Judgment a target = env.Judgment b target
-
-/-! ## IV. Foundational Theorems & Constitutional Laws -/
-
-/-! ### 1. Boundary & Identity Theorems -/
-
-/-- Boundary Theorem: Things are determined by their boundaries.
-    If two systems share identical boundaries, their state spaces coincide. -/
-axiom boundary_theorem :
-  ∀ s₁ s₂ : env.System, env.hasBoundary s₁ = env.hasBoundary s₂ → env.statesOf s₁ = env.statesOf s₂
-
-/-! ### 2. Self-Reference & Absolute Truth -/
-
-
-/-- Self-Reference Theorem: Self-referential systems must be complete; variable self-reference is forbidden. -/
-axiom self_reference_theorem :
-  ∀ s : env.System, env.SelfReferential s → (∀ t : env.Time, Correct s t) ∧ (∀ _t₁ _t₂ : env.Time, env.statesOf s = env.statesOf s)
-
-/-- Absolute Truth Theorem: Absolute truth exists; Axioms 0 and 1 hold unconditionally. -/
-theorem absolute_truth_theorem (s : env.System) (h_b : Nonempty env.Boundary) :
-    ∃ σ τ : env.State, σ ∈ env.statesOf s ∧ τ ∈ env.statesOf s ∧ env.Differs σ τ :=
-  axiom_0_boundary_is_existence s h_b
-
-/-! ### 3. Engineering & Epistemic Exploration -/
-
-/-- Superposition Theorem: Union of complete knowledge extractions preserves correctness. -/
-theorem superposition_theorem (s₁ s₂ : env.System) (t : env.Time)
-    (h₁ : Correct s₁ t) (_h₂ : Correct s₂ t) :
-    ∀ σ ∈ env.statesOf s₁, env.valuationAt s₁ t σ ≠ Valuation.unassigned :=
-  fun σ hσ => h₁ σ hσ
-
-/-- Pruning Theorem: Engineering exploration prunes incomplete correctness,
-    non-ignorant freedom, inefficient justice, and unpriced meaning. -/
-def ShouldPrune (s : env.System) (t : env.Time) : Prop :=
-  (¬ Correct s t) ∨
-  (Free s t ∧ ∀ x, env.Knowable (env.hasBoundary s) x) ∨
-  (Just s ∧ ¬ env.ParetoEfficient s)
-
-theorem pruning_theorem (s : env.System) (t : env.Time) (h_inc : ¬ Correct s t) :
-    ShouldPrune s t :=
-  Or.inl h_inc
-
-/-! ### 4. Rationality, Selfishness & Game Theorems -/
-
-
-/-- Selfishness Theorem: env.Utility maximization under constraint. -/
-axiom selfish_theorem :
-  ∀ (s : env.System) (σ : env.State),
-    env.OptimalChoice s ∈ env.FeasibleSet s ∧
-      (σ ∈ env.FeasibleSet s → env.Utility s (env.OptimalChoice s) ≥ env.Utility s σ)
-
-
-/-- Rationality Theorem: Complete information yields deterministic behavior. -/
-axiom rationality_theorem :
-  ∀ s t, env.CompleteInformation s t → env.BehaviorDeterministic s t
-
-/-- Game Theorem: Turbulence originates from information blocking. -/
-theorem game_theorem (s : env.System) (t₁ t₂ : env.Time) (h : Turbulent s t₁ t₂) :
-    env.InformationBlocked s t₁ :=
-  (turbulence_from_information_blocking s t₁ t₂ h).1
-
-/-! ### 5. First Value (Credit) & Justice Measurement -/
-
-/-- First Value Theorem: Credit is the fulfillment of completeness commitment. -/
-def Credit (s : env.System) (t : env.Time) : Prop :=
-  Correct s t ∧ env.HasCommitment s
-
-theorem first_value_is_credit (s : env.System) (t : env.Time) (h : Credit s t) :
-    Correct s t := h.1
-
-
-/-- Justice Measurement Theorem: Justice is inversely proportional to transaction cost. -/
-axiom justice_measurement_theorem :
-  ∀ s₁ s₂ : env.System, Friction s₁ s₁ ≤ Friction s₂ s₂ → env.JusticeDegree s₁ ≥ env.JusticeDegree s₂
-
-/-! ### 6. Power, Jurisdiction & Historical Invariance -/
-
-
-/-- Democracy Theorem: Democracy is organized collective power. -/
-axiom democracy_is_power :
-  ∀ s t, Democracy s t → env.HasPower s
-
-
-/-- Extraterritoriality Theorem: The Principle does not govern incorrect/non-existent entities. -/
-axiom extraterritoriality_theorem :
-  ∀ s t, ¬ Correct s t → ¬ env.GovernedByPrinciple s t
-
-
-/-- Hegel's Theorem: Humanity learns from history that it does not learn from history. -/
-axiom hegel_theorem :
-  ∀ s : env.System, ¬ env.LearnsFromHistory s
-
-/-! ### 7. Four Laws of Philosophy (Love of Wisdom / 爱智慧四定律) -/
-
-/-- Russell's Boundary Law: The boundary between philosophy and science is the transition
-    from undecided/unassigned to assigned certainty. -/
-theorem russell_boundary_law (s : env.System) :
-    Philosophy s ∧ Science s → False := by
-  intro ⟨h_phil, h_sci⟩
-  exact h_phil.1 h_sci.1
-
-/-- Philosophical Freedom Law: Philosophy is free from truth or falsehood
-    because it makes no commitments and delivers no fulfillments. -/
-theorem philosophical_freedom_law (s : env.System) (h : Philosophy s) :
-    ¬ Science s := by
-  intro h_sci
-  exact h.1 h_sci.1
-
-
-/-- Philosophical Democracy Law: Philosophical legitimacy derives from mass ignorance. -/
-axiom philosophical_democracy_law :
-  ∀ s : env.System, Philosophy s → env.MassIgnoranceAuthorization s
-
-
-/-- Philosophical Autocracy Law: Effectiveness of dialectics stems from the speaker's power. -/
-axiom philosophical_autocracy_law :
-  ∀ s : env.System, env.DialecticalEffectiveness s ↔ env.DialecticianPower s
-
-/-! ### 8. Traceability & Darwinian Boundary Principle -/
-
-
-/-- Trustworthy Deduction Theorem: Deduction is trustworthy iff traceable to foundational axioms. -/
-axiom trustworthy_deduction_iff_traceable :
-  ∀ s : env.System, env.TrustworthyDeduction s ↔ env.TraceableToAxioms s
-
-/-- Darwinian Boundary Principle: Boundary adjustment is the lawful path toward completeness. -/
-axiom darwinian_boundary_principle :
-  ∀ (s : env.System) (t : env.Time),
-    (∃ s', env.hasBoundary s' ≠ env.hasBoundary s ∧ env.UnassignedCount s' t < env.UnassignedCount s t) ∨ Correct s t
-
-/-! ### 9. The Six Constitutional Laws of Science (科学六定律) -/
-
-/-- 1. Law of Scientific Truth: Scientific principles must be correct at all times. -/
-axiom law_of_scientific_truth :
-  ∀ s : env.System, Science s → ∀ t : env.Time, Correct s t
-
-/-- 2. Law of Scientific Commitment: Scientific principles must carry explicit commitment. -/
-theorem law_of_scientific_commitment (s : env.System) (h : Science s) :
-    env.HasCommitment s := h.1
-
-/-- 3. Law of Scientific Invariance: Scientific principles do not change over time. -/
-axiom law_of_scientific_invariance :
-  ∀ s : env.System, Science s → ∀ _t₁ _t₂ : env.Time, env.statesOf s = env.statesOf s
-
-/-- 4. Law of Scientific Consistency: No scientific principle contradicts itself or any other. -/
-axiom law_of_scientific_consistency :
-  ∀ s₁ s₂ : env.System, Science s₁ → Science s₂ → ¬ env.Contradicts s₁ s₂
-
-/-- 5. Law of Scientific Deduction: Non-scientific deductions cannot challenge science. -/
-axiom law_of_scientific_deduction :
-  ∀ s non_sci : env.System, Science s → ¬ Science non_sci → ¬ env.ChallengesScience non_sci s
-
-/-- 6. Law of Secular Science: Science does not inflict physical punishment on non-scientists. -/
-axiom law_of_secular_science :
-  ∀ s target : env.System, Science s → ¬ env.InflictsPhysicalPunishment s target
-
-/-! ## V. Semantic Consistency Proof (Universal Model Existence) -/
-
-structure Model where
-  State : Type
-  Boundary : Type
-  System : Type
-  hasBoundary : System → Boundary
-  boundaryOf : Boundary → Boundary
-  statesOf : System → Set State
-  Value : Type
-  Time : Type
-  le : Time → Time → Prop
-  valuationAt : System → Time → State → Valuation Value
-  UnassignedCount : System → Time → ℕ
-  BoundarySig : Type
-  traceOf : Boundary → Time → BoundarySig
-  Crossing : Type
-  crossingsOf : Boundary → Set Crossing
-  Cost : Crossing → ℝ
-  Competition : Crossing → ℝ
-  TransactionCost : System → System → ℝ
-  Outside : Boundary → Type
-  Knowable : ∀ b : Boundary, Outside b → Prop
-  HasCompetition : Crossing → Prop
-  Description : Type
-  DescriptionLength : Description → ℝ
-  DescribesCompletely : Description → System → Prop
-  Principle : System → Description
-  Differs : State → State → Prop
-  InformationBlocked : System → Time → Prop
-  MinorityGame : System → Prop
-  PropertyRightsClear : System → Prop
-  ParetoEfficient : System → Prop
-  IsCollective : System → Prop
-  IsIndividual : System → Prop
-  HasCommitment : System → Prop
-  HasFulfillment : System → Prop
-  IsMaterial : System → Prop
-  IsConscious : System → Prop
-  IsEmpirical : System → Prop
-  IsFormal : System → Prop
-  Judgment : System → System → Prop
-  SelfReferential : System → Prop
-  Utility : System → State → ℝ
-  FeasibleSet : System → Set State
-  OptimalChoice : System → State
-  CompleteInformation : System → Time → Prop
-  BehaviorDeterministic : System → Time → Prop
   JusticeDegree : System → ℝ
-  HasPower : System → Prop
-  GovernedByPrinciple : System → Time → Prop
-  LearnsFromHistory : System → Prop
-  MassIgnoranceAuthorization : System → Prop
-  DialecticalEffectiveness : System → Prop
-  DialecticianPower : System → Prop
-  TraceableToAxioms : System → Prop
-  TrustworthyDeduction : System → Prop
-  Contradicts : System → System → Prop
-  ChallengesScience : System → System → Prop
-  InflictsPhysicalPunishment : System → System → Prop
+  SelfReferring : System → Prop
+
+  /- 公理 0：存在即差异 -/
   axiom_0 : ∀ (s : System), Nonempty Boundary →
     ∃ σ τ : State, σ ∈ statesOf s ∧ τ ∈ statesOf s ∧ Differs σ τ
+  /- 公理 2：事物趋完备 -/
   count_zero_iff_correct : ∀ (s : System) (t : Time),
     UnassignedCount s t = 0 ↔
       ∀ σ ∈ statesOf s, valuationAt s t σ ≠ Valuation.unassigned
@@ -539,87 +115,293 @@ structure Model where
     le t₁ t₂ → UnassignedCount s t₂ ≤ UnassignedCount s t₁
   axiom_2_tends_to_complete : ∀ (s : System) (n : ℕ),
     ∃ t : Time, UnassignedCount s t ≤ n
+  /- 公理 3：动荡源自信息阻塞 -/
+  turbulence_from_information_blocking :
+    ∀ (s : System) (t₁ t₂ : Time),
+      InformationBlocked s t₁ → MinorityGame s →
+        traceOf (hasBoundary s) t₁ ≠ traceOf (hasBoundary s) t₂
+  /- 公理 5：正义即效率（Coase） -/
   axiom_5_coase : ∀ s : System,
     PropertyRightsClear s → TransactionCost s s = 0 → ParetoEfficient s
+  /- 公理 7：原理即最优（MDL） -/
   axiom_7 : ∀ s : System,
     DescribesCompletely (Principle s) s ∧
       ∀ d : Description, DescribesCompletely d s →
         DescriptionLength (Principle s) ≤ DescriptionLength d
-  axiom_boundary_idempotent : ∀ b : Boundary, boundaryOf (boundaryOf b) = boundaryOf b
+  /- 边界幂等 -/
+  axiom_boundary_idempotent : ∀ b : Boundary,
+    boundaryOf (boundaryOf b) = boundaryOf b
+  /- 四元组互斥：物质/意识 -/
+  material_conscious_exclusive :
+    ∀ s : System, ¬ (IsMaterial s ∧ IsConscious s)
+  /- 四元组互斥：经验/形式 -/
+  empirical_formal_exclusive :
+    ∀ s : System, ¬ (IsEmpirical s ∧ IsFormal s)
+  /- 正义测量：系统间摩擦越小，正义度越高 -/
+  justice_measurement_theorem :
+    ∀ s₁ s₂ : System,
+      TransactionCost s₁ s₂ ≤ TransactionCost s₂ s₁ →
+        JusticeDegree s₁ ≥ JusticeDegree s₂
+  /- 自指必须完备（仅约束自指系统） -/
+  self_reference_theorem :
+    ∀ s : System, SelfReferring s → ∀ t : Time,
+      ∀ σ ∈ statesOf s, valuationAt s t σ ≠ Valuation.unassigned
+  /- 科学不变性 -/
+  law_of_scientific_invariance :
+    ∀ s : System, HasCommitment s → HasFulfillment s →
+      ∀ t₁ t₂ : Time, ∀ σ ∈ statesOf s,
+        valuationAt s t₁ σ = valuationAt s t₂ σ
+  /- 科学世俗：不直接惩罚 -/
+  law_of_secular_science :
+    ∀ s target : System, HasCommitment s → HasFulfillment s →
+      ¬ InflictsPhysicalPunishment s target
 
-/-- Concrete Minimal Model: State = Bool (binary difference), trivial elsewhere. -/
-def trivialModel : Model where
+variable (E : Env)
+
+/-! ## 定义 -/
+
+def Correct (s : E.System) (t : E.Time) : Prop :=
+  ∀ σ ∈ E.statesOf s, E.valuationAt s t σ ≠ Valuation.unassigned
+
+/-! ### 认识论四元组 -/
+
+def Free (s : E.System) (t : E.Time) : Prop :=
+  Correct E s t ∧ ∃ σ ∈ E.statesOf s, ¬ E.Knows s t σ
+
+def Order (s : E.System) (t : E.Time) : Prop :=
+  Correct E s t ∧ ∀ σ ∈ E.statesOf s, E.Knows s t σ
+
+def Slavery (s : E.System) (t : E.Time) : Prop :=
+  ¬ Correct E s t ∧ ∀ σ ∈ E.statesOf s, E.Knows s t σ
+
+def License (s : E.System) (t : E.Time) : Prop :=
+  ¬ Correct E s t ∧ ∃ σ ∈ E.statesOf s, ¬ E.Knows s t σ
+
+theorem free_order_exclusive (s : E.System) (t : E.Time) :
+    ¬ (Free E s t ∧ Order E s t) := by
+  intro ⟨hf, ho⟩
+  obtain ⟨σ, hσ_mem, hσ_not⟩ := hf.2
+  exact hσ_not (ho.2 σ hσ_mem)
+
+theorem free_slavery_exclusive (s : E.System) (t : E.Time) :
+    ¬ (Free E s t ∧ Slavery E s t) := by
+  intro ⟨hf, hs⟩
+  exact hs.1 hf.1
+
+theorem free_license_exclusive (s : E.System) (t : E.Time) :
+    ¬ (Free E s t ∧ License E s t) := by
+  intro ⟨hf, hl⟩
+  exact hl.1 hf.1
+
+theorem order_slavery_exclusive (s : E.System) (t : E.Time) :
+    ¬ (Order E s t ∧ Slavery E s t) := by
+  intro ⟨ho, hs⟩
+  exact hs.1 ho.1
+
+theorem order_license_exclusive (s : E.System) (t : E.Time) :
+    ¬ (Order E s t ∧ License E s t) := by
+  intro ⟨ho, hl⟩
+  exact hl.1 ho.1
+
+theorem slavery_license_exclusive (s : E.System) (t : E.Time) :
+    ¬ (Slavery E s t ∧ License E s t) := by
+  intro ⟨hs, hl⟩
+  obtain ⟨σ, hσ_mem, hσ_not⟩ := hl.2
+  exact hσ_not (hs.2 σ hσ_mem)
+
+/-! ### 文化实践四元组 -/
+
+def Science (s : E.System) : Prop := E.HasCommitment s ∧ E.HasFulfillment s
+def Religion (s : E.System) : Prop := E.HasCommitment s ∧ ¬ E.HasFulfillment s
+def Engineering (s : E.System) : Prop := ¬ E.HasCommitment s ∧ E.HasFulfillment s
+def Philosophy (s : E.System) : Prop := ¬ E.HasCommitment s ∧ ¬ E.HasFulfillment s
+
+theorem science_religion_exclusive (s : E.System) : ¬ (Science E s ∧ Religion E s) := by
+  intro ⟨⟨_, hf⟩, ⟨_, hnf⟩⟩; exact hnf hf
+
+theorem science_engineering_exclusive (s : E.System) : ¬ (Science E s ∧ Engineering E s) := by
+  intro ⟨⟨hc, _⟩, ⟨hnc, _⟩⟩; exact hnc hc
+
+theorem science_philosophy_exclusive (s : E.System) : ¬ (Science E s ∧ Philosophy E s) := by
+  intro ⟨⟨hc, _⟩, ⟨hnc, _⟩⟩; exact hnc hc
+
+/-! ### 科学四元组 -/
+
+def NaturalScience (s : E.System) : Prop := E.IsMaterial s ∧ E.IsEmpirical s
+def SocialScience (s : E.System) : Prop := E.IsConscious s ∧ E.IsEmpirical s
+def Mathematics (s : E.System) : Prop := E.IsMaterial s ∧ E.IsFormal s
+def MetaScience (s : E.System) : Prop := E.IsConscious s ∧ E.IsFormal s
+
+theorem natural_social_exclusive (s : E.System) :
+    ¬ (NaturalScience E s ∧ SocialScience E s) := by
+  intro ⟨⟨hm, _⟩, ⟨hc, _⟩⟩
+  exact E.material_conscious_exclusive s ⟨hm, hc⟩
+
+theorem math_meta_exclusive (s : E.System) :
+    ¬ (Mathematics E s ∧ MetaScience E s) := by
+  intro ⟨⟨hm, _⟩, ⟨hc, _⟩⟩
+  exact E.material_conscious_exclusive s ⟨hm, hc⟩
+
+theorem natural_math_exclusive (s : E.System) :
+    ¬ (NaturalScience E s ∧ Mathematics E s) := by
+  intro ⟨⟨_, he⟩, ⟨_, hf⟩⟩
+  exact E.empirical_formal_exclusive s ⟨he, hf⟩
+
+theorem social_meta_exclusive (s : E.System) :
+    ¬ (SocialScience E s ∧ MetaScience E s) := by
+  intro ⟨⟨_, he⟩, ⟨_, hf⟩⟩
+  exact E.empirical_formal_exclusive s ⟨he, hf⟩
+
+/-! ### 民主四元组 -/
+
+def Democracy (s : E.System) (t : E.Time) : Prop :=
+  E.IsCollective s ∧ Order E s t
+def Populism (s : E.System) (t : E.Time) : Prop :=
+  E.IsCollective s ∧ License E s t
+def Autocracy (s : E.System) (t : E.Time) : Prop :=
+  E.IsIndividual s ∧ Order E s t
+def Dictatorship (s : E.System) (t : E.Time) : Prop :=
+  E.IsIndividual s ∧ License E s t
+
+/-! ### 真善美（简化） -/
+
+def Truthful (s : E.System) (t : E.Time) : Prop := Correct E s t
+def Good (s : E.System) : Prop := E.IsCollective s
+def Beautiful (s : E.System) : Prop := E.HasPower s
+
+/-! ### 主观/客观 -/
+
+def Agree (s₁ s₂ : E.System) (t : E.Time) : Prop :=
+  ∀ σ ∈ E.statesOf s₁, E.valuationAt s₁ t σ = E.valuationAt s₂ t σ
+def Objective (s₁ s₂ : E.System) (t : E.Time) : Prop := Agree E s₁ s₂ t
+def Subjective (s₁ s₂ : E.System) (t : E.Time) : Prop := ¬ Agree E s₁ s₂ t
+
+/-! ### 信用与不存在 -/
+
+def Credit (s : E.System) : ℝ := E.JusticeDegree s
+def Nonexistent (s : E.System) : Prop := ¬ (E.statesOf s).Nonempty
+def Wrong (s : E.System) (t : E.Time) : Prop := ¬ Correct E s t
+
+/-! ### 动荡 -/
+
+def Turbulent (s : E.System) (t₁ t₂ : E.Time) : Prop :=
+  E.traceOf (E.hasBoundary s) t₁ ≠ E.traceOf (E.hasBoundary s) t₂
+
+theorem game_theorem (s : E.System) (t₁ t₂ : E.Time)
+    (hib : E.InformationBlocked s t₁) (hmg : E.MinorityGame s) :
+    Turbulent E s t₁ t₂ :=
+  E.turbulence_from_information_blocking s t₁ t₂ hib hmg
+
+/-! ### 正义 -/
+
+def Friction (s₁ s₂ : E.System) : ℝ := E.TransactionCost s₁ s₂
+
+def Just (s : E.System) : Prop :=
+  E.PropertyRightsClear s ∧ Friction E s s = 0 ∧ E.ParetoEfficient s
+
+def JustBetween (s₁ s₂ : E.System) : Prop :=
+  E.TransactionCost s₁ s₂ ≤ E.TransactionCost s₂ s₁
+
+theorem coase_implies_just (s : E.System)
+    (h_pr : E.PropertyRightsClear s) (h_fr : Friction E s s = 0) :
+    Just E s :=
+  ⟨h_pr, h_fr, E.axiom_5_coase s h_pr h_fr⟩
+
+theorem justice_measurement_theorem' (s₁ s₂ : E.System)
+    (h : JustBetween E s₁ s₂) : E.JusticeDegree s₁ ≥ E.JusticeDegree s₂ :=
+  E.justice_measurement_theorem s₁ s₂ h
+
+/-! ### 意义 -/
+
+def Price (cr : E.Crossing) : ℝ := E.Cost cr + E.Competition cr
+def Meaning (cr : E.Crossing) : ℝ := Price E cr
+
+/-! ### 剪枝 -/
+
+def ShouldPrune (s : E.System) (t : E.Time) : Prop :=
+  (¬ Correct E s t) ∨
+  Order E s t ∨
+  (Just E s ∧ ¬ E.ParetoEfficient s)
+
+theorem pruning_incorrect (s : E.System) (t : E.Time)
+    (h : ¬ Correct E s t) : ShouldPrune E s t :=
+  Or.inl h
+
+/-! ## 黑格尔定理（移出 `Env`） -/
+
+def HegelTheorem (E : Env) : Prop := ∀ s, ¬ E.LearnsFromHistory s
+
+/-! ## 一致性模型 -/
+
+/-- 退化模型：`Unit` 系统，`Knows = False`，用于快速验证。 -/
+def canonicalEnv : Env where
   State := Bool
   Boundary := Unit
   System := Unit
-  hasBoundary := fun _ => ()
-  boundaryOf := fun b => b
-  statesOf := fun _ => Set.univ
-  Value := Unit
   Time := ℕ
-  le := fun a b => a ≤ b
-  valuationAt := fun _ _ _ => Valuation.assigned ()
-  UnassignedCount := fun _ _ => 0
+  Value := Unit
   BoundarySig := Unit
-  traceOf := fun _ _ => ()
   Crossing := Unit
-  crossingsOf := fun _ => Set.univ
-  Cost := fun _ => 0
-  Competition := fun _ => 0
-  TransactionCost := fun _ _ => 0
-  Outside := fun _ => Empty
-  Knowable := fun _ x => nomatch x
-  HasCompetition := fun _ => True
   Description := Unit
-  DescriptionLength := fun _ => 0
-  DescribesCompletely := fun _ _ => True
-  Principle := fun _ => ()
-  Differs := fun a b => a ≠ b
-  InformationBlocked := fun _ _ => False
-  MinorityGame := fun _ => False
-  PropertyRightsClear := fun _ => True
-  ParetoEfficient := fun _ => True
-  IsCollective := fun _ => True
-  IsIndividual := fun _ => True
-  HasCommitment := fun _ => True
-  HasFulfillment := fun _ => True
-  IsMaterial := fun _ => True
-  IsConscious := fun _ => True
-  IsEmpirical := fun _ => True
-  IsFormal := fun _ => True
-  Judgment := fun _ _ => True
-  SelfReferential := fun _ => True
-  Utility := fun _ _ => 0
-  FeasibleSet := fun _ => Set.univ
-  OptimalChoice := fun _ => true
-  CompleteInformation := fun _ _ => True
-  BehaviorDeterministic := fun _ _ => True
-  JusticeDegree := fun _ => 1
-  HasPower := fun _ => True
-  GovernedByPrinciple := fun _ _ => True
-  LearnsFromHistory := fun _ => False
-  MassIgnoranceAuthorization := fun _ => True
-  DialecticalEffectiveness := fun _ => True
-  DialecticianPower := fun _ => True
-  TraceableToAxioms := fun _ => True
-  TrustworthyDeduction := fun _ => True
-  Contradicts := fun _ _ => False
-  ChallengesScience := fun _ _ => False
-  InflictsPhysicalPunishment := fun _ _ => False
+
+  hasBoundary _ := ()
+  boundaryOf b := b
+  statesOf _ := {true, false}
+  le := (· ≤ ·)
+  valuationAt _ _ _ := Valuation.assigned ()
+  UnassignedCount _ _ := 0
+  traceOf _ _ := ()
+  crossingsOf _ := {()}
+  Cost _ := 1
+  Competition _ := 1
+  TransactionCost _ _ := 0
+  Knows _ _ _ := False
+  DescriptionLength _ := 0
+  DescribesCompletely _ _ := True
+  Principle _ := ()
+  Differs a b := a ≠ b
+  InformationBlocked _ _ := False
+  MinorityGame _ := False
+  PropertyRightsClear _ := True
+  ParetoEfficient _ := True
+  IsCollective _ := True
+  IsIndividual _ := False
+  HasCommitment _ := True
+  HasFulfillment _ := True
+  IsMaterial _ := True
+  IsConscious _ := False
+  IsEmpirical _ := True
+  IsFormal _ := False
+  Judgment _ _ := True
+  HasPower _ := True
+  GovernedByPrinciple _ _ := True
+  LearnsFromHistory _ := False
+  MassIgnoranceAuthorization _ := False
+  DialecticalEffectiveness _ := False
+  DialecticianPower _ := False
+  TraceableToAxioms _ := True
+  TrustworthyDeduction _ := True
+  Contradicts _ _ := False
+  ChallengesScience _ _ := False
+  InflictsPhysicalPunishment _ _ := False
+  JusticeDegree _ := 0
+  SelfReferring _ := False
+
   axiom_0 := by
     intro _ _
-    exact ⟨true, false, Set.mem_univ _, Set.mem_univ _, by decide⟩
+    exact ⟨true, false, by simp, by simp, by decide⟩
   count_zero_iff_correct := by
     intro _ _
     constructor
     · intro _ σ _ h; cases h
     · intro _; rfl
   axiom_2_monotone := by
-    intro _ _ _ _
-    exact Nat.le_refl 0
+    intro _ _ _ _; exact Nat.le_refl 0
   axiom_2_tends_to_complete := by
     intro _ n
     exact ⟨0, Nat.zero_le n⟩
+  turbulence_from_information_blocking := by
+    intro _ _ _ h _; exact False.elim h
   axiom_5_coase := by
     intro _ _ _; trivial
   axiom_7 := by
@@ -627,16 +409,214 @@ def trivialModel : Model where
     exact ⟨trivial, fun _ _ => le_refl 0⟩
   axiom_boundary_idempotent := by
     intro _; rfl
+  material_conscious_exclusive := by
+    intro _ ⟨_, hc⟩; exact hc
+  empirical_formal_exclusive := by
+    intro _ ⟨_, hf⟩; exact hf
+  justice_measurement_theorem := by
+    intro _ _ _; exact le_refl 0
+  self_reference_theorem := by
+    intro _ h; exact False.elim h
+  law_of_scientific_invariance := by
+    intro _ _ _ _ _ _ _; rfl
+  law_of_secular_science := by
+    intro _ _ _ _ h; exact False.elim h
 
-omit env in
-/-- Universal Consistency Theorem: The comprehensive axiomatic system admits a non-empty
-    mathematical model and is logically sound and consistent. -/
-theorem axioms_consistent : ∃ _M : Model, True := ⟨trivialModel, trivial⟩
+/-! ### 非平凡模型 -/
 
-/-! ## VI. Formal Deduction, Falsifiability & Gödelian Framework -/
+def ntVal (s : Bool) (t : ℕ) (_ : Bool) : Valuation Unit :=
+  if s = false ∧ t = 0 then Valuation.unassigned else Valuation.assigned ()
 
-namespace FormalDeduction
-open Classical
+def ntUC (s : Bool) (t : ℕ) : ℕ :=
+  if s = false ∧ t = 0 then 1 else 0
+
+def ntKnows (s : Bool) (_ : ℕ) (_ : Bool) : Prop := s = true
+
+def ntTC : Bool → Bool → ℝ
+  | true, true => 0
+  | true, false => 1
+  | false, true => 2
+  | false, false => 0
+
+def ntJD : Bool → ℝ
+  | true => 1
+  | false => 0
+
+def ntCollective (s : Bool) : Prop := s = true
+def ntIndividual (s : Bool) : Prop := s = false
+def ntHasCommitment (s : Bool) : Prop := s = true
+def ntHasFulfillment (s : Bool) : Prop := s = true
+def ntIsMaterial (s : Bool) : Prop := s = true
+def ntIsConscious (s : Bool) : Prop := s = false
+def ntIsEmpirical (s : Bool) : Prop := s = true
+def ntIsFormal (s : Bool) : Prop := s = false
+def ntSelfRef (s : Bool) : Prop := s = true
+
+def ntInformationBlocked (_ : Bool) (_ : ℕ) : Prop := False
+def ntMinorityGame (_ : Bool) : Prop := False
+def ntInflictsPhysicalPunishment (_ _ : Bool) : Prop := False
+
+/-- 非平凡模型：
+- 两个系统 `true`（秩序/民主）与 `false`（初始放任/独裁，之后自由）。
+- `true` 在所有时刻正确且已知；`false` 在 `t = 0` 时未赋值且未知，`t > 0` 时正确但未知。
+- 交易成本非对称：`TC true false = 1`，`TC false true = 2`。
+- 正义度：`JD true = 1`，`JD false = 0`。 -/
+@[reducible]
+def nontrivialEnv : Env where
+  State := Bool
+  Boundary := Unit
+  System := Bool
+  Time := ℕ
+  Value := Unit
+  BoundarySig := Unit
+  Crossing := Unit
+  Description := Unit
+
+  hasBoundary _ := ()
+  boundaryOf b := b
+  statesOf _ := {true, false}
+  le := (· ≤ ·)
+  valuationAt := ntVal
+  UnassignedCount := ntUC
+  traceOf _ _ := ()
+  crossingsOf _ := {()}
+  Cost _ := 1
+  Competition _ := 1
+  TransactionCost := ntTC
+  Knows := ntKnows
+  DescriptionLength _ := 0
+  DescribesCompletely _ _ := True
+  Principle _ := ()
+  Differs a b := a ≠ b
+  InformationBlocked := ntInformationBlocked
+  MinorityGame := ntMinorityGame
+  PropertyRightsClear _ := True
+  ParetoEfficient _ := True
+  IsCollective := ntCollective
+  IsIndividual := ntIndividual
+  HasCommitment := ntHasCommitment
+  HasFulfillment := ntHasFulfillment
+  IsMaterial := ntIsMaterial
+  IsConscious := ntIsConscious
+  IsEmpirical := ntIsEmpirical
+  IsFormal := ntIsFormal
+  Judgment _ _ := True
+  HasPower _ := True
+  GovernedByPrinciple _ _ := True
+  LearnsFromHistory _ := False
+  MassIgnoranceAuthorization _ := False
+  DialecticalEffectiveness _ := False
+  DialecticianPower _ := False
+  TraceableToAxioms _ := True
+  TrustworthyDeduction _ := True
+  Contradicts _ _ := False
+  ChallengesScience _ _ := False
+  InflictsPhysicalPunishment := ntInflictsPhysicalPunishment
+  JusticeDegree := ntJD
+  SelfReferring := ntSelfRef
+
+  axiom_0 := by
+    intro _ _
+    exact ⟨true, false, by simp, by simp, by decide⟩
+  count_zero_iff_correct := by
+    intro s t
+    by_cases h : s = false ∧ t = 0
+    · simp [ntUC, ntVal, h]
+    · simp [ntUC, ntVal, h]
+  axiom_2_monotone := by
+    intro s t₁ t₂ hle
+    by_cases h1 : s = false ∧ t₁ = 0
+    · have : ntUC s t₂ ≤ 1 := by
+        unfold ntUC
+        split <;> omega
+      simpa [ntUC, h1] using this
+    · have h2 : ¬(s = false ∧ t₂ = 0) := by
+        intro h2
+        apply h1
+        exact ⟨h2.1, by omega⟩
+      simp [ntUC, h1, h2]
+  axiom_2_tends_to_complete := by
+    intro s n
+    refine ⟨1, ?_⟩
+    simp [ntUC]
+  turbulence_from_information_blocking := by
+    intro _ _ _ h _; exact False.elim h
+  axiom_5_coase := by
+    intro _ _ _; trivial
+  axiom_7 := by
+    intro _
+    exact ⟨trivial, fun _ _ => le_refl 0⟩
+  axiom_boundary_idempotent := by
+    intro _; rfl
+  material_conscious_exclusive := by
+    intro s ⟨hm, hc⟩
+    cases s
+    · cases hm
+    · cases hc
+  empirical_formal_exclusive := by
+    intro s ⟨he, hf⟩
+    cases s
+    · cases he
+    · cases hf
+  justice_measurement_theorem := by
+    intro s₁ s₂ h
+    cases s₁ <;> cases s₂ <;> simp [ntTC, ntJD] at h ⊢
+  self_reference_theorem := by
+    intro s h t σ _ hval
+    cases s
+    · cases h
+    · simp [ntVal] at hval
+  law_of_scientific_invariance := by
+    intro s hc hf t₁ t₂ σ _
+    cases s
+    · cases hc
+    · simp [ntVal]
+  law_of_secular_science := by
+    intro _ _ _ _ h; exact False.elim h
+
+/-! ## 一致性定理 -/
+
+/-- 公理集可满足：由 `nontrivialEnv` 逐条验证。 -/
+theorem axioms_consistent : Nonempty Env := ⟨nontrivialEnv⟩
+
+/-! ## 非平凡性验证 -/
+
+theorem nontrivial_free_exists : Free nontrivialEnv false 1 := by
+  constructor
+  · intro σ _ h; cases h
+  · refine ⟨true, by simp, ?_⟩
+    simp [ntKnows]
+
+theorem nontrivial_order_exists : Order nontrivialEnv true 0 := by
+  constructor
+  · intro σ _ h; cases h
+  · intro σ _; simp [ntKnows]
+
+theorem nontrivial_license_exists : License nontrivialEnv false 0 := by
+  constructor
+  · intro h
+    have := h true (by simp)
+    simp [nontrivialEnv, ntVal] at this
+  · refine ⟨true, by simp, ?_⟩
+    simp [ntKnows]
+
+theorem nontrivial_democracy_exists : Democracy nontrivialEnv true 0 :=
+  ⟨by simp [ntCollective], nontrivial_order_exists⟩
+
+theorem nontrivial_dictatorship_exists : Dictatorship nontrivialEnv false 0 :=
+  ⟨by simp [ntIndividual], nontrivial_license_exists⟩
+
+theorem nontrivial_free_not_order :
+    ¬ (Free nontrivialEnv false 1 ∧ Order nontrivialEnv false 1) :=
+  free_order_exclusive nontrivialEnv false 1
+
+/-! ## 哥德尔框架 -/
+
+namespace Gödel
+
+inductive ProofStatus where
+  | proved_true  : ProofStatus
+  | proved_false : ProofStatus
 
 structure FormalSystem where
   Formula : Type
@@ -644,102 +624,33 @@ structure FormalSystem where
   Refutable : Formula → Prop
   consistent : ∀ φ, ¬ (Provable φ ∧ Refutable φ)
 
-inductive ProofStatus where
-  | proved_true  : ProofStatus
-  | proved_false : ProofStatus
-
+open Classical in
 noncomputable def systemValuation (S : FormalSystem) (φ : S.Formula) : Valuation ProofStatus :=
-  if S.Provable φ then
-    Valuation.assigned ProofStatus.proved_true
-  else if S.Refutable φ then
-    Valuation.assigned ProofStatus.proved_false
-  else
-    Valuation.unassigned
+  if S.Provable φ then Valuation.assigned ProofStatus.proved_true
+  else if S.Refutable φ then Valuation.assigned ProofStatus.proved_false
+  else Valuation.unassigned
 
-omit env in
-
-theorem systemValuation_def (S : FormalSystem) (φ : S.Formula) :
-    systemValuation S φ =
-      if S.Provable φ then Valuation.assigned ProofStatus.proved_true
-      else if S.Refutable φ then Valuation.assigned ProofStatus.proved_false
-      else Valuation.unassigned := rfl
-
-def IsUndecided (S : FormalSystem) (φ : S.Formula) : Prop :=
-  systemValuation S φ = Valuation.unassigned
+def IsGödel (S : FormalSystem) (φ : S.Formula) : Prop :=
+  ¬ S.Provable φ ∧ ¬ S.Refutable φ
 
 def HilbertCore (S : FormalSystem) : Set S.Formula :=
   { φ | S.Provable φ ∨ S.Refutable φ }
 
-omit env in
-/-- Operational traceability equivalence:
-    a sentence is assigned (traceable) iff it is provable or refutable. -/
-theorem systemValuation_ne_unassigned_iff (S : FormalSystem) (φ : S.Formula) :
-    systemValuation S φ ≠ Valuation.unassigned ↔
-      S.Provable φ ∨ S.Refutable φ := by
-  by_cases hp : S.Provable φ
-  · rw [systemValuation_def, ite_eq_left hp]
-    constructor
-    · intro _; exact Or.inl hp
-    · intro _ h; cases h
-  · by_cases hr : S.Refutable φ
-    · rw [systemValuation_def, ite_eq_right hp, ite_eq_left hr]
-      constructor
-      · intro _; exact Or.inr hr
-      · intro _ h; cases h
-    · rw [systemValuation_def, ite_eq_right hp, ite_eq_right hr]
-      constructor
-      · intro h; exact False.elim (h rfl)
-      · intro h; exact False.elim (Or.elim h hp hr)
-
-omit env in
-theorem undecided_iff_not_in_hilbert_core (S : FormalSystem) (φ : S.Formula) :
-    IsUndecided S φ ↔ φ ∉ HilbertCore S := by
-  unfold IsUndecided HilbertCore
-  rw [← not_iff_not]
-  push Not
-  exact systemValuation_ne_unassigned_iff S φ
-
-def GödelSentenceExists (S : FormalSystem) : Prop :=
-  ∃ G : S.Formula, ¬ S.Provable G ∧ ¬ S.Refutable G
-
-omit env in
-theorem godel_sentence_not_in_hilbert_core
-    (S : FormalSystem) (G : S.Formula)
-    (h : ¬ S.Provable G ∧ ¬ S.Refutable G) :
-    G ∉ HilbertCore S := by
-  intro h_in
-  cases h_in with
+theorem godel_not_in_hilbert_core (S : FormalSystem) (G : S.Formula)
+    (h : IsGödel S G) : G ∉ HilbertCore S := by
+  intro hc
+  cases hc with
   | inl hp => exact h.1 hp
   | inr hr => exact h.2 hr
 
-/-! ### Constitutional Challenge and Falsifiability Meta-Theorem -/
-
-structure Challenge (S : FormalSystem) (τ : S.Formula) where
-  attacked : S.Refutable τ
-
-omit env in
-/-- Meta-Theorem: an in-system counterexample compromises system consistency itself.
-    If a genuine counterexample can be proven, system consistency collapses (`False`).
-    This mathematically validates the constitutional promise that "a single counterexample suffices". -/
-theorem counterexample_breaks_consistency
-    (S : FormalSystem) (τ : S.Formula)
-    (C : Challenge S τ)
-    (h : S.Provable τ) : False :=
-  S.consistent τ ⟨h, C.attacked⟩
-
-/-! ### Gödelian Framework: Open Conjecture -/
-
-/-- Open Conjecture: Hilbertian process on Gödelian domains.
-    Conjectures that under an appropriate measure μ, the undecided domain can be made
-    arbitrarily small relative to the Hilbert core.
-    Note: Formulated honestly as an open conjecture rather than a theorem,
-    as rigorous G/H → 0 requires arithmetic syntax and diagonal lemmas. -/
+/-- 开放猜想：哥德尔世界可单射嵌入希尔伯特世界。
+    这是“哥德尔世界极小化”的诚实表述，不是已解决定理。 -/
 def HilbertProcessConjecture : Prop :=
   ∀ (S : FormalSystem),
-    GödelSentenceExists S →
-    ∃ (GödelWorld HilbertWorld : Set S.Formula) (μ : Set S.Formula → ℝ),
-      (∀ G : S.Formula, ¬ S.Provable G ∧ ¬ S.Refutable G → G ∈ GödelWorld) ∧
-      (∀ φ ∈ HilbertWorld, S.Provable φ ∨ S.Refutable φ) ∧
-      (∀ ε > 0, ∃ H : Set S.Formula, H ⊆ HilbertWorld ∧ μ H < ε)
+    (∃ G : S.Formula, IsGödel S G) →
+    ∃ (embed : S.Formula → S.Formula),
+      (∀ φ, IsGödel S φ →
+        S.Provable (embed φ) ∨ S.Refutable (embed φ)) ∧
+      Function.Injective embed
 
-end FormalDeduction
+end Gödel

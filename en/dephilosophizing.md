@@ -1,5 +1,19 @@
 # Dephilosophizing
 
+## The Most Basic Propositions of Cognition
+
+- **Q: What are the most basic propositions of cognition?**
+- **A:** There is no single universally accepted answer. "The most basic propositions of cognition" usually refers to propositions treated as irreducible starting points, postulates, or default premises. Different traditions (logic, epistemology, cognitive science, phenomenology) list different ones. Common candidates: **The basic laws of logic and thought**, traditionally called the "four laws of thought": the law of identity, the law of non-contradiction, the law of excluded middle, the law of sufficient reason; **Basic presuppositions of epistemology/metaphysics**: cogito/self-existence, phenomenal experience exists, the external world exists, other minds exist, the law of causality/the uniformity of nature, the validity of induction, perception is roughly reliable, memory is roughly reliable, the world is partially knowable, the criterion of truth; **Basic propositions of cognitive science/philosophy of mind**: cognition is information processing, cognition involves representation, computationalism, embodied/embedded/enactive cognition, predictive processing, consciousness has subjectivity, mental states correlate with brain states; **Phenomenological and ontological premises**: intentionality, the lifeworld, intersubjectivity, embodiment; **Methodological/normative propositions**: fallibilism, evidentialism, Occam's razor, the requirement of consistency. **The minimal intersection**: there is experience/consciousness; there is a cognitive subject; there is an object of cognition; thought follows basic logic; perception and memory are roughly reliable; causality and induction are usable; others and a shared world exist.
+- **Q: Which one is the most basic proposition of cognition?**
+- **A:** If only one could be chosen, I would choose: "cogito" — more weakly and more precisely: "a conscious/thought activity is occurring."\
+The reason is simple: you can doubt the external world, doubt causality, doubt other minds, even doubt whether you yourself are an entity, but you cannot doubt the very fact that "I am doubting/thinking/experiencing." Because the moment the activity of doubting occurs, it already presupposes the existence of some consciousness or thought activity. To deny it, too, requires thinking.
+- **Q: No — it is "whether"**
+- **A:**
+- **Q:**
+- **A:**
+- **Q:**
+- **A:**
+
 ## Why did most great philosophers emerge over two thousand years ago?
 
 ## Why has philosophy lost to religion worldwide in both spiritual belief and daily life dimensions?
