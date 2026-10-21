@@ -71,9 +71,11 @@ structure Env where
   JusticeDegree : System → ℝ
   SelfReferring : System → Prop
 
-  /- Axiom 0: to exist is to differ -/
-  axiom_0 : ∀ (s : System), Nonempty Boundary →
-    ∃ σ τ : State, σ ∈ statesOf s ∧ τ ∈ statesOf s ∧ Differs σ τ
+  /- Axiom 0: to exist is to differ. Direction per the text: difference is
+      primary — distinguishable states give rise to a boundary. -/
+  axiom_0 : ∀ (s : System),
+    (∃ σ τ : State, σ ∈ statesOf s ∧ τ ∈ statesOf s ∧ Differs σ τ) →
+      Nonempty Boundary
   /- Axiom 2: things tend toward completeness -/
   count_zero_iff_correct : ∀ (s : System) (t : Time),
     UnassignedCount s t = 0 ↔

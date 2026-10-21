@@ -64,9 +64,7 @@ def canonicalEnv : Env where
   JusticeDegree _ := 0
   SelfReferring _ := False
 
-  axiom_0 := by
-    intro _ _
-    exact ⟨true, false, by simp, by simp, by decide⟩
+  axiom_0 := fun _ h => ⟨⟨⟩⟩
   count_zero_iff_correct := by
     intro _ _
     constructor

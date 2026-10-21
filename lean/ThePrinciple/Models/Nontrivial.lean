@@ -102,9 +102,7 @@ def nontrivialEnv : Env where
   JusticeDegree := ntJD
   SelfReferring := ntSelfRef
 
-  axiom_0 := by
-    intro _ _
-    exact ⟨true, false, by simp, by simp, by decide⟩
+  axiom_0 := fun _ h => ⟨⟨⟩⟩
   count_zero_iff_correct := by
     intro s t
     by_cases h : s = false ∧ t = 0
