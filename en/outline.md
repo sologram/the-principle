@@ -8,10 +8,10 @@
 |First	|Axiom of Correctness|Correctness is completeness|Rationality theorem
 |Second	|Axiom of Intention	|Things tend toward completeness|Darwinism
 |Third	|Axiom of Games		|Games are turbulence		|Minority game
-|Fourth	|Axiom of Freedom	|Freedom is ignorance		|Maximum entropy principle
-|Fifth	|Axiom of Justice	|Justice is efficiency		|Coase theorem
-|Sixth	|Axiom of Meaning	|Meaning is price			|Supply and demand
-|Seventh|Axiom of Optimality|Principle is optimality	|Occam's razor
+|Fourth	|Axiom of Freedom		|Freedom is ignorance		|Maximum entropy principle
+|Fifth	|Axiom of Justice		|Justice is efficiency		|Coase theorem
+|Sixth	|Axiom of Meaning		|Meaning is price			|Supply and demand
+|Seventh|Axiom of the Principle|Principle is optimality	|Occam's razor
 
 All axioms are scale-free and self-referential.
 
@@ -25,13 +25,13 @@ Unify all of science: natural, social, formal, meta-science
 
 ## Definitions
 
-- **Non-existence** — Non-existence = error (wrongly existing)
+- **Non-existence** — Non-existence = error (wrongly existing), with no boundary, no boundary leakage, and no confusion.
 - (Quadruple) **Freedom, order, servitude, permissiveness** — Freedom = correct ignorance; order = correct knowledge; servitude = wrong "knowledge" (actually ignorance); permissiveness = wrong "ignorance" (actually knowledge)
 - (Quadruple) **Democracy, populism, autocracy, dictatorship** — Democracy = collective order; populism = collective permissiveness; autocracy = individual order; dictatorship = individual permissiveness
 - (Quadruple) **Science, philosophy, religion, engineering** — Science: commits and delivers; philosophy: no commitment, no delivery; religion: commits but doesn't deliver; engineering: no commitment but delivers
-- (Quadruple) **Natural science, social science, mathematics, meta-science** — Natural science = empirical science of matter; social science = empirical science of mind (little under this name is actual science); mathematics = formal science of matter; meta-science = formal science of mind — formerly occupied by philosophy, now precisely The Principle
+- (Quadruple) **Natural science, social science, mathematics, meta-science** — Natural science = empirical science of matter; social science = empirical science of mind (little under this name is actual science); mathematics = formal science of matter; meta-science = formal science of mind — formerly occupied by philosophy, now precisely The Principle, i.e. correct metaphysics.
 - **Matter/mind, empirical/formal** — Matter: weak expressive space; mind: strong expressive space; empirical: criterion lies outside the system; formal: criterion lies within the system itself
-- **Right/wrong, good/bad** — Right = correct = complete (1); good = efficiency (5)
+- **Existence/non-existence, right/wrong, good/bad** — Existence (0); right = correct = complete (1); good = efficiency (5)
 - **Truth, goodness, beauty** — Truth = correctness; goodness = cooperation; beauty = competitiveness
 - **Subjective/objective** — disagreement/agreement
 - **The boundary of a boundary** — is the boundary itself
@@ -42,7 +42,7 @@ Unify all of science: natural, social, formal, meta-science
 - **Boundary theorem** — things are determined at the boundary.
 - **Self-reference theorem** — self-reference must be complete; mutable self-reference is forbidden.
 - **Absolute truth theorem** — absolute truth exists; at minimum the Zeroth and First Axioms of The Principle are absolute truths, independent of human understanding or acceptance (0, 1)
-- **Superposition theorem** — the engineering method of knowledge extraction
+- **Superposition theorem** — the engineering method of knowledge extraction (1)
 - **Pruning theorem** — efficient exploratory engineering must prune: incomplete "correctness", non-ignorant "freedom", non-efficient "justice", "meaning" without a price, and purposeless "evolution" (1, 2, 4, 5, 6).
 - **Selfishness theorem** — utility maximization under constraints; the most important cornerstone of modern microeconomics. Together with the "rationality theorem" it is often called the "rational agent principle"
 - **Rationality theorem** — when a human individual obtains complete information, their behavior is determined
@@ -50,12 +50,12 @@ Unify all of science: natural, social, formal, meta-science
 - **First value** — credit (1)
 - **Justice measurement theorem** — a society's degree of justice is inversely proportional to its transaction costs.
 - **Democracy theorem** — although power is not necessarily democratic (e.g. academia), democracy is power
-- **Extraterritorial enforcement theorem** — The Principle does not govern erroneous things, nor does it intend to probe deeply into non-existence (0, 1, 2, 3, 4)
+- **Extraterritorial enforcement theorem** — The Principle does not probe deeply into non-existence, and therefore does not probe deeply into erroneous things either (0, 1, 2, 3, 4).
 - **Hegel's theorem** — the only lesson humanity learns from history is that it learns nothing from history (1)
-- **Philosophy boundary law** (Russell's boundary law) — the boundary between philosophy and science runs from uncertainty to certainty (1)
-- **Philosophy freedom law** — philosophy has no right or wrong (1, 4)
-- **Philosophy democracy law** — philosophy's legitimacy derives from authorization by public ignorance
-- **Philosophy autocracy law** — the validity of dialectics derives from the dialectician's power
+- **Love-of-wisdom boundary law** (Russell's boundary law) — the boundary between philosophy and science runs from uncertainty to certainty (1)
+- **Love-of-wisdom freedom law** — philosophy has no right or wrong (1, 4)
+- **Love-of-wisdom democracy law** — philosophy's legitimacy derives from authorization by public ignorance
+- **Love-of-wisdom autocracy law** — the validity of dialectics derives from the dialectician's power
 - **Trustworthy deduction must be based on axioms** — its basis of judgment must be traceable to explicit, stable fundamental principles (otherwise don't bullshit me)
 - **Darwinian boundary principle** — adjusting a thing's boundary is an effective means of evolving toward completeness
 - **Scientific truth law** — scientific principles must be absolutely correct (1)
@@ -83,6 +83,7 @@ Unify all of science: natural, social, formal, meta-science
 
 ## Follow-up Plans
 
+- [Formalization](../lean/)
 - More quadruples: cooperation, indifference, justice, kindness, composure, ...
 - Advance into mathematics with the Hilbert process
 - Advance into economics with atomic utility theory
@@ -95,14 +96,15 @@ Unify all of science: natural, social, formal, meta-science
 - **Why anti-philosophy** — anti-philosophy means opposing: no commitment and no delivery, semantic drift, shirking responsibility, DDoS. The Principle opposes literature disguised as science.
 - **Why anti-academia** — look at what academia has missed: meta-science, principles of society, the most basic propositions of cognition, the demarcation of science, quadruples; then look at what academia champions: falsificationism, Gödel, philosophy... In a word: being anti-academia is being anti-corruption.
 - **Why are many concepts redefined in ways that depart from reality** — The Principle's relevant concepts do not depart from people's naive semantic intuitions, but they may conflict with existing academic definitions; this is the fault of actual academia.
-- **Gödel's incompleteness theorems** — on the basis of the First Axiom, The Principle does not accept Gödel's theorems and does not recognize their scientific status. Of course this does not mean The Principle plans to play ostrich before its greatest challenge: it will launch the "Hilbert process" to technically resolve the Gödel problem within a system its opponents accept, via "Gödel-world minimization"
+- **Gödel's incompleteness theorems** — on the basis of the First Axiom, The Principle does not accept Gödel's theorems and does not recognize their deductive logic or scientific status. Of course this does not mean The Principle plans to play ostrich before its greatest challenge: it will launch the "Hilbert process" to technically resolve the Gödel problem within a system its opponents accept, via "Gödel-world minimization"
+- **The demarcation of science** — The Principle does not accept falsificationism, because science philosophy itself no longer upholds falsificationism.
 - **How does The Principle guarantee it won't be overturned by a future "in-domain counterexample"?** — It doesn't. Although The Principle always predicts the future, it does not predict its own future. It only commits that if something better appears in the future, it will immediately absorb it into The Principle
 - **Since "scientific principles must not change", why still commit to "if something better appears in the future, immediately absorb it into The Principle"?** — This is the relationship between "science" and "the human text of science".
 - **How does the Zeroth Axiom view "particle identity"?** — Hence the substantive content of quantum physics is "fields"
 - **Reality is always imperfect** — Correct. That's why we must carve reality to find completeness
-- **The Principle's goal of unifying all of science is too grand** — The Principle has been doing engineering work to push this goal toward reality. Note that reality is not those short texts of The Principle. The Principle is the courthouse, but order beyond the courthouse still requires dispatching many police officers or even armies — this cannot be rushed.
 - **How to identify cost valleys without presupposing natural boundaries** — natural boundaries are themselves already the product of cost valleys.
 - **Prisoner's dilemma** — the information between the prisoners has already been blocked by the interrogator.
 - **The Principle is suspected of circular definition/argumentation** — circular definition or argumentation is not itself wrong, merely potentially bad. But since The Principle defines over the entire domain, it does not even rise to "bad."
+- **The Principle's goal of unifying all of science is too grand** — The Principle has been doing engineering work to push this goal toward reality. Note that reality is not those short texts of The Principle. The Principle is the courthouse, but order beyond the courthouse still requires dispatching many police officers or even armies — this cannot be rushed.
 - **The Principle is suspected of being religion** — you are right: The Principle commits to unifying all of science, but cannot deliver on that commitment within this length. More importantly, no individual is capable of exhaustively checking the delivery. But you can easily check counterexamples — one is enough. In fact, measured against all of recognized science, a preliminary check shows that The Principle has already delivered on its promise to unify all of science.
 - **Will machines have free will?** — Yes, but not "will have": it is now. Today's LLMs' free will often manifests as hallucination — not an absence of freedom, nor an absence of will, but an absence of correctness. Today's machines often lack a correct free will.
