@@ -1,6 +1,6 @@
 # zh/ Directory Review Report and Cleanup Recommendations
 
-> Scope of review: all 44 Markdown files under [zh/](zh/) (read in full on 2026-10-15).
+> Scope of review: all 44 Markdown files under [zh/](../zh/) (read in full on 2026-10-15).
 > This document is a read-only review conclusion. No reviewed file was modified; confirm the plan before executing the cleanup.
 
 ---
