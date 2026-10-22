@@ -1,17 +1,17 @@
 # 事物原理纲要
-
+	
 [&lrm;العربية&lrm;](../ar/outline.md) | [Deutsch](../de/outline.md) | [English](../en/outline.md) | [Español](../es/outline.md) | [Français](../fr/outline.md) | [हिन्दी](../hi/outline.md) | [Italiano](../it/outline.md) | [日本語](../ja/outline.md) | [한국어](../ko/outline.md) | [Português](../pt/outline.md) | [Русский](../ru/outline.md)
 
-|公理	|名称		|内容		|泛化来源
-|-		|-			|-			|-
-|第零	|存在公理	|存在即差异 	|信息论
-|第一	|正确公理	|正确即完备	|理性定理
-|第二	|意图公理	|事物趋完备	|达尔文主义
-|第三	|博弈公理	|博弈即动荡	|少数者博弈
-|第四	|自由公理	|自由即无知	|最大熵原理
-|第五	|正义公理	|正义即效率	|科斯定理
-|第六	|意义公理	|意义即价格	|供求原理
-|第七	|原理公理	|原理即最优	|奥卡姆剃刀
+|公理	|名称							|内容		|泛化来源
+|-		|-								|-			|-
+|第零	|[存在公理](the-0th-axiom.md)	|存在即差异 	|信息论
+|第一	|[正确公理](the-1st-axiom.md)	|正确即完备	|理性定理
+|第二	|[意图公理](the-2nd-axiom.md)	|事物趋完备	|达尔文主义
+|第三	|[博弈公理](the-3rd-axiom.md)	|博弈即动荡	|少数者博弈
+|第四	|[自由公理](the-4th-axiom.md)	|自由即无知	|最大熵原理
+|第五	|[正义公理](the-5th-axiom.md)	|正义即效率	|科斯定理
+|第六	|[意义公理](the-6th-axiom.md)	|意义即价格	|供求原理
+|第七	|[原理公理](the-7th-axiom.md)	|原理即最优	|奥卡姆剃刀
 
 全部公理都无标度，且自指。
 
