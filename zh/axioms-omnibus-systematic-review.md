@@ -1,6 +1,6 @@
 # 事物原理·八公理合订本系统审查报告
 
-- **审查对象**：[zh/the-axioms-omnibus.md](https://github.com/sologram/the-principle/blob/master/zh/the-axioms-omnibus.md)
+- **审查对象**：[the-axioms-omnibus.md](the-axioms-omnibus.md)
 - **审查日期**：2026-10-22
 - **审查性质**：概念架构、逻辑接口、可检验性与后续形式化路线的初步审查
 - **范围说明**：本报告依据本次讨论中涉及的文档内容与命题展开。它是研究性审查，不等同于逐行校勘、形式化证明或独立复现全部原文论证。
