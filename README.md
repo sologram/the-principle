@@ -38,11 +38,11 @@ Games are turbulence / 博弈即动荡
 ## [The Fourth Axiom of Freedom](en/the-4th-axiom.md) / [第四 (自由) 公理](zh/the-4th-axiom.md)
 Freedom is ignorance / 自由即无知
 
-## [The Fifth Axiom of Justice](en/the-5th-axiom.md) / [第五 (正义) 公理](zh/the-5th-axiom.md)
-Justice is efficiency / 正义即效率
-
-## [The Sixth Axiom of Meaning](en/the-6th-axiom.md) / [第六 (意义) 公理](zh/the-6th-axiom.md)
+## [The Fifth Axiom of Meaning](en/the-5th-axiom.md) / [第五 (意义) 公理](zh/the-5th-axiom.md)
 Meaning is price / 意义即价格
+
+## [The Sixth Axiom of Justice](en/the-6th-axiom.md) / [第六 (正义) 公理](zh/the-6th-axiom.md)
+Justice is efficiency / 正义即效率
 
 ## [The Seventh Axiom of Principle](en/the-7th-axiom.md) / [第七 (原理) 公理](zh/the-7th-axiom.md)
 Principle is optimality / 原理即最优
