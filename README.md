@@ -1,9 +1,9 @@
 # [The Principle](en/) / [事物原理](zh/)
-
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 	
-> Expression over deduction.\
-> 表达重于演绎。
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+
+> Expression precedes deduction.\
+> 表达先于演绎。
 >
 > The Principle is a new system, yet it introduces no new concepts.\
 > 事物原理虽然是全新体系，却没有发明任何新概念。
