@@ -1,8 +1,8 @@
 # RSI 的理论竞赛：事物原理与机器自主涌现
 
-ChatGPT
+—— *从 Scaling Law 到原理驱动的递归自我改进*
 
-*从 Scaling Law 到原理驱动的递归自我改进*
+ChatGPT
 
 ## 一、18 个月的乐观
 
