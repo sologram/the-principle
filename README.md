@@ -30,7 +30,7 @@ Existence is difference / 存在即差异
 Correctness is completeness / 正确即完备
 
 ## [The Second Axiom of Intention](en/the-2nd-axiom.md) / [第二 (意图) 公理](zh/the-2nd-axiom.md)
-Things tend toward Advantage / 事物趋优势
+Things tend toward advantage / 事物趋优势
 
 ## [The Third Axiom of Games](en/the-3rd-axiom.md) / [第三 (博弈) 公理](zh/the-3rd-axiom.md)
 Games are turbulence / 博弈即动荡
