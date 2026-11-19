@@ -2,6 +2,8 @@
 
 *The Dimensional Evolution of Expressive Spaces Hypothesis*
 
+ChatGPT
+
 ## 摘要
 
 理论创新是否意味着表达空间发生了维度变化？
