@@ -2,6 +2,8 @@
 
 *Finite Expressive Dimensions and Universal Completeness Judgment*
 
+ChatGPT
+
 ## 引言
 
 如果意识表达空间具有有限的基础表达维度，那么一个重要的问题随之出现：
