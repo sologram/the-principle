@@ -2,6 +2,8 @@
 
 *Complexity of Expressive Spaces and Simplicity of Metascience*
 
+ChatGPT
+
 ## 引言
 
 表达先于演绎。
