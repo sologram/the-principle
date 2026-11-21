@@ -158,7 +158,7 @@
 
 核心接口：
 
-`PCE(text) → integer`
+`PRAX(text) → integer`
 
 **一个输入，一个整数，一个判定。**
 
