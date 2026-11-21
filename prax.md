@@ -2,7 +2,7 @@
 
 ## 1. 定义
 
-事物原理遵循性判定模型（Principle Compliance Evaluator，简称 PCE）是一个面向任意文本的轻量级判定模型。
+事物原理遵循性判定模型（Principle Alignment eXaminer，简称 PRAX）是一个面向任意文本的轻量级判定模型。
 
 模型以事物原理的第零至第七公理为判定依据，判断输入文本是否遵循事物原理。
 
