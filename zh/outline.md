@@ -2,7 +2,7 @@
 	
 [&lrm;العربية&lrm;](../ar/outline.md) | [Deutsch](../de/outline.md) | [English](../en/outline.md) | [Español](../es/outline.md) | [Français](../fr/outline.md) | [हिन्दी](../hi/outline.md) | [Italiano](../it/outline.md) | [日本語](../ja/outline.md) | [한국어](../ko/outline.md) | [Português](../pt/outline.md) | [Русский](../ru/outline.md)
 
-“事物原理纲要”中文版为整个原理体系的最核心文档。
+*“事物原理纲要”中文版为整个原理体系的最核心文档。*
 
 |公理	|名称							|内容		|泛化来源
 |-		|-								|-			|-
