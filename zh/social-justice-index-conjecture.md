@@ -54,14 +54,10 @@ $$
 可以将其概念性地表示为：
 
 $$
-C_{\text{social}}
-=
-C_{\text{direct}}
-+
-C_{\text{external}}
-+
-C_{\text{institutional}}
-+
+C_{\text{social}} =
+C_{\text{direct}} +
+C_{\text{external}} +
+C_{\text{institutional}} +
 C_{\text{latent}}
 $$
 
