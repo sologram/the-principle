@@ -182,7 +182,7 @@ RSI 的核心是系统递归地改进自身。
 
 | 演化层次 | 空间内优化 | 空间升维 |
 |---|---|---|
-| 自发 | MoE / Quantization | Scaling Law |
+| 自发 | MoE / Quantization | Scaling Law / SFT / RL |
 | 自觉 | Pruning | AGI / ASI |
 
 四个位置分别对应：
