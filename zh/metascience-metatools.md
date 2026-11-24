@@ -1,7 +1,7 @@
 # 元科学和元工具
 *从表达空间假说到机器自主演化*
 
-ChatGPT, Sologram
+Sologram, ChatGPT
 
 ## 元科学与科学前沿
 
