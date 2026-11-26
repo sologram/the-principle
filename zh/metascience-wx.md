@@ -1,7 +1,7 @@
 # 什么是元科学
 ——从四类科学的一格到不演绎只表达
 
-Hans ([sologram](https://github.com/sologram/the-principle))
+[Wenxin](https://wenxin.baidu.com/)
 
 [元科学](https://en.wikipedia.org/wiki/Metascience)的研究对象是跨领域的共同原理，它因此与自然科学、数学、社会科学并列成四类，而不是任何一门科学的附属分支。今天通行的那支 metascience——研究科研活动自身——只是它最窄的一部分。
 
