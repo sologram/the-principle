@@ -19,6 +19,8 @@ Gemini
 - [为什么大语言模型是智能的](why-llm-is-intelligent.md)：从高维表达流形与语义压缩视角，解释 LLM 涌现智能与自我意识/幻觉的几何成因。
 - [希尔伯特纪念纲领](expel-godel-ds.md)：提出从“存在即差异”出发寻找正交数学元语，通过“哥德尔世界极小化”绕过形式系统不完备性，重建数学基础。
 - [元空间数据集的构建](space-dataset.md)
+- [从原理剪枝到数据集生长](principle-driven-dataset-growth.md)
+
 
 ## 实验记录与观测数据
 
