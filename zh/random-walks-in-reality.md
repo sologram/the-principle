@@ -249,7 +249,7 @@ Improved Exploration Policy
 
 事物原理的策略是：
 
-**The Principle is a new system, yet it introduces no new concepts.**
+> **The Principle is a new system, yet it introduces no new concepts.**
 
 事物原理并不试图通过不断发明概念来扩充认知体系，而是重新组织已有概念及其关系，以形成新的判断和推演结构。
 
