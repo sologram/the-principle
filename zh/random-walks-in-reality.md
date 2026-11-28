@@ -379,7 +379,7 @@ Improved Exploration Policy
 
 将上述机制整合进《随机游走于现实》的工程闭环，便形成了一套兼具“高探索自由度”与“强防作弊鲁棒性”的双层锚定架构（Dual-Layer Grounding Architecture）：
 
-[svg]
+<img width="598" height="446" alt="diagram" src="https://github.com/user-attachments/assets/787db669-c026-497c-8c1c-8b8acb744990" />
 
 在这个架构中，两层防御各司其职，互不替代：
 
